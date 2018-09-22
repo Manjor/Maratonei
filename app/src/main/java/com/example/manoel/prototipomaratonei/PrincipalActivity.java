@@ -24,6 +24,7 @@ public class PrincipalActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPagePrincipal);
 
         AdapterTabLayout adapterTabLayout = new AdapterTabLayout(getSupportFragmentManager());
+
         adapterTabLayout.addFragments(new SeriesFragment(),"Series");
         adapterTabLayout.addFragments(new MoviesFragment(),"Movies");
         adapterTabLayout.addFragments(new FavoritesFragment(),"Favorites");

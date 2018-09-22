@@ -27,7 +27,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/toobarPrincipal"
         app:layout_constraintEnd_toEndOf="@+id/toobarPrincipal"
         app:layout_constraintStart_toStartOf="@+id/toobarPrincipal"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabSelectedTextColor="@android:color/background_light">
 
     </android.support.design.widget.TabLayout>
 

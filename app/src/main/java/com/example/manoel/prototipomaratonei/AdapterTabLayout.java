@@ -1,5 +1,6 @@
 package com.example.manoel.prototipomaratonei;
 
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -31,12 +32,20 @@ public class AdapterTabLayout extends FragmentStatePagerAdapter {
         return fragments.size();
     }
 
+    @Nullable
+    @Override
+    //Method que irá implementar os titulos das abas
+    public CharSequence getPageTitle(int position) {
+        return this.titles.get(position);
+    }
+
     //This is method will add the fragments and titles for using in ViewPager
     public void addFragments(Fragment fragment, String titles)
     {
         this.fragments.add(fragment);
         this.titles.add(titles);
     }
+
 
 
 
