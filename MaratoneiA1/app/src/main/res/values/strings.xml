@@ -3,4 +3,8 @@
     <string name="series">Series</string>
     <string name="movies">Movies</string>
     <string name="news">News</string>
+    <string name="language">language=en-US</string>
+    <string name="overview">Overview</string>
+    <string name="serieName">Serie Name</string>
+    <string name="seasons">Seasons</string>
 </resources>

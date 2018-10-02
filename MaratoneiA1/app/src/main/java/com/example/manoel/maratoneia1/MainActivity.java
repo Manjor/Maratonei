@@ -24,21 +24,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Instance of with set ids
-        tabLayout = findViewById(R.id.tabLayoutMain);
-        viewPager = findViewById(R.id.viewPagerMain);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayoutMain);
+        viewPager = (ViewPager) findViewById(R.id.viewPagerMain);
 
         //Create a new instance of ViewPageAdapter
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        viewPagerAdapter.addFragment(new NewsFragment(),getResources().getString(R.string.news));
-        viewPagerAdapter.addFragment(new MovieFragment(),getResources().getString(R.string.movies));
-        viewPagerAdapter.addFragment(new SerieFragment(), getResources().getString(R.string.series));
+        viewPagerAdapter.addFragment(new MovieFragment(),"Movies");
+
+        viewPagerAdapter.addFragment(new SerieFragment(), "Series");
 
 
         viewPager.setAdapter(viewPagerAdapter);
+
         tabLayout.setupWithViewPager(viewPager);
-
-
 
     }
 }

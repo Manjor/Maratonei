@@ -4,6 +4,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,8 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+
+        return fragmentList.size();
     }
 
 
@@ -44,5 +46,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         fragmentList.add(fragment);
         fragmentListTitles.add(title);
 
+        Log.i("INFO","SIZE" + fragmentList.size());
+        Log.i("INFO","SIZE 2 " + fragmentListTitles.size());
     }
 }

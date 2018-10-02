@@ -1,4 +1,4 @@
-package com.example.manoel.maratoneia1.Movies;
+package com.example.manoel.maratoneia1.Series;
 
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -26,25 +26,20 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class DetailsMovie  extends AppCompatActivity{
-
-
+public class DetailsSerie extends AppCompatActivity{
     //Atributes
-    private ImageView movieBackdrop;
-    private ImageView moviePoster;
-    private VideoView movieVideo;
-    private TextView movieTitle;
-    private TextView movieOverview;
-    private TextView movieDate;
-    private TextView movieHomePage;
+
+    private ImageView seriePoster;
+    private TextView serieName;
+    private TextView serieOverview;
+    private TextView serieDate;
+    private TextView serieHomePage;
 
     private String urlPoster = null;
-    private String urlBackdrop = null;
     private String overview = null;
-    private String title = null;
+    private String name = null;
     private String date = null;
     private String homepage = null;
-    private String video = null;
     private String retorno = null;
 
     private String urlDetails = "";
@@ -53,23 +48,20 @@ public class DetailsMovie  extends AppCompatActivity{
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_movie);
 
-        movieBackdrop = findViewById(R.id.movieBackdrop);
-        moviePoster = findViewById(R.id.moviePoster);
-        movieVideo = findViewById(R.id.movieVideo);
-        movieTitle = findViewById(R.id.movieTitle);
-        movieOverview = findViewById(R.id.movieOverview);
-        movieDate = findViewById(R.id.movieDate);
-        movieHomePage = findViewById(R.id.movieHomePage);
+        seriePoster = findViewById(R.id.seriePoster);
+        serieName = findViewById(R.id.serieName);
+        serieOverview = findViewById(R.id.serieOverview);
+        //serieDate = findViewById(R.id.serieDate);
+        //serieHomePage = findViewById(R.id.serieHomePage);
 
         int movieId = this.getIntent().getIntExtra("id",0);
 
         Configuracao configuracao = new Configuracao();
-        urlDetails = configuracao.getDetailsMovie(movieId, getResources().getString(R.string.language).toString());
-        urlVideo = Configuracao.urlApi + "movie/" + movieId + "/videos" + "?api_key=" + Configuracao.apiKey + getResources().getString(R.string.language);
-
+        urlDetails = configuracao.getDetailsSerie(movieId, getResources().getString(R.string.language).toString());
 
     }
     class MyTask extends AsyncTask<String,Void,String> {
@@ -89,52 +81,6 @@ public class DetailsMovie  extends AppCompatActivity{
 
             StringBuffer buffer = new StringBuffer();
 
-            if(stringUrl.contains(urlDetails))
-            {
-                InputStream inputStream = null;
-                InputStreamReader inputStreamReader = null;
-
-
-                try {
-                    URL url = new URL(stringUrl);
-                    //Faz a requisição, abre a conexão
-                    HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
-
-                    //Recupera os dados em Bytes
-                    inputStream = conexao.getInputStream();
-
-                    //inputStreamReader lê os dados em Bytes e decodifica para caracteres
-                    inputStreamReader = new InputStreamReader(inputStream);
-
-                    //Objeto utilizado para leitura dos caracteres do InputStreamReader
-                    BufferedReader reader = new BufferedReader(inputStreamReader);
-
-
-                    String linha = "";
-
-                    while ((linha = reader.readLine()) != null) {
-
-                        buffer.append(linha);
-                    }
-
-                    JSONArray jsonArray = null;
-                    try {
-                        JSONObject jsonObject = new JSONObject(buffer.toString());
-                        jsonArray = jsonObject.getJSONArray("results");
-
-                        JSONObject posicao = jsonArray.getJSONObject(0);
-                        video = posicao.getString("key").toString();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                Log.i("INFO","Segundo Processamento Realizado: " + urlVideo);
-            }
             if(stringUrl.contains(urlDetails)){
 
                 InputStream inputStream = null;
@@ -168,11 +114,9 @@ public class DetailsMovie  extends AppCompatActivity{
 
                         urlPoster = jsonObject.getString("poster_path");
 
-                        urlBackdrop = jsonObject.getString("backdrop_path");
-
                         overview = jsonObject.getString("overview");
-                        title = jsonObject.getString("title");
-                        date = jsonObject.getString("release_date");
+                        name = jsonObject.getString("name");
+                        //date = jsonObject.getString("release_date");
                         homepage = jsonObject.getString("homepage");
 
                         retorno = "detalhesSucesso";
@@ -199,18 +143,14 @@ public class DetailsMovie  extends AppCompatActivity{
             super.onPostExecute(resultado);
 
             try{
-                if (retorno.contains("videoSucesso")) {
-                    Uri src = Uri.parse(video);
-                    movieVideo.setVideoURI(src);
-                }
 
                 if (retorno.contains("detalhesSucesso")) {
-                    movieTitle.setText(title);
-                    movieDate.setText(date);
-                    movieOverview.setText(overview);
-                    movieHomePage.setText("Homepage: " + homepage);
-                    Picasso.get().load(Configuracao.urlImageApi + urlPoster).into(moviePoster);
-                    Picasso.get().load(Configuracao.urlImageApi + urlBackdrop).into(movieBackdrop);
+                    serieName.setText(name);
+                    //serieDate.setText(date);
+                    serieOverview.setText(overview);
+                    serieHomePage.setText("Homepage: " + homepage);
+                    Picasso.get().load(Configuracao.urlImageApi + urlPoster).into(seriePoster);
+
                 }
             }catch (Exception e)
             {
