@@ -15,13 +15,23 @@ public class MovieHolder extends RecyclerView.ViewHolder {
 
     public MovieHolder(View itemView) {
         super(itemView);
-        movieTitle = itemView.findViewById(R.id.movieBackdropFrag);
-        movieBackdrop = itemView.findViewById(R.id.movieTitleFrag);
+        this.movieTitle = itemView.findViewById(R.id.movieTitleFrag);
+        this.movieBackdrop = itemView.findViewById(R.id.movieBackdropFrag);
     }
 
+    public TextView getMovieTitle() {
+        return movieTitle;
+    }
 
+    public void setMovieTitle(TextView movieTitle) {
+        this.movieTitle = movieTitle;
+    }
 
+    public ImageView getMovieBackdrop() {
+        return movieBackdrop;
+    }
 
-
-
+    public void setMovieBackdrop(ImageView movieBackdrop) {
+        this.movieBackdrop = movieBackdrop;
+    }
 }

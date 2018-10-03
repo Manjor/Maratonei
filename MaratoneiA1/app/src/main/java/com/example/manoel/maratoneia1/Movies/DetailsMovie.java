@@ -55,6 +55,7 @@ public class DetailsMovie  extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_movie);
+        getSupportActionBar().hide();
 
         movieBackdrop = findViewById(R.id.movieBackdrop);
         moviePoster = findViewById(R.id.moviePoster);
@@ -70,6 +71,11 @@ public class DetailsMovie  extends AppCompatActivity{
         urlDetails = configuracao.getDetailsMovie(movieId, getResources().getString(R.string.language).toString());
         urlVideo = Configuracao.urlApi + "movie/" + movieId + "/videos" + "?api_key=" + Configuracao.apiKey + getResources().getString(R.string.language);
 
+        MyTask task = new MyTask();
+        MyTask task1 = new MyTask();
+
+        task1.execute(urlVideo);
+        task.execute(urlDetails);
 
     }
     class MyTask extends AsyncTask<String,Void,String> {
@@ -84,12 +90,9 @@ public class DetailsMovie  extends AppCompatActivity{
 
             String stringUrl = strings[0];
 
-
-
-
             StringBuffer buffer = new StringBuffer();
 
-            if(stringUrl.contains(urlDetails))
+            if(stringUrl.contains(urlVideo))
             {
                 InputStream inputStream = null;
                 InputStreamReader inputStreamReader = null;
@@ -124,6 +127,7 @@ public class DetailsMovie  extends AppCompatActivity{
 
                         JSONObject posicao = jsonArray.getJSONObject(0);
                         video = posicao.getString("key").toString();
+                        retorno = "1";
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -175,7 +179,7 @@ public class DetailsMovie  extends AppCompatActivity{
                         date = jsonObject.getString("release_date");
                         homepage = jsonObject.getString("homepage");
 
-                        retorno = "detalhesSucesso";
+                        retorno = "2";
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -199,12 +203,12 @@ public class DetailsMovie  extends AppCompatActivity{
             super.onPostExecute(resultado);
 
             try{
-                if (retorno.contains("videoSucesso")) {
+                if (retorno.contains("1")) {
                     Uri src = Uri.parse(video);
                     movieVideo.setVideoURI(src);
                 }
 
-                if (retorno.contains("detalhesSucesso")) {
+                if (retorno.contains("2")) {
                     movieTitle.setText(title);
                     movieDate.setText(date);
                     movieOverview.setText(overview);

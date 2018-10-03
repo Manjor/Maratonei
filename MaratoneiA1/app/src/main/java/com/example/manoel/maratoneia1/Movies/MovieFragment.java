@@ -50,9 +50,10 @@ public class MovieFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
 
         recyclerView.setLayoutManager(layoutManager);
+        MyTask task = new MyTask();
 
+        task.execute(Configuracao.getMoviePopular(getResources().getString(R.string.language).toString()));
         return view;
-
     }
 
     public void adicionaMovieCard(String movieTitle,String movieBackdrop, int id)
@@ -74,7 +75,7 @@ public class MovieFragment extends Fragment {
         protected String doInBackground(String... strings) {
 
 
-            String stringUrl = strings[0];
+            String stringUrl = strings[strings.length - 1];
             InputStream inputStream = null;
             InputStreamReader inputStreamReader = null;
 
@@ -103,12 +104,37 @@ public class MovieFragment extends Fragment {
 
                     buffer.append( linha );
                 }
+                String results = null;
+                String nomeSerie = null;
+                JSONArray jsonArray = null;
+
+                try {
+                    JSONObject jsonObject = new JSONObject(buffer.toString());
+                    jsonArray = jsonObject.getJSONArray("results");
+
+                    for(int i = 0; i < jsonArray.length(); i++)
+                    {
+                        JSONObject e = jsonArray.getJSONObject(i);
+                        String strinJsonNomeSerie = e.getString("title");
+                        String backdropJsonSerie = e.getString("backdrop_path");
+                        int idJsonSerie = e.getInt("id");
+                        String urlImagemBanner = Configuracao.urlImageApi + backdropJsonSerie;
+
+                        adicionaMovieCard(strinJsonNomeSerie,urlImagemBanner,idJsonSerie);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
 
             return buffer.toString();
         }
@@ -117,33 +143,7 @@ public class MovieFragment extends Fragment {
         protected void onPostExecute(String resultado) {
             super.onPostExecute(resultado);
 
-            String results = null;
-            String titleMovie = null;
-            JSONArray jsonArray = null;
-
-            try {
-                JSONObject jsonObject = new JSONObject(resultado);
-                jsonArray = jsonObject.getJSONArray("results");
-
-                for(int i = 0; i < jsonArray.length(); i++)
-                {
-                    JSONObject e = jsonArray.getJSONObject(i);
-                    String strinJsonNomeSerie = e.getString("title");
-                    String backdropJsonSerie = e.getString("backdrop_path");
-                    int idJsonSerie = e.getInt("id");
-                    String urlImageBackdrop = Configuracao.urlImageApi + backdropJsonSerie;
-
-                    adicionaMovieCard(strinJsonNomeSerie,urlImageBackdrop,idJsonSerie);
-
-
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
             MovieAdapter movieAdapter = new MovieAdapter( movieList );
-
             recyclerView.setAdapter(movieAdapter);
 
 
