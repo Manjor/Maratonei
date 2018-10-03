@@ -33,6 +33,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         return fragmentListTitles.get(position);
     }
 
+    //Override the size of items in recycle
     @Override
     public int getCount() {
 

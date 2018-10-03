@@ -8,10 +8,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.example.manoel.maratoneia1.Configuracao;
 import com.example.manoel.maratoneia1.R;
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -26,7 +31,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class DetailsMovie  extends AppCompatActivity{
+public class DetailsMovie  extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener{
 
 
     //Atributes
@@ -37,6 +42,7 @@ public class DetailsMovie  extends AppCompatActivity{
     private TextView movieOverview;
     private TextView movieDate;
     private TextView movieHomePage;
+    private YouTubePlayerView movieYoutube;
 
     private String urlPoster = null;
     private String urlBackdrop = null;
@@ -49,27 +55,28 @@ public class DetailsMovie  extends AppCompatActivity{
 
     private String urlDetails = "";
     private String urlVideo;
-
+    private static String urlYoutube;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_movie);
-        getSupportActionBar().hide();
+
 
         movieBackdrop = findViewById(R.id.movieBackdrop);
         moviePoster = findViewById(R.id.moviePoster);
-        movieVideo = findViewById(R.id.movieVideo);
+        //movieVideo = findViewById(R.id.movieVideo);
         movieTitle = findViewById(R.id.movieTitle);
         movieOverview = findViewById(R.id.movieOverview);
         movieDate = findViewById(R.id.movieDate);
         movieHomePage = findViewById(R.id.movieHomePage);
-
+        movieYoutube = findViewById(R.id.movieYoutube);
+        movieYoutube.initialize(Configuracao.GOOGLE_API_KEY,this);
         int movieId = this.getIntent().getIntExtra("id",0);
 
         Configuracao configuracao = new Configuracao();
         urlDetails = configuracao.getDetailsMovie(movieId, getResources().getString(R.string.language).toString());
-        urlVideo = Configuracao.urlApi + "movie/" + movieId + "/videos" + "?api_key=" + Configuracao.apiKey + getResources().getString(R.string.language);
+        urlVideo = Configuracao.urlApi + "movie/" + movieId + "/videos" + "?api_key=" + Configuracao.apiKey + "&" + getResources().getString(R.string.language);
 
         MyTask task = new MyTask();
         MyTask task1 = new MyTask();
@@ -78,6 +85,8 @@ public class DetailsMovie  extends AppCompatActivity{
         task.execute(urlDetails);
 
     }
+
+
     class MyTask extends AsyncTask<String,Void,String> {
 
         @Override
@@ -127,17 +136,19 @@ public class DetailsMovie  extends AppCompatActivity{
 
                         JSONObject posicao = jsonArray.getJSONObject(0);
                         video = posicao.getString("key").toString();
-                        retorno = "1";
+                        urlYoutube = Configuracao.urlVideoApi + video;
+                        Log.i("INFO","Link:" + urlYoutube);
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
+                    retorno = "1";
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                Log.i("INFO","Segundo Processamento Realizado: " + urlVideo);
+                Log.i("INFO","Segundo Processamento Realizado: " + video);
             }
             if(stringUrl.contains(urlDetails)){
 
@@ -203,12 +214,12 @@ public class DetailsMovie  extends AppCompatActivity{
             super.onPostExecute(resultado);
 
             try{
-                if (retorno.contains("1")) {
-                    Uri src = Uri.parse(video);
-                    movieVideo.setVideoURI(src);
+                if (resultado.contains("1")) {
+
+                    //movieVideo.setVideoURI(src);
                 }
 
-                if (retorno.contains("2")) {
+                if (resultado.contains("2")) {
                     movieTitle.setText(title);
                     movieDate.setText(date);
                     movieOverview.setText(overview);
@@ -218,9 +229,21 @@ public class DetailsMovie  extends AppCompatActivity{
                 }
             }catch (Exception e)
             {
-                Log.i("INFO", "Erro no processamento de componentes");
+                Log.i("INFO", "Erro no processamento de componentes" + e);
             }
 
         }
     }
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+
+        Log.i("INFO" , "LINK:" +urlYoutube);
+        youTubePlayer.cueVideo(urlYoutube);
+    }
+
+    @Override
+    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+        Toast.makeText(this,"Player Error", Toast.LENGTH_SHORT).show();
+    }
+
 }

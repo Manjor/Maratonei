@@ -14,8 +14,8 @@ public class SerieHolder extends RecyclerView.ViewHolder {
 
     public SerieHolder(View itemView) {
         super(itemView);
-        serieName = itemView.findViewById(R.id.serieBackdropFrag);
-        serieBackdrop = itemView.findViewById(R.id.serieNameFrag);
+        serieName = itemView.findViewById(R.id.serieNameFrag);
+        serieBackdrop = itemView.findViewById(R.id.serieBackdropFrag);
     }
 
     public TextView getSerieName() {

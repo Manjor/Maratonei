@@ -48,6 +48,10 @@ public class SerieFragment extends Fragment {
 
         recyclerView.setLayoutManager(layoutManager);
 
+
+        MyTask task = new MyTask();
+        task.execute(Configuracao.getSeriePopular(getResources().getString(R.string.language)));
+
         return view;
 
     }

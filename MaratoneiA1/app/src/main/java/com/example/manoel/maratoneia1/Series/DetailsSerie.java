@@ -43,25 +43,30 @@ public class DetailsSerie extends AppCompatActivity{
     private String retorno = null;
 
     private String urlDetails = "";
-    private String urlVideo;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details_movie);
+        setContentView(R.layout.activity_details_serie);
+        getSupportActionBar().hide();
 
         seriePoster = findViewById(R.id.seriePoster);
         serieName = findViewById(R.id.serieName);
-        serieOverview = findViewById(R.id.serieOverview);
-        //serieDate = findViewById(R.id.serieDate);
+        serieOverview = findViewById(R.id.serieOverview1);
+        serieDate = findViewById(R.id.serieDate);
         //serieHomePage = findViewById(R.id.serieHomePage);
 
-        int movieId = this.getIntent().getIntExtra("id",0);
+        int serieId = this.getIntent().getIntExtra("id",0);
 
         Configuracao configuracao = new Configuracao();
-        urlDetails = configuracao.getDetailsSerie(movieId, getResources().getString(R.string.language).toString());
+        urlDetails = configuracao.getDetailsSerie(serieId, getResources().getString(R.string.language).toString());
+
+        MyTask myTask = new MyTask();
+        myTask.execute(urlDetails);
+
+
 
     }
     class MyTask extends AsyncTask<String,Void,String> {
@@ -75,9 +80,6 @@ public class DetailsSerie extends AppCompatActivity{
         protected String doInBackground(String... strings) {
 
             String stringUrl = strings[0];
-
-
-
 
             StringBuffer buffer = new StringBuffer();
 
@@ -113,13 +115,12 @@ public class DetailsSerie extends AppCompatActivity{
                         JSONObject jsonObject = new JSONObject(buffer.toString());
 
                         urlPoster = jsonObject.getString("poster_path");
-
                         overview = jsonObject.getString("overview");
                         name = jsonObject.getString("name");
-                        //date = jsonObject.getString("release_date");
-                        homepage = jsonObject.getString("homepage");
+                        date = jsonObject.getString("first_air_date");
 
-                        retorno = "detalhesSucesso";
+
+                        retorno = "1";
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -144,17 +145,17 @@ public class DetailsSerie extends AppCompatActivity{
 
             try{
 
-                if (retorno.contains("detalhesSucesso")) {
+                if (resultado.contains("1")) {
                     serieName.setText(name);
-                    //serieDate.setText(date);
+                    serieDate.setText(date);
                     serieOverview.setText(overview);
-                    serieHomePage.setText("Homepage: " + homepage);
-                    Picasso.get().load(Configuracao.urlImageApi + urlPoster).into(seriePoster);
+                    Picasso.get().load(Configuracao.urlImageApi+urlPoster).into(seriePoster);
+                    Log.i("INFO","INFOIMG" + Configuracao.urlImageApi + urlPoster);
 
                 }
             }catch (Exception e)
             {
-                Log.i("INFO", "Erro no processamento de componentes");
+                Log.i("INFO", "Erro no processamento de componentes" + e);
             }
 
         }

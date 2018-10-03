@@ -7,4 +7,7 @@
     <string name="movies">Filmes</string>
     <string name="news">Notícias</string>
     <string name="language">language=pt-BR</string>
+    <string name="newTite">Title of Notice</string>
+    <string name="dateNotice">Date of Notice</string>
+    <string name="descriptionNotice">Description of Notice</string>
 </resources>

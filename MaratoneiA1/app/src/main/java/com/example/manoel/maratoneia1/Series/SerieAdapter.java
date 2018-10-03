@@ -57,6 +57,6 @@ public class SerieAdapter extends RecyclerView.Adapter<SerieHolder>{
 
     @Override
     public int getItemCount() {
-        return 0;
+        return this.serieList.size();
     }
 }

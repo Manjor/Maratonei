@@ -5,10 +5,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TableLayout;
 
 import com.example.manoel.maratoneia1.Movies.MovieFragment;
-import com.example.manoel.maratoneia1.News.NewsFragment;
+import com.example.manoel.maratoneia1.News.NewFragment;
 import com.example.manoel.maratoneia1.Series.SerieFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewPagerAdapter.addFragment(new MovieFragment(),getResources().getString(R.string.movies));
         viewPagerAdapter.addFragment(new SerieFragment(),getResources().getString(R.string.series));
-        viewPagerAdapter.addFragment(new SerieFragment(), getResources().getString(R.string.news));
+        viewPagerAdapter.addFragment(new NewFragment(), getResources().getString(R.string.news));
 
 
         Log.i("INFO","" + Configuracao.urlApi);
