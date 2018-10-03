@@ -9,8 +9,8 @@ public class Configuracao {
     public static String urlImageApi = "https://image.tmdb.org/t/p/w500";
     public static String urlVideoApi = "";
     public static String urlYoutube = "https://www.youtube.com/watch?v=";
-    public static String apiKey = "f814673a004bcd3dfd0e837cf1a0b020";
-    public static final String GOOGLE_API_KEY = "AIzaSyCRxqBqqP-qLVNFmdFyAChnJUhO32EcFlA";
+    public static String apiKey = "";
+    public static final String GOOGLE_API_KEY = "";
 
 
     public String getDetailsMovie(int movieId, String language ){
