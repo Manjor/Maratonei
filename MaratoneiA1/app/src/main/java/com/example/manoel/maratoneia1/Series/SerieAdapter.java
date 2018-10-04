@@ -3,6 +3,7 @@ package com.example.manoel.maratoneia1.Series;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,7 +39,12 @@ public class SerieAdapter extends RecyclerView.Adapter<SerieHolder>{
 
         holder.getSerieName().setText(serie.getSerieName());
         final int id = serie.getSerieId();
+        try{
+
         Picasso.get().load(serie.getSerieImage()).into(holder.getSerieBackdrop());
+        }catch (Exception e){
+
+        }
 
         holder.getSerieBackdrop().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +57,18 @@ public class SerieAdapter extends RecyclerView.Adapter<SerieHolder>{
 
                 view.getContext().startActivity(it);
 
+            }
+        });
+        holder.getSerieLike().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v,"Like the Serie", Snackbar.LENGTH_LONG).show();
+            }
+        });
+        holder.getSerieShare().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v,"Share the Serie", Snackbar.LENGTH_LONG).show();
             }
         });
     }

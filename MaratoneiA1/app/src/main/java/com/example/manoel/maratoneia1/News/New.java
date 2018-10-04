@@ -8,7 +8,7 @@ public class New {
     private String newDesc;
     private String newImage;
     private String newVideo;
-    private int chaveVideo;
+    private int keyVideo;
 
     public New() {
     }
@@ -20,13 +20,13 @@ public class New {
         this.newDesc = newDesc;
         this.newImage = newImage;
     }
-    public New(String newImageProfile,String newTitle, String newDate, String newDesc, String newVideo, int chaveVideo){
+    public New(String newImageProfile,String newTitle, String newDate, String newDesc, String newVideo, int keyVideo){
         this.newImageProfile = newImageProfile;
         this.newTitle = newTitle;
         this.newDate = newDate;
         this.newDesc = newDesc;
         this.newVideo = newVideo;
-        this.chaveVideo = chaveVideo;
+        this.keyVideo = keyVideo;
     }
 
     public String getNewImageProfile() {
@@ -77,11 +77,11 @@ public class New {
         this.newVideo = newVideo;
     }
 
-    public int getChaveVideo() {
-        return chaveVideo;
+    public int getKeyVideo() {
+        return keyVideo;
     }
 
-    public void setChaveVideo(int chaveVideo) {
-        this.chaveVideo = chaveVideo;
+    public void setKeyVideo(int keyVideo) {
+        this.keyVideo = keyVideo;
     }
 }

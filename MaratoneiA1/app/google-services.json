@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "279594042619",
+    "firebase_url": "https://maratonei-218313.firebaseio.com",
+    "project_id": "maratonei-218313",
+    "storage_bucket": "maratonei-218313.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:279594042619:android:ac86511a28c7c836",
+        "android_client_info": {
+          "package_name": "com.example.manoel.maratoneia1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "279594042619-i3ho0qtfc88653uriu6h13ltmvilg1fk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.manoel.maratoneia1",
+            "certificate_hash": "52a57d81da7e95ba1e1b8f7875da39c88e86009a"
+          }
+        },
+        {
+          "client_id": "279594042619-ugbg9hja3h0n0sg0hvefepoja8uds400.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDROZ08pC7slO53gL89OtRd8QsSd6CYbTU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "279594042619-ugbg9hja3h0n0sg0hvefepoja8uds400.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

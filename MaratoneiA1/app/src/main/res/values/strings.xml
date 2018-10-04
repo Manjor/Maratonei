@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MaratoneiA1</string>
+    <string name="app_name">Maratonei</string>
     <string name="series">Series</string>
     <string name="movies">Movies</string>
     <string name="news">News</string>
@@ -10,4 +10,11 @@
     <string name="newTite">Title of Notice</string>
     <string name="dateNotice">Date of Notice</string>
     <string name="descriptionNotice">Description of Notice</string>
+    <string name="moviename">Movie Name</string>
+    <string name="moviedate">Movie Date</string>
+    <string name="movieoverview">Overview</string>
+    <string name="errorconnection">Connection Error.</string>
+    <string name="messageerrorconnection">You device need internet access for continue application.\n" +
+                    "Please, verify you connection.</string>
+    <string name="confirm">Confirm</string>
 </resources>

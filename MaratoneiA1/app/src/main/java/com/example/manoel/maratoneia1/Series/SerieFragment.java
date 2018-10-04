@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.manoel.maratoneia1.Configuracao;
 import com.example.manoel.maratoneia1.R;
@@ -107,9 +109,13 @@ public class SerieFragment extends Fragment {
                 }
 
             } catch (MalformedURLException e) {
-                e.printStackTrace();
+                Toast.makeText(getContext(),"Não foi possível comunicar ao servidor", Toast.LENGTH_SHORT).show();
+                //e.printStackTrace();
+
             } catch (IOException e) {
-                e.printStackTrace();
+                Toast.makeText(getContext(),"Não foi possível comunicar ao servidor", Toast.LENGTH_SHORT).show();
+                //e.printStackTrace();
+
             }
 
             return buffer.toString();
@@ -141,14 +147,15 @@ public class SerieFragment extends Fragment {
                 }
 
             } catch (JSONException e) {
-                e.printStackTrace();
+                Toast.makeText(getContext(),"Os componentes não podem ser iniciados", Toast.LENGTH_SHORT).show();
+                //e.printStackTrace();
             }
 
             SerieAdapter seriesAdapter = new SerieAdapter( serieList );
 
             recyclerView.setAdapter(seriesAdapter);
 
-            Log.i("INFO","JSON: " + jsonArray.toString());
+            //Log.i("INFO","JSON: " + jsonArray.toString());
 
 
         }

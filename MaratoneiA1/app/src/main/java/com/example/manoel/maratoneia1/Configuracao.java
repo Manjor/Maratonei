@@ -1,5 +1,9 @@
 package com.example.manoel.maratoneia1;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
 public class Configuracao {
@@ -9,8 +13,8 @@ public class Configuracao {
     public static String urlImageApi = "https://image.tmdb.org/t/p/w500";
     public static String urlVideoApi = "";
     public static String urlYoutube = "https://www.youtube.com/watch?v=";
-    public static String apiKey = "";
-    public static final String GOOGLE_API_KEY = "";
+    public static String apiKey = "f814673a004bcd3dfd0e837cf1a0b020";
+    public static final String GOOGLE_API_KEY = "AIzaSyCRxqBqqP-qLVNFmdFyAChnJUhO32EcFlA";
 
 
     public String getDetailsMovie(int movieId, String language ){
@@ -31,8 +35,6 @@ public class Configuracao {
     public static String getSeriePopular(String language){
 
         return  urlApi + "tv/popular" + "?api_key=" + apiKey + "&page=1" + "&" + language;
-
     }
-
 
 }

@@ -1,10 +1,15 @@
 package com.example.manoel.maratoneia1;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.net.ConnectivityManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.manoel.maratoneia1.Movies.MovieFragment;
 import com.example.manoel.maratoneia1.News.NewFragment;
@@ -19,32 +24,59 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
 
-        //Instance of with set ids
-        tabLayout = (TabLayout) findViewById(R.id.tabLayoutMain);
-        viewPager = (ViewPager) findViewById(R.id.viewPagerMain);
 
-        //Create a new instance of ViewPageAdapter
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        if(verificaConexao()){
+            //Instance of with set ids
+            tabLayout = (TabLayout) findViewById(R.id.tabLayoutMain);
+            viewPager = (ViewPager) findViewById(R.id.viewPagerMain);
 
-        viewPagerAdapter.addFragment(new MovieFragment(),getResources().getString(R.string.movies));
-        viewPagerAdapter.addFragment(new SerieFragment(),getResources().getString(R.string.series));
-        viewPagerAdapter.addFragment(new NewFragment(), getResources().getString(R.string.news));
+            //Create a new instance of ViewPageAdapter
+            ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
+            viewPagerAdapter.addFragment(new MovieFragment(),getResources().getString(R.string.movies));
+            viewPagerAdapter.addFragment(new SerieFragment(),getResources().getString(R.string.series));
+            viewPagerAdapter.addFragment(new NewFragment(), getResources().getString(R.string.news));
 
-        Log.i("INFO","" + Configuracao.urlApi);
-        Log.i("INFO","" + Configuracao.apiKey);
-        Log.i("INFO","" + Configuracao.urlImageApi);
-        Log.i("INFO","" + Configuracao.urlVideoApi);
-        Log.i("INFO","" + getResources().getString(R.string.language).toString());
+            viewPager.setAdapter(viewPagerAdapter);
 
-        viewPager.setAdapter(viewPagerAdapter);
+            tabLayout.setupWithViewPager(viewPager);
 
-        tabLayout.setupWithViewPager(viewPager);
+        }
+        else{
 
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+
+            dialog.setTitle(getResources().getString(R.string.errorconnection));
+            dialog.setMessage(getResources().getString(R.string.messageerrorconnection));
+
+            dialog.setPositiveButton(getResources().getString(R.string.confirm), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    System.exit(1);
+                }
+            });
+
+            dialog.show();
+        }
     }
+
+    public  boolean verificaConexao() {
+        boolean conectado;
+        ConnectivityManager conectivtyManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (conectivtyManager.getActiveNetworkInfo() != null
+                && conectivtyManager.getActiveNetworkInfo().isAvailable()
+                && conectivtyManager.getActiveNetworkInfo().isConnected()) {
+            conectado = true;
+        } else {
+            conectado = false;
+        }
+        return conectado;
+    }
+
+
 }

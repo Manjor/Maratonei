@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.manoel.maratoneia1.Configuracao;
 import com.example.manoel.maratoneia1.R;
@@ -124,15 +125,34 @@ public class MovieFragment extends Fragment {
                     }
 
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
+                    adicionaMovieCard("Nome da Serie","",0);
+                    adicionaMovieCard("Nome da Serie","",0);
+                    adicionaMovieCard("Nome da Serie","",0);
+                    adicionaMovieCard("Nome da Serie","",0);
+                    adicionaMovieCard("Nome da Serie","",0);
+                    adicionaMovieCard("Nome da Serie","",0);
                 }
 
-
-
             } catch (MalformedURLException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
+                adicionaMovieCard("Nome da Serie","",0);
+                adicionaMovieCard("Nome da Serie","",0);
+                adicionaMovieCard("Nome da Serie","",0);
+                adicionaMovieCard("Nome da Serie","",0);
+                adicionaMovieCard("Nome da Serie","",0);
+                adicionaMovieCard("Nome da Serie","",0);
+
             } catch (IOException e) {
-                e.printStackTrace();
+                Toast.makeText(getContext(),"Os componentes não podem ser iniciados", Toast.LENGTH_SHORT).show();
+                //e.printStackTrace();
+                adicionaMovieCard(getResources().getString(R.string.moviename),"",0);
+                adicionaMovieCard(getResources().getString(R.string.moviename),"",0);
+                adicionaMovieCard(getResources().getString(R.string.moviename),"",0);
+                adicionaMovieCard(getResources().getString(R.string.moviename),"",0);
+                adicionaMovieCard(getResources().getString(R.string.moviename),"",0);
+                adicionaMovieCard(getResources().getString(R.string.moviename),"",0);
+                adicionaMovieCard(getResources().getString(R.string.moviename),"",0);
             }
 
 
@@ -141,6 +161,7 @@ public class MovieFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String resultado) {
+
             super.onPostExecute(resultado);
 
             MovieAdapter movieAdapter = new MovieAdapter( movieList );

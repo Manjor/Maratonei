@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Filmes.DetalhesFilmes">
+    tools:context=".Movies.DetailsMovie">
 
     <ScrollView
         android:layout_width="0dp"
@@ -35,7 +35,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0"
-                    app:srcCompat="@mipmap/ic_launcher" />
+                    app:srcCompat="@drawable/ic_launcher_foreground" />
 
                 <ImageView
                     android:id="@+id/moviePoster"
@@ -50,7 +50,7 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/movieBackdrop"
-                    app:srcCompat="@mipmap/ic_launcher" />
+                    app:srcCompat="@drawable/ic_launcher_foreground" />
 
                 <TextView
                     android:id="@+id/movieTitle"
@@ -59,7 +59,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Nome do Filme"
+                    android:text="@string/moviename"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -74,7 +74,7 @@
                     android:layout_marginEnd="84dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Date"
+                    android:text="@string/moviedate"
                     app:layout_constraintBottom_toTopOf="@+id/movieOverview"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -89,7 +89,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:padding="10dp"
-                    android:text="resumo"
+                    android:text="@string/movieoverview"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/moviePoster" />

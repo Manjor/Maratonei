@@ -6,44 +6,68 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.manoel.maratoneia1.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewFragment extends Fragment {
+public class NewFragment extends Fragment implements ValueEventListener  {
 
     private View view;
     private RecyclerView recyclerView;
-    private List<New> newList = new ArrayList<>();
+    static List<New> newList = new ArrayList<>();
+    private DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+    public int i = 0;
 
+    String title;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_new,container,false);
 
+
         recyclerView = view.findViewById(R.id.recycleNew);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-
-        this.newList.add(new New("Sem Imagem","Novidade em Capitã Marvel","10 de Outubro de 2018","Vazou fotos do set de gravações de capitã marvel","SEM IMAGEM"));
-        this.newList.add(new New("Sem Imagem","Novidade em ","10 de Outubro de 2018","Vazou fotos do set de gravações de capitã marvel","SEM IMAGEM"));
-        this.newList.add(new New("Sem Imagem","Novidade em ","11 de Outubro de 2018","Vazou fotos do set de ","SEM IMAGEM"));
-        this.newList.add(new New("Sem Imagem","Novidade em ","12 de Outubro de 2018","Vazou fotos do set de ","SEM IMAGEM"));
-        this.newList.add(new New("Sem Imagem","Novidade em ","13 de Outubro de 2018","Vazou fotos do set de ","SEM IMAGEM"));
-        this.newList.add(new New("Sem Imagem","Novidade em ","14 de Outubro de 2018","Vazou fotos do set de ","SEM IMAGEM"));
-        this.newList.add(new New("Sem Imagem","Novidade em ","15 de Outubro de 2018","Vazou fotos do set de ","SEM IMAGEM"));
-        this.newList.add(new New("Sem Imagem","Novidade em ","16 de Outubro de 2018","Vazou fotos do set de ","SEM IMAGEM"));
-
-
-        NewAdapter newAdapter = new NewAdapter(this.newList);
-        recyclerView.setAdapter(newAdapter);
+        DatabaseReference news = reference.child("noticias");
+        news.addListenerForSingleValueEvent(this);
 
         return view;
+    }
+
+
+    @Override
+    public void onDataChange(DataSnapshot dataSnapshot) {
+        int i;
+        for (i = 1; i <= dataSnapshot.getChildrenCount(); i++) {
+            String pos = String.valueOf(i);
+            String title = dataSnapshot.child(pos).child("titulo").getValue().toString();
+            String description = dataSnapshot.child(pos).child("descricao").getValue().toString();
+            String date = dataSnapshot.child(pos).child("data").getValue().toString();
+            String id = dataSnapshot.child(pos).child("id").getValue().toString();
+            this.addList(title,date,description);
+        }
+        NewAdapter newAdapter = new NewAdapter(this.newList);
+        recyclerView.setAdapter(newAdapter);
+    }
+
+    @Override
+    public void onCancelled(DatabaseError databaseError) {
+
+    }
+
+    public void addList(String title,String description, String date){
+        this.newList.add(new New("Sem Imagem",title,date,description,"SEM IMAGEM"));
     }
 }

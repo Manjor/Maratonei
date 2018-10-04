@@ -3,4 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimaryRoxo">#870d4c</color>
+    <color name="colorPrimaryDarkRoxo">#550024</color>
+    <color name="colorAccentRoxo">#bb4678</color>
 </resources>
