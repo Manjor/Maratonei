@@ -5,11 +5,14 @@ Desenvolvido como projeto avaliativo para:
 - Periodo: 5º
 - Professor: SILVANO MALFATI
 
-Projeto inicialmente desenvolvido em IONIC 3 para estudos pessoais, e agora elaborado em JAVA para execução NATIVA.
+Projeto inicialmente desenvolvido em IONIC 3 (https://github.com/Manjor/APP-FILMES)para estudos pessoais, e agora elaborado em JAVA
+para execução NATIVA.
 O Aplicativo conta com:
   - Lista de Filmes Populares
   - Lista de Séries Populares
   - Fragmento para postagem de Notícias.
   - Detalhes e Resumo sobre Filmes e Series.
+  - Consumo de WEBSERVICE de Banco de Dados de Filmes e Series
+  - Uso do Firebase para inclusão de novas notícias.
   
  
