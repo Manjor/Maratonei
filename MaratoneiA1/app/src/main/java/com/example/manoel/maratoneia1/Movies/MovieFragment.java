@@ -62,8 +62,6 @@ public class MovieFragment extends Fragment {
         Movie movie = new Movie(movieTitle, movieBackdrop ,id);
         this.movieList.add(movie);
     }
-
-
     class MyTask extends AsyncTask<String,Void,String> {
 
 
@@ -166,14 +164,6 @@ public class MovieFragment extends Fragment {
 
             MovieAdapter movieAdapter = new MovieAdapter( movieList );
             recyclerView.setAdapter(movieAdapter);
-
-
-
         }
     }
-
-
-
-
-
 }

@@ -17,4 +17,12 @@
     <string name="messageerrorconnection">You device need internet access for continue application.\n" +
                     "Please, verify you connection.</string>
     <string name="confirm">Confirm</string>
+    <string name="search">Search</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="exit">Exit</string>
+    <string name="title_activity_home">Maratonei</string>
+    <string name="cine">Cine</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
