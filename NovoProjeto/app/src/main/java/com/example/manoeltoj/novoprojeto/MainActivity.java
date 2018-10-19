@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity{
         getSupportActionBar().hide();
 
         play = findViewById(R.id.lottiePlay);
-        loading = findViewById(R.id.lottieLoading);
+        //loading = findViewById(R.id.lottieLoading);
         button = findViewById(R.id.button);
 
         //loading.playAnimation();
