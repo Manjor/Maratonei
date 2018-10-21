@@ -23,6 +23,10 @@ public class HomeActivity extends AppCompatActivity {
     private ViewPagerAdapter viewPagerAdapter;
     private Toolbar toolbar;
     private Menu menu_home;
+    private MenuItem itemMovies;
+    private MenuItem itemSeries;
+    private MenuItem itemNews;
+    private MenuItem itemCineLocale;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -55,12 +59,15 @@ public class HomeActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbarCustom);
         setSupportActionBar(toolbar);
         toolbar.setTitle("Maratonei");
+
+
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(new MovieFragment(),getResources().getString(R.string.movies));
         viewPagerAdapter.addFragment(new SerieFragment(),getResources().getString(R.string.series));
         viewPagerAdapter.addFragment(new NewFragment(),getResources().getString(R.string.news));
         viewPagerAdapter.addFragment(new MapFragment(),"Maps");
         viewPager.setAdapter(viewPagerAdapter);
+
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

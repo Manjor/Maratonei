@@ -25,7 +25,7 @@ public class NewFragment extends Fragment implements ValueEventListener  {
 
     private View view;
     private RecyclerView recyclerView;
-    static List<New> newList = new ArrayList<>();
+    static List<New> newList;
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
     public int i = 0;
 
@@ -42,14 +42,15 @@ public class NewFragment extends Fragment implements ValueEventListener  {
 
         DatabaseReference news = reference.child("noticias");
         news.addListenerForSingleValueEvent(this);
-
         return view;
+
     }
 
 
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
         int i;
+        this.newList = new ArrayList<>();
         for (i = 1; i <= dataSnapshot.getChildrenCount(); i++) {
             String pos = String.valueOf(i);
             String title = dataSnapshot.child(pos).child("titulo").getValue().toString();

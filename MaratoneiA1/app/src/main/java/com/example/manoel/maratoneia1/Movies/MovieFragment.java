@@ -38,8 +38,7 @@ public class MovieFragment extends Fragment {
     View view;
 
     private RecyclerView recyclerView;
-    private List<Movie> movieList = new ArrayList<>();
-
+    private List<Movie> movieList;
 
     @Nullable
     @Override
@@ -49,12 +48,17 @@ public class MovieFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recycleMovie);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-
+        this.movieList = new ArrayList<>();
         recyclerView.setLayoutManager(layoutManager);
-        MyTask task = new MyTask();
+        chamaTask(Configuracao.getMoviePopular(getResources().getString(R.string.language).toString()));
 
-        task.execute(Configuracao.getMoviePopular(getResources().getString(R.string.language).toString()));
         return view;
+    }
+    public void chamaTask(String request){
+
+        MyTask task = new MyTask();
+        task.execute(request);
+
     }
 
     public void adicionaMovieCard(String movieTitle,String movieBackdrop, int id)
@@ -64,7 +68,6 @@ public class MovieFragment extends Fragment {
     }
     class MyTask extends AsyncTask<String,Void,String> {
 
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -72,7 +75,6 @@ public class MovieFragment extends Fragment {
 
         @Override
         protected String doInBackground(String... strings) {
-
 
             String stringUrl = strings[strings.length - 1];
             InputStream inputStream = null;
