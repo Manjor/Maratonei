@@ -17,7 +17,7 @@ import java.util.List;
 
 public class SerieAdapter extends RecyclerView.Adapter<SerieHolder>{
 
-    private List<Serie> serieList;
+    private List<Serie> serieList = null;
 
 
 

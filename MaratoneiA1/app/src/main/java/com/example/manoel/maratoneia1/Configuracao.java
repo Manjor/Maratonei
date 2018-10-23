@@ -31,7 +31,12 @@ public class Configuracao {
     public static String getMoviePopular(String language){
         return urlApi + "movie/popular" + "?api_key=" + apiKey + "&page=1" + "&" + language;
     }
-
+    public static String getMovieNowPlayng(String language){
+        return urlApi + "movie/now_playing" + "?api_key=" + apiKey + "&page=1" + "&"+language;
+    }
+    public static String getMovieByGenre(int genre,String language){
+        return urlApi + "genre/" + genre + "/movies?api_key=" + apiKey + "&page=1" + "&"+ language;
+    }
     public static String getSeriePopular(String language){
 
         return  urlApi + "tv/popular" + "?api_key=" + apiKey + "&page=1" + "&" + language;

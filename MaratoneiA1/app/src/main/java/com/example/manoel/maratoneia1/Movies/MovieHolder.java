@@ -20,8 +20,6 @@ public class MovieHolder extends RecyclerView.ViewHolder {
         super(itemView);
         this.movieTitle = itemView.findViewById(R.id.movieTitleFrag);
         this.movieBackdrop = itemView.findViewById(R.id.movieBackdropFrag);
-        this.movieLike = itemView.findViewById(R.id.movieLike);
-        this.movieShare = itemView.findViewById(R.id.movieShare);
     }
 
     public TextView getMovieTitle() {

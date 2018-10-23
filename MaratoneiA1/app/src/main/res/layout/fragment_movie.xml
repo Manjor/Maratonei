@@ -18,20 +18,87 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieLoad"
-        android:layout_width="wrap_content"
+        android:id="@+id/lottieLoadMovie"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_colorFilter="@color/colorPrimaryDarkRoxo"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
+        app:lottie_autoPlay="false"
+        app:lottie_loop="true"
         app:lottie_rawRes="@raw/preloader"
-        app:lottie_loop="true"/>
+        app:lottie_scale="0.3" />
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.757"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp">
+
+            <Button
+                android:id="@+id/btnNowPlay"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:elevation="2dp"
+                android:text="Now Play"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textColor="@color/colorPrimaryDarkRoxo" />
+
+            <Button
+                android:id="@+id/btnAction"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:elevation="2dp"
+                android:text="Action"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textColor="@color/colorPrimaryDarkRoxo" />
+
+            <Button
+                android:id="@+id/btnTriller"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:elevation="2dp"
+                android:text="Thriller"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textColor="@color/colorPrimaryDarkRoxo" />
+
+            <Button
+                android:id="@+id/btnWar"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:elevation="2dp"
+                android:text="War"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textColor="@color/colorPrimaryDarkRoxo" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
 </android.support.constraint.ConstraintLayout>

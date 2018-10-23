@@ -56,18 +56,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieHolder> {
                 v.getContext().startActivity(intent);
             }
         });
-        holder.getMovieLike().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Snackbar.make(v,"Like the Movie", Snackbar.LENGTH_LONG).show();
-            }
-        });
-        holder.getMovieShare().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Snackbar.make(v,"Share the Movie", Snackbar.LENGTH_LONG).show();
-            }
-        });
 
     }
 

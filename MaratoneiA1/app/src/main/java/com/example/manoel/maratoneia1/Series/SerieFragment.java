@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.manoel.maratoneia1.Configuracao;
 import com.example.manoel.maratoneia1.R;
 
@@ -36,7 +37,8 @@ public class SerieFragment extends Fragment {
     View view;
 
     private RecyclerView recyclerView;
-    private List<Serie> serieList = new ArrayList<>();
+    private List<Serie> serieList;
+    private LottieAnimationView lottieLoad;
 
 
     @Nullable
@@ -46,6 +48,7 @@ public class SerieFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_serie,container,false);
 
         recyclerView = view.findViewById(R.id.recycleSerie);
+        lottieLoad = view.findViewById(R.id.lottieLoadSerie);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
 
         recyclerView.setLayoutManager(layoutManager);
@@ -72,6 +75,7 @@ public class SerieFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            lottieLoad.playAnimation();
         }
 
         @Override
@@ -124,7 +128,7 @@ public class SerieFragment extends Fragment {
         @Override
         protected void onPostExecute(String resultado) {
             super.onPostExecute(resultado);
-
+            serieList = new ArrayList<>();
             String results = null;
             String nomeSerie = null;
             JSONArray jsonArray = null;
@@ -150,7 +154,8 @@ public class SerieFragment extends Fragment {
                 Toast.makeText(getContext(),"Os componentes não podem ser iniciados", Toast.LENGTH_SHORT).show();
                 //e.printStackTrace();
             }
-
+            lottieLoad.cancelAnimation();
+            lottieLoad.setVisibility(View.INVISIBLE);
             SerieAdapter seriesAdapter = new SerieAdapter( serieList );
 
             recyclerView.setAdapter(seriesAdapter);
