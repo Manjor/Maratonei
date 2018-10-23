@@ -36,7 +36,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
-        app:lottie_colorFilter="#ab106d"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/playing"
         app:lottie_scale="1.3" />
