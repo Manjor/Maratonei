@@ -31,7 +31,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class DetailsMovie  extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener{
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+public class DetailsMovie extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
 
     //Atributes
@@ -71,8 +75,8 @@ public class DetailsMovie  extends YouTubeBaseActivity implements YouTubePlayer.
         movieDate = findViewById(R.id.movieDate);
         movieHomePage = findViewById(R.id.movieHomePage);
         movieYoutube = findViewById(R.id.movieYoutube);
-        movieYoutube.initialize(Configuracao.GOOGLE_API_KEY,this);
-        int movieId = this.getIntent().getIntExtra("id",0);
+        movieYoutube.initialize(Configuracao.GOOGLE_API_KEY, this);
+        int movieId = this.getIntent().getIntExtra("id", 0);
 
         Configuracao configuracao = new Configuracao();
         urlDetails = configuracao.getDetailsMovie(movieId, getResources().getString(R.string.language).toString());
@@ -87,7 +91,7 @@ public class DetailsMovie  extends YouTubeBaseActivity implements YouTubePlayer.
     }
 
 
-    class MyTask extends AsyncTask<String,Void,String> {
+    class MyTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected void onPreExecute() {
@@ -98,86 +102,47 @@ public class DetailsMovie  extends YouTubeBaseActivity implements YouTubePlayer.
         protected String doInBackground(String... strings) {
 
             String stringUrl = strings[0];
-
+            String results;
+            OkHttpClient client = new OkHttpClient();
             StringBuffer buffer = new StringBuffer();
+            JSONArray jsonArray = null;
 
-            if(stringUrl.contains(urlVideo))
-            {
-                InputStream inputStream = null;
-                InputStreamReader inputStreamReader = null;
+            if (stringUrl.contains(urlVideo)) {
+                try {
 
+                    URL url = new URL(stringUrl);
+                    Request request = new Request.Builder().url(url).build();
+
+                    Response response = client.newCall(request).execute();
+                    results = response.body().string();
+
+                } catch (Exception err) {
+
+                }
 
                 try {
-                    URL url = new URL(stringUrl);
-                    //Faz a requisição, abre a conexão
-                    HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+                    JSONObject jsonObject = new JSONObject(buffer.toString());
+                    jsonArray = jsonObject.getJSONArray("results");
 
-                    //Recupera os dados em Bytes
-                    inputStream = conexao.getInputStream();
+                    JSONObject posicao = jsonArray.getJSONObject(0);
+                    video = posicao.getString("key").toString();
+                    urlYoutube = Configuracao.urlVideoApi + video;
+                    Log.i("INFO", "Link:" + urlYoutube);
 
-                    //inputStreamReader lê os dados em Bytes e decodifica para caracteres
-                    inputStreamReader = new InputStreamReader(inputStream);
-
-                    //Objeto utilizado para leitura dos caracteres do InputStreamReader
-                    BufferedReader reader = new BufferedReader(inputStreamReader);
-
-
-                    String linha = "";
-
-                    while ((linha = reader.readLine()) != null) {
-
-                        buffer.append(linha);
-                    }
-
-                    JSONArray jsonArray = null;
-                    try {
-                        JSONObject jsonObject = new JSONObject(buffer.toString());
-                        jsonArray = jsonObject.getJSONArray("results");
-
-                        JSONObject posicao = jsonArray.getJSONObject(0);
-                        video = posicao.getString("key").toString();
-                        urlYoutube = Configuracao.urlVideoApi + video;
-                        Log.i("INFO","Link:" + urlYoutube);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    retorno = "1";
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Log.i("INFO","Segundo Processamento Realizado: " + video);
-            }
-            if(stringUrl.contains(urlDetails)){
+                retorno = "1";
 
-                InputStream inputStream = null;
-                InputStreamReader inputStreamReader = null;
-
-
+            } else if (stringUrl.contains(urlDetails)) {
                 try {
                     URL url = new URL(stringUrl);
-                    //Faz a requisição, abre a conexão
-                    HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+                    Request request = new Request.Builder().url(url).build();
 
-                    //Recupera os dados em Bytes
-                    inputStream = conexao.getInputStream();
+                    Response response = client.newCall(request).execute();
 
-                    //inputStreamReader lê os dados em Bytes e decodifica para caracteres
-                    inputStreamReader = new InputStreamReader(inputStream);
-
-                    //Objeto utilizado para leitura dos caracteres do InputStreamReader
-                    BufferedReader reader = new BufferedReader(inputStreamReader);
-
-
-                    String linha = "";
-
-                    while ((linha = reader.readLine()) != null) {
-
-                        buffer.append(linha);
-                    }
-
+                    results = response.body().string();
+                    Log.i("INFO", "Result" + results);
                     try {
                         JSONObject jsonObject = new JSONObject(buffer.toString());
 
@@ -196,16 +161,16 @@ public class DetailsMovie  extends YouTubeBaseActivity implements YouTubePlayer.
                         e.printStackTrace();
                     }
 
+
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-            }
-            //return buffer.toString();
-            return retorno;
 
+            }
+            return retorno;
         }
 
         @Override
@@ -213,7 +178,7 @@ public class DetailsMovie  extends YouTubeBaseActivity implements YouTubePlayer.
 
             super.onPostExecute(resultado);
 
-            try{
+            try {
                 if (resultado.contains("1")) {
 
                     //movieVideo.setVideoURI(src);
@@ -227,23 +192,23 @@ public class DetailsMovie  extends YouTubeBaseActivity implements YouTubePlayer.
                     Picasso.get().load(Configuracao.urlImageApi + urlPoster).into(moviePoster);
                     Picasso.get().load(Configuracao.urlImageApi + urlBackdrop).into(movieBackdrop);
                 }
-            }catch (Exception e)
-            {
+            } catch (Exception e) {
                 Log.i("INFO", "Erro no processamento de componentes" + e);
             }
 
         }
     }
+
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
 
-        Log.i("INFO" , "LINK:" +urlYoutube);
+        Log.i("INFO", "LINK:" + urlYoutube);
         youTubePlayer.cueVideo(urlYoutube);
     }
 
     @Override
     public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-        Toast.makeText(this,"Player Error", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Player Error", Toast.LENGTH_SHORT).show();
     }
 
 }

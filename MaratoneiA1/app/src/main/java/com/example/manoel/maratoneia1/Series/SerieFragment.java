@@ -32,6 +32,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 public class SerieFragment extends Fragment {
 
     View view;
@@ -81,60 +85,28 @@ public class SerieFragment extends Fragment {
         @Override
         protected String doInBackground(String... strings) {
 
-
+            serieList = new ArrayList<>();
             String stringUrl = strings[0];
-            InputStream inputStream = null;
-            InputStreamReader inputStreamReader = null;
 
-            StringBuffer buffer = null;
-
+            String results = null;
+            OkHttpClient client = new OkHttpClient();
             try {
                 URL url = new URL(stringUrl);
-                //Faz a requisição, abre a conexão
-                HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+                Request request = new Request.Builder().url(url).build();
 
+                Response response = client.newCall(request).execute();
 
+                results = response.body().string();
+                Log.i("INFO", "Result" + results);
 
-                //Recupera os dados em Bytes
-                inputStream = conexao.getInputStream();
-
-                //inputStreamReader lê os dados em Bytes e decodifica para caracteres
-                inputStreamReader = new InputStreamReader( inputStream );
-
-                //Objeto utilizado para leitura dos caracteres do InputStreamReader
-                BufferedReader reader = new BufferedReader( inputStreamReader );
-
-                buffer = new StringBuffer();
-                String linha = "";
-
-                while(( linha = reader.readLine()) != null ){
-
-                    buffer.append( linha );
-                }
-
-            } catch (MalformedURLException e) {
-                Toast.makeText(getContext(),"Não foi possível comunicar ao servidor", Toast.LENGTH_SHORT).show();
-                //e.printStackTrace();
-
-            } catch (IOException e) {
-                Toast.makeText(getContext(),"Não foi possível comunicar ao servidor", Toast.LENGTH_SHORT).show();
-                //e.printStackTrace();
-
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
-            return buffer.toString();
-        }
-
-        @Override
-        protected void onPostExecute(String resultado) {
-            super.onPostExecute(resultado);
-            serieList = new ArrayList<>();
-            String results = null;
-            String nomeSerie = null;
             JSONArray jsonArray = null;
 
             try {
-                JSONObject jsonObject = new JSONObject(resultado);
+                JSONObject jsonObject = new JSONObject(results);
                 jsonArray = jsonObject.getJSONArray("results");
 
                 for(int i = 0; i < jsonArray.length(); i++)
@@ -144,25 +116,23 @@ public class SerieFragment extends Fragment {
                     String backdropJsonSerie = e.getString("backdrop_path");
                     int idJsonSerie = e.getInt("id");
                     String urlImagemBanner = Configuracao.urlImageApi + backdropJsonSerie;
-
                     adicionaSerieCard(strinJsonNomeSerie,urlImagemBanner,idJsonSerie);
-
-
                 }
 
             } catch (JSONException e) {
                 Toast.makeText(getContext(),"Os componentes não podem ser iniciados", Toast.LENGTH_SHORT).show();
-                //e.printStackTrace();
             }
+
+            return results;
+        }
+
+        @Override
+        protected void onPostExecute(String resultado) {
+            super.onPostExecute(resultado);
             lottieLoad.cancelAnimation();
             lottieLoad.setVisibility(View.INVISIBLE);
             SerieAdapter seriesAdapter = new SerieAdapter( serieList );
-
             recyclerView.setAdapter(seriesAdapter);
-
-            //Log.i("INFO","JSON: " + jsonArray.toString());
-
-
         }
     }
 }
