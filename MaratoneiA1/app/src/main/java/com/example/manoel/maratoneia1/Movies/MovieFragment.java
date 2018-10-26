@@ -32,6 +32,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 public class MovieFragment extends Fragment implements View.OnClickListener {
 
 
@@ -52,7 +56,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_movie,container,false);
+        view = inflater.inflate(R.layout.fragment_movie, container, false);
 
         recyclerView = view.findViewById(R.id.recycleMovie);
         lottieLoad = view.findViewById(R.id.lottieLoadMovie);
@@ -79,7 +83,6 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
         btnWar.setOnClickListener(this);
 
 
-
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
 
         recyclerView.setLayoutManager(layoutManager);
@@ -88,49 +91,49 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
 
         return view;
     }
-    public void chamaTask(String request){
+
+    public void chamaTask(String request) {
 
         MyTask task = new MyTask();
         task.execute(request);
 
     }
 
-    public void adicionaMovieCard(String movieTitle,String movieBackdrop, int id)
-    {
-        Movie movie = new Movie(movieTitle, movieBackdrop ,id);
+    public void adicionaMovieCard(String movieTitle, String movieBackdrop, int id) {
+        Movie movie = new Movie(movieTitle, movieBackdrop, id);
         this.movieList.add(movie);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btnNowPlay:
                 chamaTask(Configuracao.getMovieNowPlayng(getResources().getString(R.string.language)));
                 break;
             case R.id.btnAction:
-                chamaTask(Configuracao.getMovieByGenre(28,getResources().getString(R.string.language)));
+                chamaTask(Configuracao.getMovieByGenre(28, getResources().getString(R.string.language)));
                 break;
             case R.id.btnAventure:
-                chamaTask(Configuracao.getMovieByGenre(12,getResources().getString(R.string.language)));
+                chamaTask(Configuracao.getMovieByGenre(12, getResources().getString(R.string.language)));
                 break;
             case R.id.btnComedy:
-                chamaTask(Configuracao.getMovieByGenre(35,getResources().getString(R.string.language)));
+                chamaTask(Configuracao.getMovieByGenre(35, getResources().getString(R.string.language)));
                 break;
             case R.id.btnRomance:
-                chamaTask(Configuracao.getMovieByGenre(10749,getResources().getString(R.string.language)));
+                chamaTask(Configuracao.getMovieByGenre(10749, getResources().getString(R.string.language)));
                 break;
             case R.id.btnMistery:
-                chamaTask(Configuracao.getMovieByGenre(9648,getResources().getString(R.string.language)));
+                chamaTask(Configuracao.getMovieByGenre(9648, getResources().getString(R.string.language)));
                 break;
             case R.id.btnWar:
-                chamaTask(Configuracao.getMovieByGenre(10752,getResources().getString(R.string.language)));
+                chamaTask(Configuracao.getMovieByGenre(10752, getResources().getString(R.string.language)));
                 break;
 
 
         }
     }
 
-    class MyTask extends AsyncTask<String,Void,String> {
+    class MyTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected void onPreExecute() {
@@ -142,68 +145,40 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
         protected String doInBackground(String... strings) {
             movieList = new ArrayList<>();
             String stringUrl = strings[strings.length - 1];
-            InputStream inputStream = null;
-            InputStreamReader inputStreamReader = null;
 
-            StringBuffer buffer = null;
-            Log.i("INFO","String doInBackground"+ stringUrl);
-
+            String results = null;
+            JSONArray jsonArray = null;
+            OkHttpClient client = new OkHttpClient();
             try {
                 URL url = new URL(stringUrl);
-                //Faz a requisição, abre a conexão
-                HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+                Request request = new Request.Builder().url(url).build();
 
+                Response response = client.newCall(request).execute();
 
+                results = response.body().string();
+                Log.i("INFO", "Result" + results);
 
-                //Recupera os dados em Bytes
-                inputStream = conexao.getInputStream();
-
-                //inputStreamReader lê os dados em Bytes e decodifica para caracteres
-                inputStreamReader = new InputStreamReader( inputStream );
-
-                //Objeto utilizado para leitura dos caracteres do InputStreamReader
-                BufferedReader reader = new BufferedReader( inputStreamReader );
-
-                buffer = new StringBuffer();
-                String linha = "";
-
-                while(( linha = reader.readLine()) != null ){
-
-                    buffer.append( linha );
-                }
-                String results = null;
-                String nomeSerie = null;
-                JSONArray jsonArray = null;
-
-                try {
-                    JSONObject jsonObject = new JSONObject(buffer.toString());
-                    jsonArray = jsonObject.getJSONArray("results");
-
-                    for(int i = 0; i < jsonArray.length(); i++)
-                    {
-                        JSONObject e = jsonArray.getJSONObject(i);
-                        String strinJsonNomeSerie = e.getString("title");
-                        String backdropJsonSerie = e.getString("backdrop_path");
-                        int idJsonSerie = e.getInt("id");
-                        String urlImagemBanner = Configuracao.urlImageApi + backdropJsonSerie;
-
-                        adicionaMovieCard(strinJsonNomeSerie,urlImagemBanner,idJsonSerie);
-                    }
-
-                } catch (JSONException e) {
-                    //e.printStackTrace();
-                }
-
-            } catch (MalformedURLException e) {
-                //e.printStackTrace();
-
-            } catch (IOException e) {
-                Toast.makeText(getContext(),"Os componentes não podem ser iniciados", Toast.LENGTH_SHORT).show();
-                //e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+            try {
+                JSONObject jsonObject = new JSONObject(results);
+                jsonArray = jsonObject.getJSONArray("results");
 
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject e = jsonArray.getJSONObject(i);
+                    String strinJsonNomeSerie = e.getString("title");
+                    String backdropJsonSerie = e.getString("backdrop_path");
+                    int idJsonSerie = e.getInt("id");
+                    String urlImagemBanner = Configuracao.urlImageApi + backdropJsonSerie;
 
-            return buffer.toString();
+                    adicionaMovieCard(strinJsonNomeSerie, urlImagemBanner, idJsonSerie);
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return results;
         }
 
         @Override
@@ -211,9 +186,9 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
             lottieLoad.cancelAnimation();
             lottieLoad.setVisibility(View.INVISIBLE);
             super.onPostExecute(resultado);
-            Log.i("INFO","Tamnho do Lista: " + movieList.size());
+            Log.i("INFO", "Tamnho do Lista: " + movieList.size());
 
-            MovieAdapter movieAdapter = new MovieAdapter( movieList );
+            MovieAdapter movieAdapter = new MovieAdapter(movieList);
             recyclerView.setAdapter(movieAdapter);
         }
     }
