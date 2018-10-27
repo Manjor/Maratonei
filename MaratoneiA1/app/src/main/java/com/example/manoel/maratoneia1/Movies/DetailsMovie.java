@@ -41,7 +41,6 @@ public class DetailsMovie extends YouTubeBaseActivity implements YouTubePlayer.O
     //Atributes
     private ImageView movieBackdrop;
     private ImageView moviePoster;
-    private VideoView movieVideo;
     private TextView movieTitle;
     private TextView movieOverview;
     private TextView movieDate;
@@ -56,20 +55,19 @@ public class DetailsMovie extends YouTubeBaseActivity implements YouTubePlayer.O
     private String homepage = null;
     private String video = null;
     private String retorno = null;
-
     private String urlDetails = "";
-    private String urlVideo;
-    private static String urlYoutube;
+    private String urlVideo = null;
+    private static String urlVideoYoutube;
+    MyTask task = new MyTask();
+    MyTask task1 = new MyTask();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_movie);
 
-
         movieBackdrop = findViewById(R.id.movieBackdrop);
         moviePoster = findViewById(R.id.moviePoster);
-        //movieVideo = findViewById(R.id.movieVideo);
         movieTitle = findViewById(R.id.movieTitle);
         movieOverview = findViewById(R.id.movieOverview);
         movieDate = findViewById(R.id.movieDate);
@@ -78,18 +76,13 @@ public class DetailsMovie extends YouTubeBaseActivity implements YouTubePlayer.O
         movieYoutube.initialize(Configuracao.GOOGLE_API_KEY, this);
         int movieId = this.getIntent().getIntExtra("id", 0);
 
-        Configuracao configuracao = new Configuracao();
-        urlDetails = configuracao.getDetailsMovie(movieId, getResources().getString(R.string.language).toString());
+        urlDetails = Configuracao.getDetailsMovie(movieId, getResources().getString(R.string.language).toString());
         urlVideo = Configuracao.urlApi + "movie/" + movieId + "/videos" + "?api_key=" + Configuracao.apiKey + "&" + getResources().getString(R.string.language);
-
-        MyTask task = new MyTask();
-        MyTask task1 = new MyTask();
 
         task1.execute(urlVideo);
         task.execute(urlDetails);
 
     }
-
 
     class MyTask extends AsyncTask<String, Void, String> {
 
@@ -102,11 +95,10 @@ public class DetailsMovie extends YouTubeBaseActivity implements YouTubePlayer.O
         protected String doInBackground(String... strings) {
 
             String stringUrl = strings[0];
-            String results;
-            OkHttpClient client = new OkHttpClient();
-            StringBuffer buffer = new StringBuffer();
+            String results = null;
             JSONArray jsonArray = null;
 
+            OkHttpClient client = new OkHttpClient();
             if (stringUrl.contains(urlVideo)) {
                 try {
 
@@ -117,17 +109,15 @@ public class DetailsMovie extends YouTubeBaseActivity implements YouTubePlayer.O
                     results = response.body().string();
 
                 } catch (Exception err) {
-
+                    err.printStackTrace();
                 }
-
                 try {
-                    JSONObject jsonObject = new JSONObject(buffer.toString());
+                    JSONObject jsonObject = new JSONObject(results);
                     jsonArray = jsonObject.getJSONArray("results");
+
 
                     JSONObject posicao = jsonArray.getJSONObject(0);
                     video = posicao.getString("key").toString();
-                    urlYoutube = Configuracao.urlVideoApi + video;
-                    Log.i("INFO", "Link:" + urlYoutube);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -135,7 +125,9 @@ public class DetailsMovie extends YouTubeBaseActivity implements YouTubePlayer.O
                 retorno = "1";
 
             } else if (stringUrl.contains(urlDetails)) {
+
                 try {
+
                     URL url = new URL(stringUrl);
                     Request request = new Request.Builder().url(url).build();
 
@@ -144,7 +136,7 @@ public class DetailsMovie extends YouTubeBaseActivity implements YouTubePlayer.O
                     results = response.body().string();
                     Log.i("INFO", "Result" + results);
                     try {
-                        JSONObject jsonObject = new JSONObject(buffer.toString());
+                        JSONObject jsonObject = new JSONObject(results);
 
                         urlPoster = jsonObject.getString("poster_path");
 
@@ -155,11 +147,11 @@ public class DetailsMovie extends YouTubeBaseActivity implements YouTubePlayer.O
                         date = jsonObject.getString("release_date");
                         homepage = jsonObject.getString("homepage");
 
-                        retorno = "2";
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                    retorno = "2";
 
 
                 } catch (MalformedURLException e) {
@@ -167,23 +159,19 @@ public class DetailsMovie extends YouTubeBaseActivity implements YouTubePlayer.O
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-
             }
+
             return retorno;
         }
-
         @Override
         protected void onPostExecute(String resultado) {
 
             super.onPostExecute(resultado);
 
             try {
-                if (resultado.contains("1")) {
-
-                    //movieVideo.setVideoURI(src);
+                if(resultado.contains("1")){
+                    urlVideoYoutube = Configuracao.getTrailer(video);
                 }
-
                 if (resultado.contains("2")) {
                     movieTitle.setText(title);
                     movieDate.setText(date);
@@ -195,20 +183,23 @@ public class DetailsMovie extends YouTubeBaseActivity implements YouTubePlayer.O
             } catch (Exception e) {
                 Log.i("INFO", "Erro no processamento de componentes" + e);
             }
+        }
 
+        public String getTrailer(){
+            return Configuracao.getTrailer(video);
         }
     }
 
+
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-
-        Log.i("INFO", "LINK:" + urlYoutube);
-        youTubePlayer.cueVideo(urlYoutube);
+        youTubePlayer.cueVideo(task1.getTrailer());
     }
 
     @Override
     public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
         Toast.makeText(this, "Player Error", Toast.LENGTH_SHORT).show();
     }
+
 
 }

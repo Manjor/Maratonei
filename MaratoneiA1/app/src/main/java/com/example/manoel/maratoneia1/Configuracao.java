@@ -17,13 +17,15 @@ public class Configuracao {
     public static final String GOOGLE_API_KEY = "AIzaSyCRxqBqqP-qLVNFmdFyAChnJUhO32EcFlA";
 
 
-    public String getDetailsMovie(int movieId, String language ){
+    public static String getDetailsMovie(int movieId, String language ){
 
-        String result = this.urlApi + "movie/" + movieId + "?api_key=" + apiKey + "&" +language;
+        String result = urlApi + "movie/" + movieId + "?api_key=" + apiKey + "&" +language;
         Log.i("INFO","INFO - Result:" +result);
         return result;
     }
-
+    public static String getTrailer(String key){
+        return urlYoutube + key;
+    }
     public static String getDetailsSerie(int serieId, String language){
         return urlApi + "tv/" + serieId + "?api_key=" + apiKey + "&" + language;
     }
