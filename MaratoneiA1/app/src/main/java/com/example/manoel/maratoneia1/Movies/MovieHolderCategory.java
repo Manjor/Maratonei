@@ -8,15 +8,16 @@ import android.widget.TextView;
 
 import com.example.manoel.maratoneia1.R;
 
-public class MovieHolder extends RecyclerView.ViewHolder {
+public class MovieHolderCategory extends RecyclerView.ViewHolder {
 
     private TextView movieTitle;
     private ImageView movieBackdrop;
 
-    public MovieHolder(View itemView) {
+
+    public MovieHolderCategory(View itemView) {
         super(itemView);
-        //this.movieTitle = itemView.findViewById(R.id.txtNameMovie);
-        this.movieBackdrop = itemView.findViewById(R.id.txtImageMovie);
+        this.movieTitle = itemView.findViewById(R.id.txtNameMovieCategory);
+        this.movieBackdrop = itemView.findViewById(R.id.txtImageMovieCategory);
     }
 
     public TextView getMovieTitle() {

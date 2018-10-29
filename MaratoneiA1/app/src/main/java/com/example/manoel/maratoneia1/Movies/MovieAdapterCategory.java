@@ -14,28 +14,28 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class MovieAdapter extends RecyclerView.Adapter<MovieHolder> {
+public class MovieAdapterCategory extends RecyclerView.Adapter<MovieHolderCategory> {
 
     private List<Movie> movieList = null;
 
 
-    public MovieAdapter(List<Movie> movieList){
+    public MovieAdapterCategory(List<Movie> movieList){
         this.movieList = movieList;
     }
 
 
     @NonNull
     @Override
-    public MovieHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MovieHolderCategory onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemList = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_card,parent,false);
 
-        return new MovieHolder(itemList);
+        return new MovieHolderCategory(itemList);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MovieHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MovieHolderCategory holder, int position) {
         Movie movie = movieList.get(position);
-        //holder.getMovieTitle().setText(movie.getMovieName());
+        holder.getMovieTitle().setText(movie.getMovieName());
 
         final int id = movie.getMovieId();
 

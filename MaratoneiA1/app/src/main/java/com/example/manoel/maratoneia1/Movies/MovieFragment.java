@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.manoel.maratoneia1.Configuracao;
@@ -22,12 +21,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +34,8 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
 
     View view;
 
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerViewEmCartaz;
+    private RecyclerView recyclerViewCategory;
     private List<Movie> movieList;
     private LottieAnimationView lottieLoad;
     private Button btnNowPlay;
@@ -56,49 +50,51 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_movie, container, false);
+        view = inflater.inflate(R.layout.movie_frag, container, false);
 
-        recyclerView = view.findViewById(R.id.recycleMovie);
-        lottieLoad = view.findViewById(R.id.lottieLoadMovie);
-
-        btnNowPlay = view.findViewById(R.id.btnNowPlay);
-        btnNowPlay.setOnClickListener(this);
-
-        btnAction = view.findViewById(R.id.btnAction);
-        btnAction.setOnClickListener(this);
-
-        btnAventure = view.findViewById(R.id.btnAventure);
-        btnAventure.setOnClickListener(this);
-
-        btnComedy = view.findViewById(R.id.btnComedy);
-        btnComedy.setOnClickListener(this);
-
-        btnRomance = view.findViewById(R.id.btnRomance);
-        btnRomance.setOnClickListener(this);
-
-        btnMistery = view.findViewById(R.id.btnMistery);
-        btnMistery.setOnClickListener(this);
-
-        btnWar = view.findViewById(R.id.btnWar);
-        btnWar.setOnClickListener(this);
+        recyclerViewEmCartaz = view.findViewById(R.id.recyclerAir);
+        recyclerViewCategory = view.findViewById(R.id.reclyclerCategory);
+//        lottieLoad = view.findViewById(R.id.lottieLoadMovie);
+//
+//        btnNowPlay = view.findViewById(R.id.btnNowPlay);
+//        btnNowPlay.setOnClickListener(this);
+//
+//        btnAction = view.findViewById(R.id.btnAction);
+//        btnAction.setOnClickListener(this);
+//
+//        btnAventure = view.findViewById(R.id.btnAventure);
+//        btnAventure.setOnClickListener(this);
+//
+//        btnComedy = view.findViewById(R.id.btnComedy);
+//        btnComedy.setOnClickListener(this);
+//
+//        btnRomance = view.findViewById(R.id.btnRomance);
+//        btnRomance.setOnClickListener(this);
+//
+//        btnMistery = view.findViewById(R.id.btnMistery);
+//        btnMistery.setOnClickListener(this);
+//
+//        btnWar = view.findViewById(R.id.btnWar);
+//        btnWar.setOnClickListener(this);
 
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(getContext());
+        ((LinearLayoutManager) layoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerViewEmCartaz.setLayoutManager(layoutManager);
 
-        recyclerView.setLayoutManager(layoutManager);
+        ((LinearLayoutManager) layoutManager1).setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerViewCategory.setLayoutManager(layoutManager1);
 
-        chamaTask(Configuracao.getMoviePopular(getResources().getString(R.string.language).toString()));
-
+        chamaTask(Configuracao.getMovieNowPlayng(getResources().getString(R.string.language)),1);
+        chamaTask(Configuracao.getMoviePopular(getResources().getString(R.string.language)),2);
         return view;
     }
 
-    public void chamaTask(String request) {
 
-        MyTask task = new MyTask();
-        task.execute(request);
-
+    public void chamaTask(String request,int type) {
+        MyTask task = new MyTask(request,type);
     }
-
     public void adicionaMovieCard(String movieTitle, String movieBackdrop, int id) {
         Movie movie = new Movie(movieTitle, movieBackdrop, id);
         this.movieList.add(movie);
@@ -106,39 +102,46 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btnNowPlay:
-                chamaTask(Configuracao.getMovieNowPlayng(getResources().getString(R.string.language)));
-                break;
-            case R.id.btnAction:
-                chamaTask(Configuracao.getMovieByGenre(28, getResources().getString(R.string.language)));
-                break;
-            case R.id.btnAventure:
-                chamaTask(Configuracao.getMovieByGenre(12, getResources().getString(R.string.language)));
-                break;
-            case R.id.btnComedy:
-                chamaTask(Configuracao.getMovieByGenre(35, getResources().getString(R.string.language)));
-                break;
-            case R.id.btnRomance:
-                chamaTask(Configuracao.getMovieByGenre(10749, getResources().getString(R.string.language)));
-                break;
-            case R.id.btnMistery:
-                chamaTask(Configuracao.getMovieByGenre(9648, getResources().getString(R.string.language)));
-                break;
-            case R.id.btnWar:
-                chamaTask(Configuracao.getMovieByGenre(10752, getResources().getString(R.string.language)));
-                break;
-
-
-        }
+//        switch (v.getId()) {
+//            case R.id.btnNowPlay:
+//                chamaTask(Configuracao.getMovieNowPlayng(getResources().getString(R.string.language)));
+//                break;
+//            case R.id.btnAction:
+//                chamaTask(Configuracao.getMovieByGenre(28, getResources().getString(R.string.language)));
+//                break;
+//            case R.id.btnAventure:
+//                chamaTask(Configuracao.getMovieByGenre(12, getResources().getString(R.string.language)));
+//                break;
+//            case R.id.btnComedy:
+//                chamaTask(Configuracao.getMovieByGenre(35, getResources().getString(R.string.language)));
+//                break;
+//            case R.id.btnRomance:
+//                chamaTask(Configuracao.getMovieByGenre(10749, getResources().getString(R.string.language)));
+//                break;
+//            case R.id.btnMistery:
+//                chamaTask(Configuracao.getMovieByGenre(9648, getResources().getString(R.string.language)));
+//                break;
+//            case R.id.btnWar:
+//                chamaTask(Configuracao.getMovieByGenre(10752, getResources().getString(R.string.language)));
+//                break;
+//
+//
+//        }
     }
 
     class MyTask extends AsyncTask<String, Void, String> {
 
+        private int type;
+
+        public MyTask(String url, int type) {
+            this.execute(url);
+            this.type = type;
+        }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            lottieLoad.playAnimation();
+//            lottieLoad.playAnimation();
         }
 
         @Override
@@ -168,11 +171,18 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject e = jsonArray.getJSONObject(i);
                     String strinJsonNomeSerie = e.getString("title");
-                    String backdropJsonSerie = e.getString("backdrop_path");
+                    String backdropJsonSerie = "";
                     int idJsonSerie = e.getInt("id");
-                    String urlImagemBanner = Configuracao.urlImageApi + backdropJsonSerie;
+                    if (this.type == 1) {
+                        backdropJsonSerie = e.getString("poster_path");
+                        String urlImagemBanner = Configuracao.urlImageApi + backdropJsonSerie;
+                        adicionaMovieCard(strinJsonNomeSerie, urlImagemBanner, idJsonSerie);
+                    } else if (this.type == 2) {
+                        backdropJsonSerie = e.getString("backdrop_path");
+                        String urlImagemBanner = Configuracao.urlImageApi + backdropJsonSerie;
+                        adicionaMovieCard(strinJsonNomeSerie, urlImagemBanner, idJsonSerie);
+                    }
 
-                    adicionaMovieCard(strinJsonNomeSerie, urlImagemBanner, idJsonSerie);
                 }
 
             } catch (JSONException e) {
@@ -183,13 +193,19 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
 
         @Override
         protected void onPostExecute(String resultado) {
-            lottieLoad.cancelAnimation();
-            lottieLoad.setVisibility(View.INVISIBLE);
+//            lottieLoad.cancelAnimation();
+//            lottieLoad.setVisibility(View.INVISIBLE);
             super.onPostExecute(resultado);
-            Log.i("INFO", "Tamnho do Lista: " + movieList.size());
 
-            MovieAdapter movieAdapter = new MovieAdapter(movieList);
-            recyclerView.setAdapter(movieAdapter);
+            if(this.type == 1){
+                MovieAdapter movieAdapter = new MovieAdapter(movieList);
+                recyclerViewEmCartaz.setAdapter(movieAdapter);
+            }
+            else if(this.type == 2){
+                MovieAdapterCategory movieAdapterCategory = new MovieAdapterCategory(movieList);
+                recyclerViewCategory.setAdapter(movieAdapterCategory);
+            }
+
         }
     }
 }
