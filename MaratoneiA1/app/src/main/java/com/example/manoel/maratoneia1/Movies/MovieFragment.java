@@ -45,6 +45,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     private Button btnRomance;
     private Button btnWar;
     private Button btnMistery;
+    MyTask task;
 
     @Nullable
     @Override
@@ -54,7 +55,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
 
         recyclerViewEmCartaz = view.findViewById(R.id.recyclerAir);
         recyclerViewCategory = view.findViewById(R.id.reclyclerCategory);
-//        lottieLoad = view.findViewById(R.id.lottieLoadMovie);
+        lottieLoad = view.findViewById(R.id.lottieLoading);
 //
 //        btnNowPlay = view.findViewById(R.id.btnNowPlay);
 //        btnNowPlay.setOnClickListener(this);
@@ -88,12 +89,14 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
 
         chamaTask(Configuracao.getMovieNowPlayng(getResources().getString(R.string.language)),1);
         chamaTask(Configuracao.getMoviePopular(getResources().getString(R.string.language)),2);
+
         return view;
     }
 
 
     public void chamaTask(String request,int type) {
-        MyTask task = new MyTask(request,type);
+        this.task = new MyTask(type);
+        task.execute(request);
     }
     public void adicionaMovieCard(String movieTitle, String movieBackdrop, int id) {
         Movie movie = new Movie(movieTitle, movieBackdrop, id);
@@ -133,15 +136,14 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
 
         private int type;
 
-        public MyTask(String url, int type) {
-            this.execute(url);
+        public MyTask(int type) {
             this.type = type;
         }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-//            lottieLoad.playAnimation();
+            lottieLoad.playAnimation();
         }
 
         @Override
@@ -171,15 +173,17 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject e = jsonArray.getJSONObject(i);
                     String strinJsonNomeSerie = e.getString("title");
-                    String backdropJsonSerie = "";
+                    String imageMovie = "";
                     int idJsonSerie = e.getInt("id");
+
                     if (this.type == 1) {
-                        backdropJsonSerie = e.getString("poster_path");
-                        String urlImagemBanner = Configuracao.urlImageApi + backdropJsonSerie;
+                        imageMovie = e.getString("poster_path");
+                        String urlImagemBanner = Configuracao.urlImageApi + imageMovie;
                         adicionaMovieCard(strinJsonNomeSerie, urlImagemBanner, idJsonSerie);
-                    } else if (this.type == 2) {
-                        backdropJsonSerie = e.getString("backdrop_path");
-                        String urlImagemBanner = Configuracao.urlImageApi + backdropJsonSerie;
+                    }
+                    else if (this.type == 2) {
+                        imageMovie = e.getString("backdrop_path");
+                        String urlImagemBanner = Configuracao.urlImageApi + imageMovie;
                         adicionaMovieCard(strinJsonNomeSerie, urlImagemBanner, idJsonSerie);
                     }
 
@@ -193,18 +197,21 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
 
         @Override
         protected void onPostExecute(String resultado) {
-//            lottieLoad.cancelAnimation();
-//            lottieLoad.setVisibility(View.INVISIBLE);
+            lottieLoad.cancelAnimation();
+            lottieLoad.setVisibility(View.INVISIBLE);
             super.onPostExecute(resultado);
-
             if(this.type == 1){
                 MovieAdapter movieAdapter = new MovieAdapter(movieList);
                 recyclerViewEmCartaz.setAdapter(movieAdapter);
+                Log.d("TIPO","TYPE" + this.type);
             }
             else if(this.type == 2){
                 MovieAdapterCategory movieAdapterCategory = new MovieAdapterCategory(movieList);
                 recyclerViewCategory.setAdapter(movieAdapterCategory);
+                Log.d("TIPO","TYPE" + this.type);
             }
+
+            Log.d("TIPO","TYPE" + this.type);
 
         }
     }

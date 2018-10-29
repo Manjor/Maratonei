@@ -35,7 +35,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieHolder> {
     @Override
     public void onBindViewHolder(@NonNull final MovieHolder holder, int position) {
         Movie movie = movieList.get(position);
-        //holder.getMovieTitle().setText(movie.getMovieName());
+        //holder.getMovieTitleCategory().setText(movie.getMovieName());
 
         final int id = movie.getMovieId();
 
