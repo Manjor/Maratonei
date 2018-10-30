@@ -114,8 +114,6 @@ public class DetailsMovie extends YouTubeBaseActivity implements YouTubePlayer.O
                 try {
                     JSONObject jsonObject = new JSONObject(results);
                     jsonArray = jsonObject.getJSONArray("results");
-
-
                     JSONObject posicao = jsonArray.getJSONObject(0);
                     video = posicao.getString("key").toString();
 

@@ -45,7 +45,8 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     private Button btnRomance;
     private Button btnWar;
     private Button btnMistery;
-    MyTask task;
+    private String urlAirPlaying;
+    private String urlCategory;
 
     @Nullable
     @Override
@@ -56,6 +57,8 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
         recyclerViewEmCartaz = view.findViewById(R.id.recyclerAir);
         recyclerViewCategory = view.findViewById(R.id.reclyclerCategory);
         lottieLoad = view.findViewById(R.id.lottieLoading);
+        urlAirPlaying = Configuracao.getMovieNowPlayng(getResources().getString(R.string.language));
+        urlCategory = Configuracao.getMoviePopular(getResources().getString(R.string.language));
 //
 //        btnNowPlay = view.findViewById(R.id.btnNowPlay);
 //        btnNowPlay.setOnClickListener(this);
@@ -81,23 +84,17 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(getContext());
-        ((LinearLayoutManager) layoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
+        ((LinearLayoutManager) layoutManager).setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewEmCartaz.setLayoutManager(layoutManager);
 
-        ((LinearLayoutManager) layoutManager1).setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerViewCategory.setLayoutManager(layoutManager1);
+//        ((LinearLayoutManager) layoutManager1).setOrientation(LinearLayoutManager.VERTICAL);
+//        recyclerViewCategory.setLayoutManager(layoutManager1);
 
-        chamaTask(Configuracao.getMovieNowPlayng(getResources().getString(R.string.language)),1);
-        chamaTask(Configuracao.getMoviePopular(getResources().getString(R.string.language)),2);
-
+        MyTask task = new MyTask();
+        task.execute(this.urlAirPlaying);
         return view;
     }
 
-
-    public void chamaTask(String request,int type) {
-        this.task = new MyTask(type);
-        task.execute(request);
-    }
     public void adicionaMovieCard(String movieTitle, String movieBackdrop, int id) {
         Movie movie = new Movie(movieTitle, movieBackdrop, id);
         this.movieList.add(movie);
@@ -133,13 +130,8 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     }
 
     class MyTask extends AsyncTask<String, Void, String> {
-
-        private int type;
-
-        public MyTask(int type) {
-            this.type = type;
-        }
-
+        private String results;
+        private JSONArray jsonArray;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -150,49 +142,36 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
         protected String doInBackground(String... strings) {
             movieList = new ArrayList<>();
             String stringUrl = strings[strings.length - 1];
+            processJson(stringUrl);
+            return results;
+        }
 
-            String results = null;
-            JSONArray jsonArray = null;
+        public void processJson(String stringUrl) {
+
             OkHttpClient client = new OkHttpClient();
             try {
                 URL url = new URL(stringUrl);
                 Request request = new Request.Builder().url(url).build();
-
                 Response response = client.newCall(request).execute();
-
-                results = response.body().string();
-                Log.i("INFO", "Result" + results);
-
+                this.results = response.body().string();
             } catch (Exception e) {
                 e.printStackTrace();
             }
             try {
-                JSONObject jsonObject = new JSONObject(results);
-                jsonArray = jsonObject.getJSONArray("results");
-
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject e = jsonArray.getJSONObject(i);
+                JSONObject jsonObject = new JSONObject(this.results);
+                this.jsonArray = jsonObject.getJSONArray("results");
+                for (int i = 0; i < this.jsonArray.length(); i++) {
+                    JSONObject e = this.jsonArray.getJSONObject(i);
                     String strinJsonNomeSerie = e.getString("title");
                     String imageMovie = "";
                     int idJsonSerie = e.getInt("id");
-
-                    if (this.type == 1) {
-                        imageMovie = e.getString("poster_path");
-                        String urlImagemBanner = Configuracao.urlImageApi + imageMovie;
-                        adicionaMovieCard(strinJsonNomeSerie, urlImagemBanner, idJsonSerie);
-                    }
-                    else if (this.type == 2) {
-                        imageMovie = e.getString("backdrop_path");
-                        String urlImagemBanner = Configuracao.urlImageApi + imageMovie;
-                        adicionaMovieCard(strinJsonNomeSerie, urlImagemBanner, idJsonSerie);
-                    }
-
+                    imageMovie = e.getString("backdrop_path");
+                    String urlImagemBanner = Configuracao.urlImageApi + imageMovie;
+                    adicionaMovieCard(strinJsonNomeSerie, urlImagemBanner, idJsonSerie);
                 }
-
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-            return results;
         }
 
         @Override
@@ -200,19 +179,8 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
             lottieLoad.cancelAnimation();
             lottieLoad.setVisibility(View.INVISIBLE);
             super.onPostExecute(resultado);
-            if(this.type == 1){
-                MovieAdapter movieAdapter = new MovieAdapter(movieList);
-                recyclerViewEmCartaz.setAdapter(movieAdapter);
-                Log.d("TIPO","TYPE" + this.type);
-            }
-            else if(this.type == 2){
-                MovieAdapterCategory movieAdapterCategory = new MovieAdapterCategory(movieList);
-                recyclerViewCategory.setAdapter(movieAdapterCategory);
-                Log.d("TIPO","TYPE" + this.type);
-            }
-
-            Log.d("TIPO","TYPE" + this.type);
-
+            MovieAdapterCategory movieAdapter = new MovieAdapterCategory(movieList);
+            recyclerViewEmCartaz.setAdapter(movieAdapter);
         }
     }
 }
