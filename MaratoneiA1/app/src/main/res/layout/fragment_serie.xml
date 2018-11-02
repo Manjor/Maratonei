@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#EFEFEF"
+    android:background="#222"
     >
 
 
@@ -29,7 +29,8 @@
         android:id="@+id/recycleSerie"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        android:background="#222"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -12,15 +12,11 @@ public class SerieHolder extends RecyclerView.ViewHolder {
 
     private TextView serieName;
     private ImageView serieBackdrop;
-    private ImageButton serieLike;
-    private ImageButton serieShare;
 
     public SerieHolder(View itemView) {
         super(itemView);
-        serieName = itemView.findViewById(R.id.serieNameFrag);
+        serieName = itemView.findViewById(R.id.txtSerieNameFrag);
         serieBackdrop = itemView.findViewById(R.id.serieBackdropFrag);
-        this.serieLike = itemView.findViewById(R.id.serieLike);
-        this.serieShare = itemView.findViewById(R.id.serieShare);
     }
 
     public TextView getSerieName() {
@@ -39,19 +35,4 @@ public class SerieHolder extends RecyclerView.ViewHolder {
         this.serieBackdrop = serieBackdrop;
     }
 
-    public ImageButton getSerieLike() {
-        return serieLike;
-    }
-
-    public void setSerieLike(ImageButton serieLike) {
-        this.serieLike = serieLike;
-    }
-
-    public ImageButton getSerieShare() {
-        return serieShare;
-    }
-
-    public void setSerieShare(ImageButton serieShare) {
-        this.serieShare = serieShare;
-    }
 }

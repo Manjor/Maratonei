@@ -59,18 +59,6 @@ public class SerieAdapter extends RecyclerView.Adapter<SerieHolder>{
 
             }
         });
-        holder.getSerieLike().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Snackbar.make(v,"Like the Serie", Snackbar.LENGTH_LONG).show();
-            }
-        });
-        holder.getSerieShare().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Snackbar.make(v,"Share the Serie", Snackbar.LENGTH_LONG).show();
-            }
-        });
     }
 
     @Override

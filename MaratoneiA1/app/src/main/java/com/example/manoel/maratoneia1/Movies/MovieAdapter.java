@@ -9,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.manoel.maratoneia1.Configuracao;
 import com.example.manoel.maratoneia1.R;
+import com.example.manoel.maratoneia1.movie.movie;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -17,10 +19,11 @@ import java.util.List;
 public class MovieAdapter extends RecyclerView.Adapter<MovieHolder> {
 
     private List<Movie> movieList = null;
+    private List<movie> movies = null;
 
 
-    public MovieAdapter(List<Movie> movieList){
-        this.movieList = movieList;
+    public MovieAdapter(List<movie> movies){
+        this.movies = movies;
     }
 
 
@@ -34,13 +37,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull final MovieHolder holder, int position) {
-        Movie movie = movieList.get(position);
+        movie movieObject = movies.get(position);
         //holder.getMovieTitleCategory().setText(movie.getMovieName());
 
-        final int id = movie.getMovieId();
-
+        final int id = movieObject.getId();
         try{
-            Picasso.get().load(movie.getMovieImg()).into(holder.getMovieBackdrop());
+            Picasso.get().load(Configuracao.urlImageApi + movieObject.getBackdropPath()).into(holder.getMovieBackdrop());
 
         }catch (Exception e){
 
