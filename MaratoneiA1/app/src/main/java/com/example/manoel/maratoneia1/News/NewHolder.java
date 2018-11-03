@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.manoel.maratoneia1.R;
+import com.dataMovie.manoel.maratoneia1.R;
 
 public class NewHolder extends RecyclerView.ViewHolder {
 

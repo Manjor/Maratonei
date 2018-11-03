@@ -6,7 +6,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.manoel.maratoneia1.R;
+import com.dataMovie.manoel.maratoneia1.R;
 
 public class SerieHolder extends RecyclerView.ViewHolder {
 

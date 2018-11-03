@@ -3,25 +3,25 @@ package com.example.manoel.maratoneia1.Series;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.manoel.maratoneia1.R;
+import com.dataMovie.manoel.maratoneia1.R;
+import com.example.manoel.maratoneia1.Configuracao;
+import com.example.manoel.maratoneia1.ResultsSerie.Result;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class SerieAdapter extends RecyclerView.Adapter<SerieHolder>{
 
-    private List<Serie> serieList = null;
+    private List<Result> serieList = null;
 
 
 
-    public SerieAdapter(List<Serie> serieList){
+    public SerieAdapter(List<Result> serieList){
         this.serieList = serieList;
     }
 
@@ -35,13 +35,13 @@ public class SerieAdapter extends RecyclerView.Adapter<SerieHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull SerieHolder holder, int position) {
-        final Serie serie = serieList.get(position);
+        final Result serie = serieList.get(position);
 
-        holder.getSerieName().setText(serie.getSerieName());
-        final int id = serie.getSerieId();
+        holder.getSerieName().setText(serie.getName());
+        final int id = serie.getId();
         try{
 
-        Picasso.get().load(serie.getSerieImage()).into(holder.getSerieBackdrop());
+        Picasso.get().load(Configuracao.urlImageApi + serie.getBackdropPath()).into(holder.getSerieBackdrop());
         }catch (Exception e){
 
         }

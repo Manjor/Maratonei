@@ -5,7 +5,7 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Example {
+public class DataMovie {
 
     @SerializedName("page")
     @Expose
@@ -13,9 +13,9 @@ public class Example {
     @SerializedName("results")
     @Expose
     private List<Result> results = null;
-    @SerializedName("dates")
+    @SerializedName("date")
     @Expose
-    private Dates dates;
+    private Date date;
     @SerializedName("total_pages")
     @Expose
     private Integer totalPages;
@@ -39,12 +39,12 @@ public class Example {
         this.results = results;
     }
 
-    public Dates getDates() {
-        return dates;
+    public Date getDate() {
+        return date;
     }
 
-    public void setDates(Dates dates) {
-        this.dates = dates;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Integer getTotalPages() {

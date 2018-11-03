@@ -11,8 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.dataMovie.manoel.maratoneia1.R;
 import com.example.manoel.maratoneia1.Configuracao;
-import com.example.manoel.maratoneia1.R;
+
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;

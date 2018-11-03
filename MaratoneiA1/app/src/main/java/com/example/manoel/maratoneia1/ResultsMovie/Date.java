@@ -4,7 +4,7 @@ package com.example.manoel.maratoneia1.ResultsMovie;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Dates {
+public class Date {
 
     @SerializedName("maximum")
     @Expose

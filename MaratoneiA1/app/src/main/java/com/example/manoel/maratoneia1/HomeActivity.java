@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.dataMovie.manoel.maratoneia1.R;
 import com.example.manoel.maratoneia1.Maps.MapFragment;
 import com.example.manoel.maratoneia1.Movies.MovieFragment;
 import com.example.manoel.maratoneia1.News.NewFragment;

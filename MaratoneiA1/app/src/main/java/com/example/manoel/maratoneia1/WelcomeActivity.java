@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import java.util.EventListener;
+import com.dataMovie.manoel.maratoneia1.R;
 
 public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener {
 

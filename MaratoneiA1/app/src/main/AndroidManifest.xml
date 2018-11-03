@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.manoel.maratoneia1">
+    package="com.dataMovie.manoel.maratoneia1">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -24,19 +24,19 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WelcomeActivity">
+        <activity android:name="com.example.manoel.maratoneia1.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".Movies.DetailsMovie" />
-        <activity android:name=".Series.DetailsSerie" />
+        <activity android:name="com.example.manoel.maratoneia1.MainActivity" />
+        <activity android:name="com.example.manoel.maratoneia1.Movies.DetailsMovie" />
+        <activity android:name="com.example.manoel.maratoneia1.Series.DetailsSerie" />
         <!-- <activity android:name=".WelcomeActivity"></activity> -->
         <activity
-            android:name=".HomeActivity"
+            android:name="com.example.manoel.maratoneia1.HomeActivity"
             android:label="@string/title_activity_home" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -51,7 +51,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name="com.example.manoel.maratoneia1.MapsActivity"
             android:label="@string/title_activity_maps"></activity>
     </application>
 

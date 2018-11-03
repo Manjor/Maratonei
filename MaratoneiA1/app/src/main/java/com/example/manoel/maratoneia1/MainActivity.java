@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.dataMovie.manoel.maratoneia1.R;
 import com.example.manoel.maratoneia1.Movies.MovieFragment;
 import com.example.manoel.maratoneia1.News.NewFragment;
 import com.example.manoel.maratoneia1.Series.SerieFragment;

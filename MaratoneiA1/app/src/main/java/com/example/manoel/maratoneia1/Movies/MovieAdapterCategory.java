@@ -8,10 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dataMovie.manoel.maratoneia1.R;
 import com.example.manoel.maratoneia1.Configuracao;
-import com.example.manoel.maratoneia1.R;
 import com.example.manoel.maratoneia1.ResultsMovie.Result;
-import com.example.manoel.maratoneia1.movie.movie;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

@@ -3,6 +3,7 @@ package com.example.manoel.maratoneia1;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
+import com.dataMovie.manoel.maratoneia1.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
