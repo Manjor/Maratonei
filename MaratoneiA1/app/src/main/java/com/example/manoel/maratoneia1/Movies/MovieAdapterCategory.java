@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.dataMovie.manoel.maratoneia1.R;
 import com.example.manoel.maratoneia1.Configuracao;
+import com.example.manoel.maratoneia1.DetailsMovieActivity;
 import com.example.manoel.maratoneia1.ResultsMovie.Result;
 import com.squareup.picasso.Picasso;
 
@@ -41,17 +42,15 @@ public class MovieAdapterCategory extends RecyclerView.Adapter<MovieHolderCatego
         }catch (Exception e){
 
         }
-//        holder.getMovieBackdrop().setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(v.getContext(),DetailsMovie.class);
-//                Bundle bundle = new Bundle();
-//
-//                intent.putExtra("id",id);
-//
-//                v.getContext().startActivity(intent);
-//            }
-//        });
+        holder.getMovieBackdrop().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(),DetailsMovieActivity.class);
+                Bundle bundle = new Bundle();
+                intent.putExtra("id",id);
+                v.getContext().startActivity(intent);
+            }
+        });
 
     }
 
