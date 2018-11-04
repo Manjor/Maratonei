@@ -27,7 +27,7 @@ public class NewAdapter extends RecyclerView.Adapter<NewHolder>
 
 
 
-        View itemList = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_new,parent,false);
+        View itemList = LayoutInflater.from(parent.getContext()).inflate(R.layout.new_card,parent,false);
 
         return new NewHolder(itemList);
     }

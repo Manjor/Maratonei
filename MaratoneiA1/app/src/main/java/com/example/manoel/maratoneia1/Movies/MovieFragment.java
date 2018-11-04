@@ -25,7 +25,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
 
     private RecyclerView recyclerViewEmCartaz;
     private RecyclerView recyclerViewCategory;
-    private LottieAnimationView lottieLoad;
+    private LottieAnimationView lottieLoader;
     private Button btnNowPlay;
     private Button btnAction;
     private Button btnAventure;
@@ -41,14 +41,16 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.movie_frag, container, false);
+        view = inflater.inflate(R.layout.fragment_movies, container, false);
 
-        recyclerViewEmCartaz = view.findViewById(R.id.recyclerAir);
-        recyclerViewCategory = view.findViewById(R.id.reclyclerCategory);
-        lottieLoad = view.findViewById(R.id.lottieLoading);
+        recyclerViewEmCartaz = view.findViewById(R.id.reclyclerMovie);
+        lottieLoader = view.findViewById(R.id.lottieLoader);
         urlAirPlaying = Configuracao.getMovieNowPlayng(getResources().getString(R.string.language));
         urlCategory = Configuracao.getMoviePopular(getResources().getString(R.string.language));
-        movieTask = new MovieTask(this);
+
+
+        movieTask = new MovieTask(this,lottieLoader);
+        movieTask.execute(urlAirPlaying);
 //
 //        btnNowPlay = view.findViewById(R.id.btnNowPlay);
 //        btnNowPlay.setOnClickListener(this);
@@ -71,9 +73,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
 //        btnWar = view.findViewById(R.id.btnWar);
 //        btnWar.setOnClickListener(this);
 
-
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(getContext());
         ((LinearLayoutManager) layoutManager).setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewEmCartaz.setLayoutManager(layoutManager);
 

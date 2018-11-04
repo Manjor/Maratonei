@@ -46,8 +46,5 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         //Add fragment and titles of tabItems
         fragmentList.add(fragment);
         fragmentListTitles.add(title);
-
-        Log.i("INFO","SIZE" + fragmentList.size());
-        Log.i("INFO","SIZE 2 " + fragmentListTitles.size());
     }
 }

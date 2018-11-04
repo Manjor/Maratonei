@@ -1,7 +1,9 @@
 package com.example.manoel.maratoneia1.ResultsSerie;
 
 import android.os.AsyncTask;
+import android.view.View;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.manoel.maratoneia1.Series.SerieAdapter;
 import com.example.manoel.maratoneia1.Series.SerieFragment;
 import com.google.gson.Gson;
@@ -23,14 +25,17 @@ public class SerieTask extends AsyncTask<String,Void,DataSerie> {
     private ArrayList<DataSerie> dataSeries = null;
     private DataSerie resultRequest = null;
     SerieFragment serieFragment = null;
+    LottieAnimationView lottieAnimationView = null;
 
-    public SerieTask(SerieFragment serieFragment){
+    public SerieTask(SerieFragment serieFragment, LottieAnimationView lottieAnimationView){
         this.serieFragment = serieFragment;
+        this.lottieAnimationView = lottieAnimationView;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        lottieAnimationView.playAnimation();
     }
 
     @Override
@@ -55,6 +60,8 @@ public class SerieTask extends AsyncTask<String,Void,DataSerie> {
         resultSeries = (ArrayList<Result>) dataSerie.getResultSeries();
 
         serieFragment.setAdapter(resultSeries);
+        lottieAnimationView.cancelAnimation();
+        lottieAnimationView.setVisibility(View.INVISIBLE);
     }
 
 

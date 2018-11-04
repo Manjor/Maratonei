@@ -5,7 +5,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission
         android:name="android.permission.LOCATION_HARDWARE"
         tools:ignore="ProtectedPermissions" />
@@ -32,12 +32,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.manoel.maratoneia1.MainActivity" />
-        <activity android:name="com.example.manoel.maratoneia1.Movies.DetailsMovie" />
-        <activity android:name="com.example.manoel.maratoneia1.Series.DetailsSerie" />
+        <activity android:name="com.example.manoel.maratoneia1.DetailsMovieActivity"/>
         <!-- <activity android:name=".WelcomeActivity"></activity> -->
-        <activity
-            android:name="com.example.manoel.maratoneia1.HomeActivity"
-            android:label="@string/title_activity_home" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -49,10 +45,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
-        <activity
-            android:name="com.example.manoel.maratoneia1.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
     </application>
 
 </manifest>

@@ -16,8 +16,8 @@ public class MovieHolderCategory extends RecyclerView.ViewHolder {
 
     public MovieHolderCategory(View itemView) {
         super(itemView);
-        this.movieTitleCategory = itemView.findViewById(R.id.txtNameMovieCategory);
-        this.movieBackdrop = itemView.findViewById(R.id.serieBackdropFrag);
+        this.movieTitleCategory = itemView.findViewById(R.id.textTitle);
+        this.movieBackdrop = itemView.findViewById(R.id.imageBackdrop);
     }
 
     public TextView getMovieTitleCategory() {

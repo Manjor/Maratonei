@@ -33,10 +33,10 @@ public class NewFragment extends Fragment implements ValueEventListener  {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_new,container,false);
+        view = inflater.inflate(R.layout.fragment_news,container,false);
 
 
-        recyclerView = view.findViewById(R.id.recycleNew);
+        recyclerView = view.findViewById(R.id.recyclerNew);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 

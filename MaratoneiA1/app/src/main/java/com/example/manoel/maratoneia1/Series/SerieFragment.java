@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,13 +31,15 @@ public class SerieFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_serie,container,false);
-        recyclerView = view.findViewById(R.id.recycleSerie);
-        lottieLoad = view.findViewById(R.id.lottieLoadSerie);
+        view = inflater.inflate(R.layout.fragment_series,container,false);
+        recyclerView = view.findViewById(R.id.reclyclerSerie);
+        lottieLoad = view.findViewById(R.id.lottieLoaderSerie);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        RecyclerView.LayoutManager layoutManager1 = new GridLayoutManager(getContext(),3);
+        recyclerView.setLayoutManager(layoutManager1);
 
-        recyclerView.setLayoutManager(layoutManager);
-        SerieTask serieTask = new SerieTask(this);
+        //recyclerView.setLayoutManager(layoutManager);
+        SerieTask serieTask = new SerieTask(this,lottieLoad);
         serieTask.execute(Configuracao.getSeriePopular(getResources().getString(R.string.language)));
 
         return view;

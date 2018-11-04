@@ -1,7 +1,9 @@
 package com.example.manoel.maratoneia1.ResultsMovie;
 
 import android.os.AsyncTask;
+import android.view.View;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.manoel.maratoneia1.Movies.MovieAdapterCategory;
 import com.example.manoel.maratoneia1.Movies.MovieFragment;
 import com.google.gson.Gson;
@@ -22,13 +24,18 @@ public class MovieTask extends AsyncTask<String,Void,DataMovie> {
 
     private ArrayList<Result> movieList = null;
     private DataMovie resultRequest = null;
-    MovieFragment movieFragment = null;
+    private LottieAnimationView lottieAnimationView = null;
 
-    public MovieTask(MovieFragment fragment) {
+    MovieFragment movieFragment;
+
+    public MovieTask(MovieFragment fragment, LottieAnimationView lottieAnimationView) {
         this.movieFragment = fragment;
+        this.lottieAnimationView = lottieAnimationView;
     }
+
     @Override
     protected DataMovie doInBackground(String... strings) {
+
         try{
             movieList = new ArrayList<>();
             request = new Request.Builder().url(strings[0]).build();
@@ -47,6 +54,7 @@ public class MovieTask extends AsyncTask<String,Void,DataMovie> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        lottieAnimationView.playAnimation();
     }
 
     @Override
@@ -59,6 +67,8 @@ public class MovieTask extends AsyncTask<String,Void,DataMovie> {
         results = (ArrayList<Result>) dataMovie.getResults();
 
         movieFragment.setAdapeter(results);
+        lottieAnimationView.cancelAnimation();
+        lottieAnimationView.setVisibility(View.INVISIBLE);
     }
 
 }

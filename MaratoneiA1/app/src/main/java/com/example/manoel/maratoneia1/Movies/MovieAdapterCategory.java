@@ -25,7 +25,7 @@ public class MovieAdapterCategory extends RecyclerView.Adapter<MovieHolderCatego
     @NonNull
     @Override
     public MovieHolderCategory onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemList = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_card_category,parent,false);
+        View itemList = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_card,parent,false);
 
         return new MovieHolderCategory(itemList);
     }
@@ -41,17 +41,17 @@ public class MovieAdapterCategory extends RecyclerView.Adapter<MovieHolderCatego
         }catch (Exception e){
 
         }
-        holder.getMovieBackdrop().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),DetailsMovie.class);
-                Bundle bundle = new Bundle();
-
-                intent.putExtra("id",id);
-
-                v.getContext().startActivity(intent);
-            }
-        });
+//        holder.getMovieBackdrop().setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(v.getContext(),DetailsMovie.class);
+//                Bundle bundle = new Bundle();
+//
+//                intent.putExtra("id",id);
+//
+//                v.getContext().startActivity(intent);
+//            }
+//        });
 
     }
 

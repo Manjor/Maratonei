@@ -3,9 +3,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimaryDarkRoxo</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryRoxo</item>
-        <item name="colorAccent">@color/colorAccentRoxo</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">#d8c4c4c4</item>
+        <item name="colorAccent">#6100ED</item>
     </style>
     <style name="Toolbar" parent="Theme.AppCompat.NoActionBar">
 
