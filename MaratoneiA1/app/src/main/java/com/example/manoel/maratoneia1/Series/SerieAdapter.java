@@ -1,7 +1,5 @@
 package com.example.manoel.maratoneia1.Series;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -41,7 +39,7 @@ public class SerieAdapter extends RecyclerView.Adapter<SerieHolder>{
         final int id = serie.getId();
         try{
 
-        Picasso.get().load(Configuracao.urlImageApi + serie.getPosterPath()).into(holder.getSerieBackdrop());
+        Picasso.get().load(Configuracao.urlImageApi500 + serie.getPosterPath()).into(holder.getSerieBackdrop());
         }catch (Exception e){
 
         }

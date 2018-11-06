@@ -20,9 +20,9 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabIndicatorColor="@color/puple"
+            app:tabIndicatorColor="@color/colorPrimaryDarkRoxo"
             app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/puple">
+            app:tabSelectedTextColor="@color/colorPrimaryDarkRoxo">
 
         </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>

@@ -149,8 +149,8 @@
 //                    serieName.setText(name);
 //                    serieDate.setText(date);
 //                    serieOverview.setText(overview);
-//                    Picasso.get().load(Configuracao.urlImageApi+urlPoster).into(seriePoster);
-//                    Log.i("INFO","INFOIMG" + Configuracao.urlImageApi + urlPoster);
+//                    Picasso.get().load(Configuracao.urlImageApi500+urlPoster).into(seriePoster);
+//                    Log.i("INFO","INFOIMG" + Configuracao.urlImageApi500 + urlPoster);
 //
 //                }
 //            }catch (Exception e)

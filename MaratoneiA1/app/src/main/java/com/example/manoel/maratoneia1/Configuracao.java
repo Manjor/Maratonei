@@ -10,7 +10,8 @@ public class Configuracao {
 
 
     public static String urlApi = "https://api.themoviedb.org/3/";
-    public static String urlImageApi = "https://image.tmdb.org/t/p/w500";
+    public static String urlImageApi500 = "https://image.tmdb.org/t/p/w500";
+    public static String urlImageApi300 = "https://image.tmdb.org/t/p/w300";
     public static String urlYoutube = "https://www.youtube.com/watch?v=";
     public static String apiKey = "f814673a004bcd3dfd0e837cf1a0b020";
 
@@ -38,6 +39,9 @@ public class Configuracao {
     public static String getSeriePopular(String language){
 
         return  urlApi + "tv/popular" + "?api_key=" + apiKey + "&page=1" + "&" + language;
+    }
+    public static String getPeopleMovie(int id, String language){
+        return  urlApi + "movie/" + id + "/casts?api_key=" + apiKey  + "&" +language;
     }
 
 }

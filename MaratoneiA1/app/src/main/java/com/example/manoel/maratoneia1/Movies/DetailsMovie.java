@@ -176,8 +176,8 @@
 //                    movieDate.setText(date);
 //                    movieOverview.setText(overview);
 //                    movieHomePage.setText("Homepage: " + homepage);
-//                    Picasso.get().load(Configuracao.urlImageApi + urlPoster).into(moviePoster);
-//                    Picasso.get().load(Configuracao.urlImageApi + urlBackdrop).into(movieBackdrop);
+//                    Picasso.get().load(Configuracao.urlImageApi500 + urlPoster).into(moviePoster);
+//                    Picasso.get().load(Configuracao.urlImageApi500 + urlBackdrop).into(movieBackdrop);
 //                }
 //            } catch (Exception e) {
 //                Log.i("INFO", "Erro no processamento de componentes" + e);

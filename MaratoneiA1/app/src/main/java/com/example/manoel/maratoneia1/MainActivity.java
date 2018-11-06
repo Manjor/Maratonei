@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             setSupportActionBar(toolbar);
 
             toolbar.setTitle("Maratonei");
-            toolbar.setTitleTextColor(getResources().getColor(R.color.puple));
+            toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimaryDarkRoxo));
 
             //Create a new instance of ViewPageAdapter
             ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());

@@ -1,14 +1,8 @@
 package com.example.manoel.maratoneia1.ResultsMovie.detailsMovie;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 
-import com.example.manoel.maratoneia1.DetailsMovieActivity;
-import com.example.manoel.maratoneia1.ResultsMovie.DataMovie;
-import com.example.manoel.maratoneia1.ResultsMovie.Result;
 import com.google.gson.Gson;
-
-import java.util.ArrayList;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

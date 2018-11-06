@@ -24,8 +24,8 @@
 
         <ImageView
             android:id="@+id/posterDetailsMovie"
-            android:layout_width="103dp"
-            android:layout_height="151dp"
+            android:layout_width="130dp"
+            android:layout_height="196dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/backdropDetailsMovie"
@@ -37,15 +37,16 @@
 
         <Button
             android:id="@+id/btnPlay"
-            android:layout_width="wrap_content"
-            android:layout_height="32dp"
+            android:layout_width="170dp"
+            android:layout_height="39dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:elevation="5dp"
             android:text="Reproduzir Trailer"
-            android:textSize="8sp"
+            android:textSize="12sp
+"
             app:layout_constraintBottom_toBottomOf="@+id/backdropDetailsMovie"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -56,12 +57,12 @@
         <TextView
             android:id="@+id/textDetailsMovieTitle"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="27dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
             android:text="Movie Title"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/posterDetailsMovie"
@@ -72,7 +73,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
             android:text="Estréia: "
             android:textSize="12sp"
@@ -86,17 +87,14 @@
             android:layout_width="wrap_content"
             android:layout_height="37dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:text="Action"
             android:textColor="#FFF"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btngenre2"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/posterDetailsMovie"
+            app:layout_constraintStart_toEndOf="@+id/posterDetailsMovie"
+            app:layout_constraintTop_toBottomOf="@+id/textDetailsMovieDate"
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
@@ -105,16 +103,15 @@
             android:layout_width="wrap_content"
             android:layout_height="37dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:text="Romance"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/posterDetailsMovie"
-            app:layout_constraintVertical_bias="0.003" />
+            app:layout_constraintStart_toEndOf="@+id/posterDetailsMovie"
+            app:layout_constraintTop_toBottomOf="@+id/textDetailsMovieDate"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/btngenre3"
@@ -122,17 +119,15 @@
             android:layout_width="wrap_content"
             android:layout_height="37dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:text="Aventure"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/btngenre2"
-            app:layout_constraintTop_toBottomOf="@+id/posterDetailsMovie"
-            app:layout_constraintVertical_bias="0.003" />
+            app:layout_constraintTop_toBottomOf="@+id/textDetailsMovieDate"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/textView10"
@@ -148,7 +143,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btngenre1"
+            app:layout_constraintTop_toBottomOf="@+id/posterDetailsMovie"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -186,7 +181,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerPeaple"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="198dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
@@ -194,7 +189,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+            app:layout_constraintTop_toBottomOf="@+id/textView15"
+            app:layout_constraintVertical_bias="0.51" />
 
     </android.support.constraint.ConstraintLayout>
 

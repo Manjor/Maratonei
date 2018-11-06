@@ -50,7 +50,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
 
 
         movieTask = new MovieTask(this,lottieLoader);
-        movieTask.execute(urlAirPlaying);
+        movieTask.execute(urlCategory);
 //
 //        btnNowPlay = view.findViewById(R.id.btnNowPlay);
 //        btnNowPlay.setOnClickListener(this);
