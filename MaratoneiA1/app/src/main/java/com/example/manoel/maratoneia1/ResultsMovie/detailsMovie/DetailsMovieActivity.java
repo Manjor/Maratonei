@@ -8,29 +8,37 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dataMovie.manoel.maratoneia1.R;
 import com.example.manoel.maratoneia1.Configuracao;
 import com.example.manoel.maratoneia1.ResultsMovie.people.Cast;
 import com.example.manoel.maratoneia1.ResultsMovie.people.PeopleTask;
+import com.example.manoel.maratoneia1.ResultsMovie.video.Trailer;
+import com.example.manoel.maratoneia1.ResultsMovie.video.TrailerTask;
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DetailsMovieActivity extends AppCompatActivity{
+public class DetailsMovieActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
     private String urlMovieDetails = null;
     private int id =0;
     private ImageView imageBackdrop = null;
     private ImageView imagePoster = null;
     private TextView textTitle = null;
     private TextView textDate = null;
-    private Button btnGenre1 = null;
-    private Button btnGenre2 = null;
-    private Button btnGenre3 = null;
+    private TextView genre = null;
+    private TextView star = null;
     private TextView textOverview = null;
     private List<Cast> casts = null;
     private RecyclerView recyclerPeople = null;
+    private YouTubePlayerView youTubePlayer = null;
+    private Trailer trailer = null;
 
 
     @Override
@@ -44,9 +52,11 @@ public class DetailsMovieActivity extends AppCompatActivity{
         textTitle = findViewById(R.id.textDetailsMovieTitle);
         textDate = findViewById(R.id.textDetailsMovieDate);
         textOverview = findViewById(R.id.textDetailsMovieOverview);
-        btnGenre1 = findViewById(R.id.btngenre1);
-        btnGenre2 = findViewById(R.id.btngenre2);
-        btnGenre3 = findViewById(R.id.btngenre3);
+        genre = findViewById(R.id.textDetailsMovieGenre);
+        star = findViewById(R.id.textStars);
+        youTubePlayer = findViewById(R.id.movieYoutubePlayer);
+
+
         recyclerPeople = findViewById(R.id.recyclerPeaple);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         ((LinearLayoutManager) layoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -54,38 +64,83 @@ public class DetailsMovieActivity extends AppCompatActivity{
 
         DetailsMovieTask detailsMovieTask = new DetailsMovieTask(this);
         detailsMovieTask.execute(urlMovieDetails);
+
         PeopleTask peopleTask = new PeopleTask(this);
         peopleTask.execute(Configuracao.getPeopleMovie(this.id,getResources().getString(R.string.language)));
+
+        TrailerTask trailerTask = new TrailerTask(this);
+        trailerTask.execute(Configuracao.getVideo(this.id,getResources().getString(R.string.language)));
     }
 
     public void setData(MovieDetail movieDetail){
-        //Set images
-        Picasso.get().load(Configuracao.urlImageApi500 + movieDetail.getBackdropPath()).into(imageBackdrop);
-        Picasso.get().load(Configuracao.urlImageApi500 + movieDetail.getPosterPath()).into(imagePoster);
 
-        //Set texts
-        textTitle.setText(movieDetail.getTitle());
-        textDate.setText(movieDetail.getReleaseDate());
-        textOverview.setText(movieDetail.getOverview());
 
-        //Set genres
-        if(movieDetail.getGenres().size() >= 3){
-            btnGenre1.setText(movieDetail.getGenres().get(0).getName());
-            btnGenre2.setText(movieDetail.getGenres().get(1).getName());
-            btnGenre3.setText(movieDetail.getGenres().get(2).getName());
+        try{
+            //Set images
+            Picasso.get().load(Configuracao.urlImageApi500 + movieDetail.getBackdropPath()).into(imageBackdrop);
+            Picasso.get().load(Configuracao.urlImageApi500 + movieDetail.getPosterPath()).into(imagePoster);
+
+            //Set texts
+            textTitle.setText(movieDetail.getTitle());
+            textDate.setText(movieDetail.getReleaseDate());
+            textOverview.setText(movieDetail.getOverview());
+            star.setText(movieDetail.getVoteAverage().toString());
+            //Set genres
+            if(movieDetail.getGenres().size() >= 1){
+                genre.setText(movieDetail.getGenres().get(0).getName());
+            }
+            else {
+                genre.setVisibility(View.INVISIBLE);
+                genre.setEnabled(false);
+            }
+        }catch (Exception e){
+            Toast.makeText(getApplicationContext(),"Desculpe. O Filme indisponível.",Toast.LENGTH_LONG).show();
+            this.finish();
         }
-        else if(movieDetail.getGenres().size() < 3 && movieDetail.getGenres().size() > 0){
-            btnGenre2.setText(movieDetail.getGenres().get(0).getName());
-            btnGenre1.setVisibility(View.INVISIBLE);
-            btnGenre3.setVisibility(View.INVISIBLE);
+
+    }
+    public void setThrailer(Trailer trailer){
+        try{
+            this.trailer = trailer;
+            youTubePlayer.initialize(Configuracao.GOOGLE_API_KEY,this);
         }
+        catch (Exception e){
+            youTubePlayer.setVisibility(View.INVISIBLE);
+            youTubePlayer.setEnabled(false);
+            Toast.makeText(getApplicationContext(),"Trailer Não Encontrado.",Toast.LENGTH_LONG).show();
+        }
+
     }
 
     public void setPeople(List<Cast> casts){
-        this.casts = new ArrayList<>();
-        this.casts = casts;
-        AdapterPeople adapterPeople = new AdapterPeople((ArrayList<Cast>) this.casts);
-        recyclerPeople.setAdapter(adapterPeople);
+        try{
+            this.casts = new ArrayList<>();
+            this.casts = casts;
+            AdapterPeople adapterPeople = new AdapterPeople((ArrayList<Cast>) this.casts);
+            recyclerPeople.setAdapter(adapterPeople);
+        }catch (Exception e){
+            this.recyclerPeople.setVisibility(View.INVISIBLE);
+            this.recyclerPeople.setEnabled(false);
+            Toast.makeText(getApplicationContext(),"Elenco Indisponível para esse Filme.",Toast.LENGTH_LONG).show();
+        }
+
     }
 
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+        try{
+            String url = Configuracao.urlYoutube + this.trailer.getResults().get(0).getKey();
+            youTubePlayer.cueVideo(this.trailer.getResults().get(0).getKey());
+        }catch (Exception e){
+            this.youTubePlayer.setVisibility(View.INVISIBLE);
+            this.youTubePlayer.setEnabled(false);
+            Toast.makeText(getApplicationContext(),"Trailer Não Encontrado.",Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    @Override
+    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+        Toast.makeText(getApplicationContext(),"Não foi possível encontrar um trailer para esse filme.",Toast.LENGTH_LONG).show();
+    }
 }

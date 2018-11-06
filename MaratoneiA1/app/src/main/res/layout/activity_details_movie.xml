@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,8 +18,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@color/colorPrimaryRoxo" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/posterDetailsMovie"
@@ -33,26 +31,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/backdropDetailsMovie"
-            app:srcCompat="@color/place_autocomplete_prediction_secondary_text" />
-
-        <Button
-            android:id="@+id/btnPlay"
-            android:layout_width="170dp"
-            android:layout_height="39dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:elevation="5dp"
-            android:text="Reproduzir Trailer"
-            android:textSize="12sp
-"
-            app:layout_constraintBottom_toBottomOf="@+id/backdropDetailsMovie"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/posterDetailsMovie"
-            app:layout_constraintTop_toTopOf="@+id/backdropDetailsMovie"
-            app:layout_constraintVertical_bias="1.0" />
+            app:srcCompat="@android:color/darker_gray" />
 
         <TextView
             android:id="@+id/textDetailsMovieTitle"
@@ -80,54 +59,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/posterDetailsMovie"
             app:layout_constraintTop_toBottomOf="@+id/textDetailsMovieTitle" />
-
-        <Button
-            android:id="@+id/btngenre1"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="37dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="Action"
-            android:textColor="#FFF"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btngenre2"
-            app:layout_constraintStart_toEndOf="@+id/posterDetailsMovie"
-            app:layout_constraintTop_toBottomOf="@+id/textDetailsMovieDate"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <Button
-            android:id="@+id/btngenre2"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="37dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="Romance"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/posterDetailsMovie"
-            app:layout_constraintTop_toBottomOf="@+id/textDetailsMovieDate"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <Button
-            android:id="@+id/btngenre3"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="37dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="Aventure"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btngenre2"
-            app:layout_constraintTop_toBottomOf="@+id/textDetailsMovieDate"
-            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/textView10"
@@ -182,15 +113,81 @@
             android:id="@+id/recyclerPeaple"
             android:layout_width="0dp"
             android:layout_height="198dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="17dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView15"
-            app:layout_constraintVertical_bias="0.51" />
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textDetailsMovieGenre"
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/colorPrimaryDarkRoxo"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp"
+            android:text="Genero"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/posterDetailsMovie"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/posterDetailsMovie"
+            app:layout_constraintTop_toBottomOf="@+id/textDetailsMovieDate"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/textStars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:padding="3dp"
+            android:text="Note"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="29dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textDetailsMovieGenre"
+            app:layout_constraintStart_toEndOf="@+id/textDetailsMovieGenre"
+            app:layout_constraintTop_toTopOf="@+id/textDetailsMovieGenre"
+            app:srcCompat="@drawable/stars" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardYoutube"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerPeaple" >
+
+            <view
+                android:id="@+id/movieYoutubePlayer"
+                class="com.google.android.youtube.player.YouTubePlayerView"
+                id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </android.support.v7.widget.CardView>
 
     </android.support.constraint.ConstraintLayout>
 

@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">#d8c4c4c4</item>
-        <item name="colorAccent">#6100ED</item>
+        <item name="colorAccent">@color/colorPrimaryDarkRoxo</item>
     </style>
     <style name="Toolbar" parent="Theme.AppCompat.NoActionBar">
 

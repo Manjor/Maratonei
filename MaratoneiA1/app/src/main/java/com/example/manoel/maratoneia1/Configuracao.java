@@ -15,7 +15,7 @@ public class Configuracao {
     public static String urlYoutube = "https://www.youtube.com/watch?v=";
     public static String apiKey = "f814673a004bcd3dfd0e837cf1a0b020";
 
-    public static final String GOOGLE_API_KEY = "AIzaSyCRxqBqqP-qLVNFmdFyAChnJUhO32EcFlA";
+    public static final String GOOGLE_API_KEY = "AIzaSyDD2ms4lXPrQuI8GT7YmvmRPskx2VkVUjE";
 
 
     public static String getDetailsMovie(int movieId, String language ){
@@ -23,6 +23,9 @@ public class Configuracao {
     }
     public static String getTrailer(String key){
         return urlYoutube + key;
+    }
+    public static String getVideo(int id, String language){
+        return urlApi + "movie/" + id + "/videos?api_key=" + apiKey + "&" + language;
     }
     public static String getDetailsSerie(int serieId, String language){
         return urlApi + "tv/" + serieId + "?api_key=" + apiKey + "&" + language;
