@@ -3,7 +3,6 @@ package com.example.manoel.maratoneia1.ResultsMovie.video;
 
 import java.util.List;
 
-import com.example.manoel.maratoneia1.ResultsMovie.Result;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

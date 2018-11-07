@@ -47,4 +47,5 @@
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>
+    <include layout="@layout/bottomsheet_overview"/>
 </android.support.design.widget.CoordinatorLayout>

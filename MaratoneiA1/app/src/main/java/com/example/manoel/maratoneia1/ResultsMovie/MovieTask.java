@@ -22,7 +22,7 @@ public class MovieTask extends AsyncTask<String,Void,DataMovie> {
     private Request request = null;
     private MovieAdapterCategory adapterCategory;
 
-    private ArrayList<Result> movieList = null;
+    private ArrayList<ResultMovie> movieList = null;
     private DataMovie resultRequest = null;
     private LottieAnimationView lottieAnimationView = null;
 
@@ -46,7 +46,7 @@ public class MovieTask extends AsyncTask<String,Void,DataMovie> {
         }catch (Exception e){
             System.out.println("Error in processing request");
         }
-        movieList = (ArrayList<Result>) resultRequest.getResults();
+        movieList = (ArrayList<ResultMovie>) resultRequest.getResults();
 
         return resultRequest;
     }
@@ -62,9 +62,9 @@ public class MovieTask extends AsyncTask<String,Void,DataMovie> {
 
         super.onPostExecute(dataMovie);
 
-        ArrayList<Result> results = new ArrayList<>();
+        ArrayList<ResultMovie> results = new ArrayList<>();
 
-        results = (ArrayList<Result>) dataMovie.getResults();
+        results = (ArrayList<ResultMovie>) dataMovie.getResults();
 
         movieFragment.setAdapeter(results);
         lottieAnimationView.cancelAnimation();

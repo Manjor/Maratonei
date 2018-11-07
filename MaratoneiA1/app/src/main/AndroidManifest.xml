@@ -33,6 +33,7 @@
         </activity>
         <activity android:name="com.example.manoel.maratoneia1.MainActivity" />
         <activity android:name="com.example.manoel.maratoneia1.ResultsMovie.detailsMovie.DetailsMovieActivity"/>
+        <activity android:name="com.example.manoel.maratoneia1.ResultsSerie.detailsSerie.DetailsSerieActivity"/>
         <!-- <activity android:name=".WelcomeActivity"></activity> -->
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

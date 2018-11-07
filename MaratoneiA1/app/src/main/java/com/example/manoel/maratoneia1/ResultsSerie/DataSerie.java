@@ -12,7 +12,7 @@ public class DataSerie {
     private Integer page;
     @SerializedName("results")
     @Expose
-    private List<Result> resultSeries = null;
+    private List<ResultSerie> resultSeries = null;
     @SerializedName("total_results")
     @Expose
     private Integer totalResults;
@@ -28,11 +28,11 @@ public class DataSerie {
         this.page = page;
     }
 
-    public List<Result> getResultSeries() {
+    public List<ResultSerie> getResultSeries() {
         return resultSeries;
     }
 
-    public void setResultSeries(List<Result> resultSeries) {
+    public void setResultSeries(List<ResultSerie> resultSeries) {
         this.resultSeries = resultSeries;
     }
 

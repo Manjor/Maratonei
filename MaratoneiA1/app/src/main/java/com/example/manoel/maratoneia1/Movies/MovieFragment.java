@@ -15,7 +15,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.dataMovie.manoel.maratoneia1.R;
 import com.example.manoel.maratoneia1.Configuracao;
 import com.example.manoel.maratoneia1.ResultsMovie.MovieTask;
-import com.example.manoel.maratoneia1.ResultsMovie.Result;
+import com.example.manoel.maratoneia1.ResultsMovie.ResultMovie;
 
 import java.util.ArrayList;
 public class MovieFragment extends Fragment implements View.OnClickListener {
@@ -76,11 +76,10 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         ((LinearLayoutManager) layoutManager).setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewEmCartaz.setLayoutManager(layoutManager);
-
         return view;
     }
 
-    public void setAdapeter(ArrayList<Result> movies){
+    public void setAdapeter(ArrayList<ResultMovie> movies){
         MovieAdapterCategory movieAdapter = new MovieAdapterCategory(movies);
         recyclerViewEmCartaz.setAdapter(movieAdapter);
     }

@@ -1,5 +1,7 @@
 package com.example.manoel.maratoneia1.Series;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,18 +10,21 @@ import android.view.ViewGroup;
 
 import com.dataMovie.manoel.maratoneia1.R;
 import com.example.manoel.maratoneia1.Configuracao;
-import com.example.manoel.maratoneia1.ResultsSerie.Result;
+import com.example.manoel.maratoneia1.ResultsMovie.detailsMovie.DetailsMovieActivity;
+import com.example.manoel.maratoneia1.ResultsSerie.ResultSerie;
+import com.example.manoel.maratoneia1.ResultsSerie.detailsSerie.DetailsSerieActivity;
+import com.example.manoel.maratoneia1.WelcomeActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class SerieAdapter extends RecyclerView.Adapter<SerieHolder>{
 
-    private List<Result> serieList = null;
+    private List<ResultSerie> serieList = null;
 
 
 
-    public SerieAdapter(List<Result> serieList){
+    public SerieAdapter(List<ResultSerie> serieList){
         this.serieList = serieList;
     }
 
@@ -33,30 +38,28 @@ public class SerieAdapter extends RecyclerView.Adapter<SerieHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull SerieHolder holder, int position) {
-        final Result serie = serieList.get(position);
-
-        //holder.getSerieName().setText(serie.getName());
+        final ResultSerie serie = serieList.get(position);
         final int id = serie.getId();
         try{
-
-        Picasso.get().load(Configuracao.urlImageApi500 + serie.getPosterPath()).into(holder.getSerieBackdrop());
+            Picasso.get().load(Configuracao.urlImageApi500 + serie.getPosterPath()).into(holder.getSeriePosterPath());
         }catch (Exception e){
 
         }
 
-//        holder.getSerieBackdrop().setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Intent it = new Intent(view.getContext(),DetailsSerie.class);
-//                Bundle bundle = new Bundle();
-//
-//                it.putExtra("id", id);
-//
-//                view.getContext().startActivity(it);
-//
-//            }
-//        });
+        holder.getSeriePosterPath().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(),DetailsSerieActivity.class);
+                Bundle bundle = new Bundle();
+                intent.putExtra("id",id);
+
+                v.getContext().startActivity(intent);
+
+//                BottomSheetDetails bottom = new BottomSheetDetails(v.getContext());
+//                bottom.setTitle("Resumo");
+//                bottom.show();
+            }
+        });
     }
 
     @Override

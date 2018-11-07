@@ -12,7 +12,7 @@ public class DataMovie {
     private Integer page;
     @SerializedName("results")
     @Expose
-    private List<Result> results = null;
+    private List<ResultMovie> results = null;
     @SerializedName("date")
     @Expose
     private Date date;
@@ -31,11 +31,11 @@ public class DataMovie {
         this.page = page;
     }
 
-    public List<Result> getResults() {
+    public List<ResultMovie> getResults() {
         return results;
     }
 
-    public void setResults(List<Result> results) {
+    public void setResults(List<ResultMovie> results) {
         this.results = results;
     }
 

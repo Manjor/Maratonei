@@ -1,11 +1,9 @@
 package com.example.manoel.maratoneia1.ResultsMovie.detailsMovie;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DetailsMovieActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
+
     private String urlMovieDetails = null;
     private int id =0;
     private ImageView imageBackdrop = null;
@@ -45,6 +44,8 @@ public class DetailsMovieActivity extends YouTubeBaseActivity implements YouTube
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_movie);
+
+
         this.id = this.getIntent().getIntExtra("id",0);
         urlMovieDetails = Configuracao.getDetailsMovie(id,getResources().getString(R.string.language));
         imageBackdrop = findViewById(R.id.backdropDetailsMovie);
@@ -82,7 +83,7 @@ public class DetailsMovieActivity extends YouTubeBaseActivity implements YouTube
 
             //Set texts
             textTitle.setText(movieDetail.getTitle());
-            textDate.setText(movieDetail.getReleaseDate());
+            textDate.setText("Estréia: " +movieDetail.getReleaseDate());
             textOverview.setText(movieDetail.getOverview());
             star.setText(movieDetail.getVoteAverage().toString());
             //Set genres

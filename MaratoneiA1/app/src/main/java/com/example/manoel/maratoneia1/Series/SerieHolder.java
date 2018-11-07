@@ -2,7 +2,6 @@ package com.example.manoel.maratoneia1.Series;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,12 +10,12 @@ import com.dataMovie.manoel.maratoneia1.R;
 public class SerieHolder extends RecyclerView.ViewHolder {
 
     private TextView serieName;
-    private ImageView serieBackdrop;
+    private ImageView seriePosterPath;
 
     public SerieHolder(View itemView) {
         super(itemView);
         //serieName = itemView.findViewById(R.id.textNameSerie);
-        serieBackdrop = itemView.findViewById(R.id.imageSerie);
+        seriePosterPath = itemView.findViewById(R.id.imageSerie);
     }
 
     public TextView getSerieName() {
@@ -27,12 +26,12 @@ public class SerieHolder extends RecyclerView.ViewHolder {
         this.serieName = serieName;
     }
 
-    public ImageView getSerieBackdrop() {
-        return serieBackdrop;
+    public ImageView getSeriePosterPath() {
+        return seriePosterPath;
     }
 
-    public void setSerieBackdrop(ImageView serieBackdrop) {
-        this.serieBackdrop = serieBackdrop;
+    public void setSeriePosterPath(ImageView seriePosterPath) {
+        this.seriePosterPath = seriePosterPath;
     }
 
 }

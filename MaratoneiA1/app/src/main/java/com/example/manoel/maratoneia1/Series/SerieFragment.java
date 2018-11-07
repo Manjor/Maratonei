@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import com.airbnb.lottie.LottieAnimationView;
 import com.dataMovie.manoel.maratoneia1.R;
 import com.example.manoel.maratoneia1.Configuracao;
-import com.example.manoel.maratoneia1.ResultsSerie.Result;
+import com.example.manoel.maratoneia1.ResultsSerie.ResultSerie;
 import com.example.manoel.maratoneia1.ResultsSerie.SerieTask;
 
 import java.util.ArrayList;
@@ -45,7 +45,7 @@ public class SerieFragment extends Fragment {
         return view;
 
     }
-    public void setAdapter(ArrayList<Result> series){
+    public void setAdapter(ArrayList<ResultSerie> series){
         SerieAdapter movieAdapter = new SerieAdapter(series);
         recyclerView.setAdapter(movieAdapter);
     }

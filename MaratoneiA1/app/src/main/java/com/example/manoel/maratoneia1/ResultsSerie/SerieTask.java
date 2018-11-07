@@ -56,8 +56,8 @@ public class SerieTask extends AsyncTask<String,Void,DataSerie> {
     @Override
     protected void onPostExecute(DataSerie dataSerie) {
         super.onPostExecute(dataSerie);
-        ArrayList<Result> resultSeries = new ArrayList<>();
-        resultSeries = (ArrayList<Result>) dataSerie.getResultSeries();
+        ArrayList<ResultSerie> resultSeries = new ArrayList<>();
+        resultSeries = (ArrayList<ResultSerie>) dataSerie.getResultSeries();
 
         serieFragment.setAdapter(resultSeries);
         lottieAnimationView.cancelAnimation();
