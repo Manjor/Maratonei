@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        if (verificaConexao()) {
+        verificaConexao();
+//        if (verificaConexao()) {
             //Instance of with set ids
             toolbar = findViewById(R.id.toolbar);
             tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -73,24 +74,24 @@ public class MainActivity extends AppCompatActivity {
             viewPager.setAdapter(viewPagerAdapter);
 
             tabLayout.setupWithViewPager(viewPager);
-        } else {
-
-            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-
-            dialog.setTitle(getResources().getString(R.string.errorconnection));
-            dialog.setMessage(getResources().getString(R.string.messageerrorconnection));
-
-            dialog.setPositiveButton(getResources().getString(R.string.confirm), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    System.exit(1);
-                }
-            });
-
-            dialog.show();
-        }
+//        } else {
+//
+//            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+//
+//            dialog.setTitle(getResources().getString(R.string.errorconnection));
+//            dialog.setMessage(getResources().getString(R.string.messageerrorconnection));
+//
+//            dialog.setPositiveButton(getResources().getString(R.string.confirm), new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    System.exit(1);
+//                }
+//            });
+//
+//            dialog.show();
+//        }
     }
-
+    public static boolean Connection = false;
     public boolean verificaConexao() {
         boolean conectado;
         ConnectivityManager conectivtyManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -101,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             conectado = false;
         }
+        this.Connection = conectado;
         return conectado;
     }
 

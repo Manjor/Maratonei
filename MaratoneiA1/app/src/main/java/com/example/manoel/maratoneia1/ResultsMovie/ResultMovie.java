@@ -50,6 +50,13 @@ public class ResultMovie {
     @Expose
     private Double voteAverage;
 
+    public ResultMovie(){}
+
+    public ResultMovie(String title, String backdropPath){
+        this.title = title;
+        this.backdropPath = backdropPath;
+    }
+
     public String getPosterPath() {
         return posterPath;
     }

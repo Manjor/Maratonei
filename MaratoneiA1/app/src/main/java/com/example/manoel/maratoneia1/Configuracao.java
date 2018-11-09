@@ -46,5 +46,4 @@ public class Configuracao {
     public static String getPeopleMovie(int id, String language){
         return  urlApi + "movie/" + id + "/casts?api_key=" + apiKey  + "&" +language;
     }
-
 }

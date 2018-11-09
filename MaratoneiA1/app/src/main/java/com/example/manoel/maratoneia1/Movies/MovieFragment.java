@@ -1,11 +1,14 @@
 package com.example.manoel.maratoneia1.Movies;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +17,14 @@ import android.widget.Button;
 import com.airbnb.lottie.LottieAnimationView;
 import com.dataMovie.manoel.maratoneia1.R;
 import com.example.manoel.maratoneia1.Configuracao;
+import com.example.manoel.maratoneia1.DataBase.DataBaseOffline;
+import com.example.manoel.maratoneia1.MainActivity;
 import com.example.manoel.maratoneia1.ResultsMovie.MovieTask;
 import com.example.manoel.maratoneia1.ResultsMovie.ResultMovie;
+import com.example.manoel.maratoneia1.WelcomeActivity;
 
 import java.util.ArrayList;
+
 public class MovieFragment extends Fragment implements View.OnClickListener {
 
 
@@ -36,6 +43,8 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     private String urlAirPlaying;
     private String urlCategory;
     private MovieTask movieTask;
+    private DataBaseOffline dataBaseOffline = null;
+    private ArrayList<ResultMovie> resultMovies = null;
 
     @Nullable
     @Override
@@ -49,8 +58,23 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
         urlCategory = Configuracao.getMoviePopular(getResources().getString(R.string.language));
 
 
-        movieTask = new MovieTask(this,lottieLoader);
-        movieTask.execute(urlCategory);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        ((LinearLayoutManager) layoutManager).setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerViewEmCartaz.setLayoutManager(layoutManager);
+
+        if (MainActivity.Connection == false) {
+
+            resultMovies = new ArrayList<>();
+            dataBaseOffline = new DataBaseOffline(getContext(), "movie", 1);
+            for (int i = 0; i < dataBaseOffline.getItensMovieIntro().size(); i++) {
+                resultMovies.add(new ResultMovie(dataBaseOffline.getItensMovieIntro().get(i).getTitle(), dataBaseOffline.getItensMovieIntro().get(i).getBackdrop()));
+            }
+            MovieAdapterCategory movieAdapter = new MovieAdapterCategory(resultMovies);
+            recyclerViewEmCartaz.setAdapter(movieAdapter);
+        } else {
+            movieTask = new MovieTask(this, lottieLoader);
+            movieTask.execute(urlCategory);
+        }
 //
 //        btnNowPlay = view.findViewById(R.id.btnNowPlay);
 //        btnNowPlay.setOnClickListener(this);
@@ -72,14 +96,22 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
 //
 //        btnWar = view.findViewById(R.id.btnWar);
 //        btnWar.setOnClickListener(this);
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        ((LinearLayoutManager) layoutManager).setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerViewEmCartaz.setLayoutManager(layoutManager);
         return view;
     }
 
-    public void setAdapeter(ArrayList<ResultMovie> movies){
+    public void setAdapeter(ArrayList<ResultMovie> movies) {
+
+        dataBaseOffline = new DataBaseOffline(getContext(), "movie", 1);
+
+        for (int i = 0; i < movies.size(); i++) {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("title", movies.get(i).getTitle());
+            contentValues.put("backdrop", movies.get(i).getBackdropPath());
+            this.dataBaseOffline.insertMovieIntro(contentValues);
+        }
+        int size = dataBaseOffline.getItensMovieIntro().size();
+        String itens = dataBaseOffline.getItensMovieIntro().toString();
+
         MovieAdapterCategory movieAdapter = new MovieAdapterCategory(movies);
         recyclerViewEmCartaz.setAdapter(movieAdapter);
     }
