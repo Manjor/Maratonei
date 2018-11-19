@@ -18,6 +18,7 @@ public class Configuracao {
     public static final String GOOGLE_API_KEY = "AIzaSyDD2ms4lXPrQuI8GT7YmvmRPskx2VkVUjE";
 
 
+
     public static String getDetailsMovie(int movieId, String language ){
         return urlApi + "movie/" + movieId + "?api_key=" + apiKey + "&" +language;
     }

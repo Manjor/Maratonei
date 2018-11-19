@@ -74,29 +74,40 @@ public class DetailsMovieActivity extends YouTubeBaseActivity implements YouTube
     }
 
     public void setData(MovieDetail movieDetail){
-
-
         try{
-            //Set images
-            Picasso.get().load(Configuracao.urlImageApi500 + movieDetail.getBackdropPath()).into(imageBackdrop);
-            Picasso.get().load(Configuracao.urlImageApi500 + movieDetail.getPosterPath()).into(imagePoster);
+            try{
+                //Set images
+                Picasso.get().load(Configuracao.urlImageApi500 + movieDetail.getBackdropPath()).into(imageBackdrop);
+                Picasso.get().load(Configuracao.urlImageApi500 + movieDetail.getPosterPath()).into(imagePoster);
+            }catch (Exception e ){
 
-            //Set texts
-            textTitle.setText(movieDetail.getTitle());
-            textDate.setText("Estréia: " +movieDetail.getReleaseDate());
-            textOverview.setText(movieDetail.getOverview());
-            star.setText(movieDetail.getVoteAverage().toString());
-            //Set genres
-            if(movieDetail.getGenres().size() >= 1){
-                genre.setText(movieDetail.getGenres().get(0).getName());
             }
-            else {
-                genre.setVisibility(View.INVISIBLE);
-                genre.setEnabled(false);
+            try{
+                //Set texts
+                textTitle.setText(movieDetail.getTitle());
+                textDate.setText("Estréia: " +movieDetail.getReleaseDate());
+                textOverview.setText(movieDetail.getOverview());
+                star.setText(movieDetail.getVoteAverage().toString());
+            }catch (Exception e){
+
             }
+
+            try{
+                //Set genres
+                if(movieDetail.getGenres().size() >= 1){
+                    genre.setText(movieDetail.getGenres().get(0).getName());
+                }
+                else {
+                    genre.setVisibility(View.INVISIBLE);
+                    genre.setEnabled(false);
+                }
+            }catch (Exception e){
+
+            }
+
         }catch (Exception e){
             Toast.makeText(getApplicationContext(),"Desculpe. O Filme indisponível.",Toast.LENGTH_LONG).show();
-            this.finish();
+            //this.finish();
         }
 
     }
