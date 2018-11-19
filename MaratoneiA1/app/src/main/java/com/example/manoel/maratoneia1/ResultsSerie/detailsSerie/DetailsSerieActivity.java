@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +29,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DetailsSerieActivity extends AppCompatActivity{
+public class DetailsSerieActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private String urlSerieDetail = null;
     private int id = 0;
@@ -40,7 +41,8 @@ public class DetailsSerieActivity extends AppCompatActivity{
     private TextView textOverview = null;
     private Spinner spinnerSeasons = null;
     private RecyclerView recyclerEpisode = null;
-    SeasonDetailsTask seasonDetailsTask = null;
+    private List<Episode> episodes = null;
+    List<Integer> numSeason = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +57,14 @@ public class DetailsSerieActivity extends AppCompatActivity{
         this.textOverview = findViewById(R.id.textDetailsSerieOverview);
         this.spinnerSeasons = findViewById(R.id.spinnerSeasons);
         this.recyclerEpisode = findViewById(R.id.recyclerEpsodes);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        ((LinearLayoutManager) layoutManager).setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerEpisode.setLayoutManager(layoutManager);
+
         DetailsSerieTask detailsSerieTask = new DetailsSerieTask(this);
         detailsSerieTask.execute(Configuracao.getDetailsSerie(id, getResources().getString(R.string.language)));
-        this.seasonDetailsTask = new SeasonDetailsTask(this);
+
 
     }
 
@@ -71,22 +78,21 @@ public class DetailsSerieActivity extends AppCompatActivity{
             this.textRelease.setText("Primeira vez no ar: " + serieDetail.getFirstAirDate());
             this.textOverview.setText(serieDetail.getOverview());
             List<Season> seasons = serieDetail.getSeasons();
+
             List<String> numberSeasons = new ArrayList<>();
-            for(int i = 0; i < seasons.size(); i++){
+            this.numSeason = new ArrayList<>();
+            for (int i = 0; i < seasons.size(); i++) {
                 numberSeasons.add(seasons.get(i).getSeasonNumber() + "ª Temporada");
+                numSeason.add(seasons.get(i).getSeasonNumber());
             }
+
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                    this,android.R.layout.simple_spinner_item,
+                    this, android.R.layout.simple_spinner_item,
                     numberSeasons
             );
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             this.spinnerSeasons.setAdapter(arrayAdapter);
-            this.spinnerSeasons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Log.d("INFO", "SELECIONADO: " + spinnerSeasons.getSelectedItemPosition());
-                }
-            });
+            this.spinnerSeasons.setOnItemSelectedListener(this);
             //Set genres
             if (serieDetail.getGenres().size() >= 1) {
                 genre.setText(serieDetail.getGenres().get(0).getName());
@@ -99,8 +105,20 @@ public class DetailsSerieActivity extends AppCompatActivity{
         }
     }
 
-    public void setSeasonDetails(SeasonDetail seasonDetails){
-        AdapterEpisode adapterEpisode = new AdapterEpisode((ArrayList<Episode>) seasonDetails.getEpisodes());
+    public void setSeasonDetails(List<Episode> episodes) {
+        this.episodes = new ArrayList<>();
+        this.episodes = episodes;
+        AdapterEpisode adapterEpisode = new AdapterEpisode((ArrayList<Episode>) this.episodes);
+
         this.recyclerEpisode.setAdapter(adapterEpisode);
+    }
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        SeasonDetailsTask seasonDetailsTask  = new SeasonDetailsTask(this);
+        seasonDetailsTask.execute(Configuracao.getSeason(this.id,this.numSeason.get(spinnerSeasons.getSelectedItemPosition()),getResources().getString(R.string.language)));
+    }
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

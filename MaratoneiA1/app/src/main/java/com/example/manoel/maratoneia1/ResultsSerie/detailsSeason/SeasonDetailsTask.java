@@ -13,7 +13,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class SeasonDetailsTask extends AsyncTask<String,Void,SeasonDetail>{
+public class SeasonDetailsTask extends AsyncTask<String, Void, SeasonDetail> {
 
     private SeasonDetail seasonDetail = null;
     private OkHttpClient client = new OkHttpClient();
@@ -24,7 +24,7 @@ public class SeasonDetailsTask extends AsyncTask<String,Void,SeasonDetail>{
 
     private Activity activity;
 
-    public SeasonDetailsTask(DetailsSerieActivity activity){
+    public SeasonDetailsTask(DetailsSerieActivity activity) {
         this.detailsSerieActivity = activity;
     }
 
@@ -36,13 +36,13 @@ public class SeasonDetailsTask extends AsyncTask<String,Void,SeasonDetail>{
     @Override
     protected SeasonDetail doInBackground(String... strings) {
 
-        try{
+        try {
             request = new Request.Builder().url(strings[0]).build();
             response = client.newCall(request).execute();
             String json = response.body().string();
             seasonDetail = gson.fromJson(json, SeasonDetail.class);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Error in processing request");
         }
         return seasonDetail;
@@ -51,6 +51,6 @@ public class SeasonDetailsTask extends AsyncTask<String,Void,SeasonDetail>{
     @Override
     protected void onPostExecute(SeasonDetail seasonDetail) {
         super.onPostExecute(seasonDetail);
-        this.detailsSerieActivity.setSeasonDetails(seasonDetail);
+        this.detailsSerieActivity.setSeasonDetails(seasonDetail.getEpisodes());
     }
 }

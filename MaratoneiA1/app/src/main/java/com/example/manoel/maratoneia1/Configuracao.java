@@ -18,33 +18,44 @@ public class Configuracao {
     public static final String GOOGLE_API_KEY = "AIzaSyDD2ms4lXPrQuI8GT7YmvmRPskx2VkVUjE";
 
 
-
-    public static String getDetailsMovie(int movieId, String language ){
-        return urlApi + "movie/" + movieId + "?api_key=" + apiKey + "&" +language;
+    public static String getDetailsMovie(int movieId, String language) {
+        return urlApi + "movie/" + movieId + "?api_key=" + apiKey + "&" + language;
     }
-    public static String getTrailer(String key){
+
+    public static String getTrailer(String key) {
         return urlYoutube + key;
     }
-    public static String getVideo(int id, String language){
+
+    public static String getVideo(int id, String language) {
         return urlApi + "movie/" + id + "/videos?api_key=" + apiKey + "&" + language;
     }
-    public static String getDetailsSerie(int serieId, String language){
+
+    public static String getDetailsSerie(int serieId, String language) {
         return urlApi + "tv/" + serieId + "?api_key=" + apiKey + "&" + language;
     }
-    public static String getMoviePopular(String language){
+
+    public static String getMoviePopular(String language) {
         return urlApi + "movie/popular" + "?api_key=" + apiKey + "&page=1" + "&" + language;
     }
-    public static String getMovieNowPlayng(String language){
-        return urlApi + "movie/now_playing" + "?api_key=" + apiKey + "&page=1" + "&"+language;
-    }
-    public static String getMovieByGenre(int genre,String language){
-        return urlApi + "genre/" + genre + "/movies?api_key=" + apiKey + "&page=1" + "&"+ language;
-    }
-    public static String getSeriePopular(String language){
 
-        return  urlApi + "tv/popular" + "?api_key=" + apiKey + "&page=1" + "&" + language;
+    public static String getMovieNowPlayng(String language) {
+        return urlApi + "movie/now_playing" + "?api_key=" + apiKey + "&page=1" + "&" + language;
     }
-    public static String getPeopleMovie(int id, String language){
-        return  urlApi + "movie/" + id + "/casts?api_key=" + apiKey  + "&" +language;
+
+    public static String getMovieByGenre(int genre, String language) {
+        return urlApi + "genre/" + genre + "/movies?api_key=" + apiKey + "&page=1" + "&" + language;
+    }
+
+    public static String getSeriePopular(String language) {
+
+        return urlApi + "tv/popular" + "?api_key=" + apiKey + "&page=1" + "&" + language;
+    }
+
+    public static String getPeopleMovie(int id, String language) {
+        return urlApi + "movie/" + id + "/casts?api_key=" + apiKey + "&" + language;
+    }
+
+    public static String getSeason(int tvId, int seasonNumber, String language) {
+        return urlApi + "tv/" + tvId + "/season/" + seasonNumber + "?api_key=" + apiKey + "&" + language;
     }
 }

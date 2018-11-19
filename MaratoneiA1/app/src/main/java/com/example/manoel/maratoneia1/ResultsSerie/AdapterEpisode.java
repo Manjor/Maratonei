@@ -7,19 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dataMovie.manoel.maratoneia1.R;
-import com.example.manoel.maratoneia1.Configuracao;
-import com.example.manoel.maratoneia1.ResultsMovie.detailsMovie.HolderPeople;
-import com.example.manoel.maratoneia1.ResultsMovie.people.Cast;
 import com.example.manoel.maratoneia1.ResultsSerie.detailsSeason.Episode;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AdapterEpisode extends RecyclerView.Adapter<EpisodeHolder> {
 
 
-    private ArrayList<Episode> episodes;
+    private ArrayList<Episode> episodes = null;
 
     public AdapterEpisode(ArrayList<Episode> episodes) {
         this.episodes = episodes;
