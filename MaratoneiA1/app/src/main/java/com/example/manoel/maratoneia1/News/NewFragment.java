@@ -35,12 +35,11 @@ public class NewFragment extends Fragment implements ValueEventListener  {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_news,container,false);
 
-
         recyclerView = view.findViewById(R.id.recyclerNew);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        DatabaseReference news = reference.child("noticias");
+        DatabaseReference news = reference.child("new");
         news.addListenerForSingleValueEvent(this);
         return view;
 
@@ -52,12 +51,15 @@ public class NewFragment extends Fragment implements ValueEventListener  {
         int i;
         this.newList = new ArrayList<>();
         for (i = 1; i <= dataSnapshot.getChildrenCount(); i++) {
+
             String pos = String.valueOf(i);
-            String title = dataSnapshot.child(pos).child("titulo").getValue().toString();
-            String description = dataSnapshot.child(pos).child("descricao").getValue().toString();
-            String date = dataSnapshot.child(pos).child("data").getValue().toString();
+            String autor = dataSnapshot.child(pos).child("autor").getValue().toString();
+            String title = dataSnapshot.child(pos).child("title").getValue().toString();
+            String description = dataSnapshot.child(pos).child("description").getValue().toString();
+            String date = dataSnapshot.child(pos).child("date").getValue().toString();
             String id = dataSnapshot.child(pos).child("id").getValue().toString();
-            this.addList(title,date,description);
+            this.addList(autor,title,description,date);
+
         }
         NewAdapter newAdapter = new NewAdapter(this.newList);
         recyclerView.setAdapter(newAdapter);
@@ -68,7 +70,7 @@ public class NewFragment extends Fragment implements ValueEventListener  {
 
     }
 
-    public void addList(String title,String description, String date){
-        this.newList.add(new New("Sem Imagem",title,date,description,"SEM IMAGEM"));
+    public void addList(String autor,String title,String description, String date){
+        this.newList.add(new New(autor,title,date,description,"SEM IMAGEM"));
     }
 }

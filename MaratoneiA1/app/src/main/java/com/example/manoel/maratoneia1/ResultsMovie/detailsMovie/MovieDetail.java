@@ -16,7 +16,7 @@ public class MovieDetail {
     private String backdropPath;
     @SerializedName("belongs_to_collection")
     @Expose
-    private Object belongsToCollection;
+    private BelongsToCollection belongsToCollection;
     @SerializedName("budget")
     @Expose
     private Integer budget;
@@ -104,7 +104,7 @@ public class MovieDetail {
         return belongsToCollection;
     }
 
-    public void setBelongsToCollection(Object belongsToCollection) {
+    public void setBelongsToCollection(BelongsToCollection belongsToCollection) {
         this.belongsToCollection = belongsToCollection;
     }
 

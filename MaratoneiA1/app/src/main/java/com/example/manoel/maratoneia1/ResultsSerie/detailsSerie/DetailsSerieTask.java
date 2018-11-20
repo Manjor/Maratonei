@@ -34,15 +34,15 @@ public class DetailsSerieTask extends AsyncTask<String,Void,SerieDetail>{
     protected SerieDetail doInBackground(String... strings) {
 
         try{
-            request = new Request.Builder().url(strings[0]).build();
-            response = client.newCall(request).execute();
+            this.request = new Request.Builder().url(strings[0]).build();
+            this.response = client.newCall(request).execute();
             String json = response.body().string();
-            serieDetail = gson.fromJson(json, SerieDetail.class);
+            this.serieDetail = gson.fromJson(json, SerieDetail.class);
 
         }catch (Exception e){
             System.out.println("Error in processing request");
         }
-        return serieDetail;
+        return this.serieDetail;
     }
 
     @Override

@@ -28,6 +28,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class DetailsSerieActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -69,48 +70,78 @@ public class DetailsSerieActivity extends AppCompatActivity implements AdapterVi
     }
 
     public void setData(SerieDetail serieDetail) {
+
         try {
-            //Set images
-            Picasso.get().load(Configuracao.urlImageApi500 + serieDetail.getBackdropPath()).into(imageBackdrop);
-            Picasso.get().load(Configuracao.urlImageApi500 + serieDetail.getPosterPath()).into(imagePoster);
-            //Set texts
-            this.textName.setText(serieDetail.getName());
-            this.textRelease.setText("Primeira vez no ar: " + serieDetail.getFirstAirDate());
-            this.textOverview.setText(serieDetail.getOverview());
-            List<Season> seasons = serieDetail.getSeasons();
+            try{
+                //Set images
+                if(serieDetail.getBackdropPath().equals("") || serieDetail.getBackdropPath() == null){
 
-            List<String> numberSeasons = new ArrayList<>();
-            this.numSeason = new ArrayList<>();
-            for (int i = 0; i < seasons.size(); i++) {
-                numberSeasons.add(seasons.get(i).getSeasonNumber() + "ª Temporada");
-                numSeason.add(seasons.get(i).getSeasonNumber());
+                }else{
+                    Picasso.get().load(Configuracao.urlImageApi500 + serieDetail.getBackdropPath()).into(imageBackdrop);
+                }
+                //Set images
+                if(serieDetail.getPosterPath().equals("") || serieDetail.getPosterPath() == null){
+
+                }else{
+                    Picasso.get().load(Configuracao.urlImageApi500 + serieDetail.getPosterPath()).into(imagePoster);
+                }
+
+            }catch (Exception e){
+
             }
 
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                    this, android.R.layout.simple_spinner_item,
-                    numberSeasons
-            );
-            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            this.spinnerSeasons.setAdapter(arrayAdapter);
-            this.spinnerSeasons.setOnItemSelectedListener(this);
-            //Set genres
-            if (serieDetail.getGenres().size() >= 1) {
-                genre.setText(serieDetail.getGenres().get(0).getName());
-            } else {
-                genre.setVisibility(View.INVISIBLE);
-                genre.setEnabled(false);
-            }
+            try{
+                //Set texts
+                this.textName.setText(serieDetail.getName());
+                this.textRelease.setText("Primeira vez no ar: " + serieDetail.getFirstAirDate());
+                this.textOverview.setText(serieDetail.getOverview());
+
+            }catch (Exception e){}
+
+            try{
+                List<Season> seasons = serieDetail.getSeasons();
+
+                List<String> numberSeasons = new ArrayList<>();
+                this.numSeason = new ArrayList<>();
+                for (int i = 0; i < seasons.size(); i++) {
+                    numberSeasons.add(seasons.get(i).getSeasonNumber() + "ª Temporada");
+                    numSeason.add(seasons.get(i).getSeasonNumber());
+                }
+
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                        this, android.R.layout.simple_spinner_item,
+                        numberSeasons
+                );
+                arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                this.spinnerSeasons.setAdapter(arrayAdapter);
+                this.spinnerSeasons.setOnItemSelectedListener(this);
+            }catch (Exception e){}
+
+            try{
+                //Set genres
+                if (serieDetail.getGenres().size() >= 1) {
+                    genre.setText(serieDetail.getGenres().get(0).getName());
+                } else {
+                    genre.setVisibility(View.INVISIBLE);
+                    genre.setEnabled(false);
+                }
+            }catch (Exception e){}
+
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Desculpe. Serie indisponível.", Toast.LENGTH_LONG).show();
         }
     }
 
     public void setSeasonDetails(List<Episode> episodes) {
-        this.episodes = new ArrayList<>();
-        this.episodes = episodes;
-        AdapterEpisode adapterEpisode = new AdapterEpisode((ArrayList<Episode>) this.episodes);
+        try{
+            this.episodes = new ArrayList<>();
+            this.episodes = episodes;
+            AdapterEpisode adapterEpisode = new AdapterEpisode((ArrayList<Episode>) this.episodes);
 
-        this.recyclerEpisode.setAdapter(adapterEpisode);
+            this.recyclerEpisode.setAdapter(adapterEpisode);
+        }catch (Exception e){
+
+        }
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

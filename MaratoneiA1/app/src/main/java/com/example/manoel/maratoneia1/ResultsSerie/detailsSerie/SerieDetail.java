@@ -46,7 +46,7 @@ public class SerieDetail {
     private String name;
     @SerializedName("next_episode_to_air")
     @Expose
-    private Object nextEpisodeToAir;
+    private NextEpisodeToAir nextEpisodeToAir;
     @SerializedName("networks")
     @Expose
     private List<Network> networks = null;
@@ -193,7 +193,7 @@ public class SerieDetail {
         return nextEpisodeToAir;
     }
 
-    public void setNextEpisodeToAir(Object nextEpisodeToAir) {
+    public void setNextEpisodeToAir(NextEpisodeToAir nextEpisodeToAir) {
         this.nextEpisodeToAir = nextEpisodeToAir;
     }
 

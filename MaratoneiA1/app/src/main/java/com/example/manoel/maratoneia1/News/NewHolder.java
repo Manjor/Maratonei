@@ -14,15 +14,17 @@ public class NewHolder extends RecyclerView.ViewHolder {
     private TextView newDate;
     private ImageView newImage;
     private TextView newDescription;
+    private TextView newAutor;
 
     public NewHolder(View itemView) {
         super(itemView);
 
         newImageProfile = itemView.findViewById(R.id.newImageProfile);
-        newTitle = itemView.findViewById(R.id.newTitle);
-        newDate = itemView.findViewById(R.id.newDate);
-        newImage = itemView.findViewById(R.id.newMedia);
-        newDescription = itemView.findViewById(R.id.newDescription);
+        newAutor = itemView.findViewById(R.id.textNewAutor);
+        newTitle = itemView.findViewById(R.id.textNewTitle);
+        newDate = itemView.findViewById(R.id.textNewDate);
+        //newImage = itemView.findViewById(R.id.newMedia);
+        newDescription = itemView.findViewById(R.id.textNewDescripton);
     }
 
     public ImageView getNewImageProfile() {
@@ -31,6 +33,14 @@ public class NewHolder extends RecyclerView.ViewHolder {
 
     public void setNewImageProfile(ImageView newImageProfile) {
         this.newImageProfile = newImageProfile;
+    }
+
+    public TextView getNewAutor() {
+        return newAutor;
+    }
+
+    public void setNewAutor(TextView newAutor) {
+        this.newAutor = newAutor;
     }
 
     public TextView getNewTitle() {

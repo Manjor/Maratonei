@@ -8,17 +8,18 @@ public class New {
     private String newDesc;
     private String newImage;
     private String newVideo;
+    private String newAutor;
     private int keyVideo;
 
     public New() {
     }
 
-    public New(String newImageProfile,String newTitle, String newDate, String newDesc, String newImage) {
-        this.newImageProfile = newImageProfile;
+    public New(String newAutor,String newTitle, String newDate, String newDesc, String newImage) {
         this.newTitle = newTitle;
         this.newDate = newDate;
         this.newDesc = newDesc;
         this.newImage = newImage;
+        this.newAutor = newAutor;
     }
     public New(String newImageProfile,String newTitle, String newDate, String newDesc, String newVideo, int keyVideo){
         this.newImageProfile = newImageProfile;
@@ -35,6 +36,14 @@ public class New {
 
     public void setNewImageProfile(String newImageProfile) {
         this.newImageProfile = newImageProfile;
+    }
+
+    public String getNewAutor() {
+        return newAutor;
+    }
+
+    public void setNewAutor(String newAutor) {
+        this.newAutor = newAutor;
     }
 
     public String getNewTitle() {
