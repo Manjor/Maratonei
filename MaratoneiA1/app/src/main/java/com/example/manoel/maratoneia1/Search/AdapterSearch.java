@@ -18,12 +18,11 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class AdapterSearch extends RecyclerView.Adapter<SearchHolder> implements View.OnClickListener {
+public class AdapterSearch extends RecyclerView.Adapter<SearchHolder> {
 
-    private ArrayList<ResultSearch> resultSearchArrayList;
     private int id = 0;
     private String type = "";
-
+    private ArrayList<ResultSearch> resultSearchArrayList = null;
     public AdapterSearch(ArrayList<ResultSearch> resultSearchArrayList) {
         this.resultSearchArrayList = resultSearchArrayList;
     }
@@ -39,31 +38,29 @@ public class AdapterSearch extends RecyclerView.Adapter<SearchHolder> implements
     public void onBindViewHolder(@NonNull SearchHolder searchHolder, int i) {
         ResultSearch resultSearch = this.resultSearchArrayList.get(i);
         Picasso.get().load(Configuracao.urlImageApi300 + resultSearch.getPosterPath()).into(searchHolder.getPosterPath());
-        this.type = resultSearch.getMediaType();
-        this.id = resultSearch.getId();
-        searchHolder.getPosterPath().setOnClickListener(this);
+        final int id  = resultSearch.getId();
+        final String type = resultSearch.getMediaType().toString();
+        searchHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(type.equals("tv")){
+                    Intent intent = new Intent(v.getContext(),DetailsSerieActivity.class);
+                    Bundle bundle = new Bundle();
+                    intent.putExtra("id",id);
+                    v.getContext().startActivity(intent);
+                }else if(type.equals("movie")){
+                    Intent intent = new Intent(v.getContext(),DetailsMovieActivity.class);
+                    Bundle bundle = new Bundle();
+                    intent.putExtra("id",id);
+                    v.getContext().startActivity(intent);
+                }else {}
+
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return this.resultSearchArrayList.size();
-    }
-
-    @Override
-    public void onClick(View v) {
-        if(v.getId() == R.id.posterSearch){
-            if(this.type.contains("tv")){
-                Intent intent = new Intent(v.getContext(),DetailsSerieActivity.class);
-                Bundle bundle = new Bundle();
-                intent.putExtra("id",this.id);
-                v.getContext().startActivity(intent);
-            }
-            if(this.type.contains("movie")){
-                Intent intent = new Intent(v.getContext(),DetailsMovieActivity.class);
-                Bundle bundle = new Bundle();
-                intent.putExtra("id",this.id);
-                v.getContext().startActivity(intent);
-            }
-        }
     }
 }

@@ -52,14 +52,8 @@ public class MainActivity extends AppCompatActivity {
             //viewPagerAdapter.addFragment(new MapFragment(), "Cinemas");
 
             viewPager.setAdapter(viewPagerAdapter);
-            tabLayout.setTabMode(TabLayout.GRAVITY_CENTER);
             //tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
             tabLayout.setupWithViewPager(viewPager);
-            tabLayout.getTabAt(0).setIcon(R.drawable.ic_play_circle_outline_gray_24dp);
-            tabLayout.getTabAt(1).setIcon(R.drawable.ic_tv_gray_24dp);
-            tabLayout.getTabAt(2).setIcon(R.drawable.ic_forum_gray_24dp);
-
-
 //        } else {
 //
 //            AlertDialog.Builder dialog = new AlertDialog.Builder(this);

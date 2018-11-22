@@ -103,11 +103,10 @@ public class DetailsSerieActivity extends AppCompatActivity implements AdapterVi
 
                 List<String> numberSeasons = new ArrayList<>();
                 this.numSeason = new ArrayList<>();
-                for (int i = 0; i < seasons.size(); i++) {
+                for (int i = seasons.size() - 1; i > 0; i--) {
                     numberSeasons.add(seasons.get(i).getSeasonNumber() + "ª Temporada");
                     numSeason.add(seasons.get(i).getSeasonNumber());
                 }
-
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                         this, android.R.layout.simple_spinner_item,
                         numberSeasons
