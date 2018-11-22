@@ -18,6 +18,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="TextView"
+            android:textColor="@color/colorPrimaryRoxo"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"

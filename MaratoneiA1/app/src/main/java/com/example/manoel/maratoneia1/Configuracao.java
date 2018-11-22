@@ -58,4 +58,8 @@ public class Configuracao {
     public static String getSeason(int tvId, int seasonNumber, String language) {
         return urlApi + "tv/" + tvId + "/season/" + seasonNumber + "?api_key=" + apiKey + "&" + language;
     }
+    public static String getSearch(String search, String language){
+        search = search.replace(" ","%");
+        return urlApi + "search/multi?api_key=" + apiKey + "&" + language + "&query=" + search;
+    }
 }

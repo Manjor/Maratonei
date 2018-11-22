@@ -113,8 +113,10 @@ public class DetailsSerieActivity extends AppCompatActivity implements AdapterVi
                         numberSeasons
                 );
                 arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
                 this.spinnerSeasons.setAdapter(arrayAdapter);
                 this.spinnerSeasons.setOnItemSelectedListener(this);
+
             }catch (Exception e){}
 
             try{
@@ -137,7 +139,6 @@ public class DetailsSerieActivity extends AppCompatActivity implements AdapterVi
             this.episodes = new ArrayList<>();
             this.episodes = episodes;
             AdapterEpisode adapterEpisode = new AdapterEpisode((ArrayList<Episode>) this.episodes);
-
             this.recyclerEpisode.setAdapter(adapterEpisode);
         }catch (Exception e){
 

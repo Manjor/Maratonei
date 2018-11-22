@@ -12,8 +12,10 @@
         <ImageView
             android:id="@+id/backdropDetailsMovie"
             android:layout_width="0dp"
-            android:layout_height="241dp"
+            android:layout_height="230dp"
             android:layout_marginBottom="8dp"
+            android:background="@color/colorPrimary"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,29 +38,38 @@
         <TextView
             android:id="@+id/textDetailsMovieTitle"
             android:layout_width="0dp"
-            android:layout_height="27dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="5dp"
             android:fontFamily="@font/fredokaoneregular"
             android:text="Movie Title"
+            android:textColor="@color/white"
             android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/backdropDetailsMovie"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/posterDetailsMovie"
-            app:layout_constraintTop_toBottomOf="@+id/backdropDetailsMovie" />
+            app:layout_constraintTop_toTopOf="@+id/posterDetailsMovie"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/textDetailsMovieDate"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
             android:text="Estréia: "
-            android:textSize="12sp"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView10"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/posterDetailsMovie"
-            app:layout_constraintTop_toBottomOf="@+id/textDetailsMovieTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/backdropDetailsMovie"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/textView10"
@@ -147,30 +158,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/posterDetailsMovie"
             app:layout_constraintTop_toBottomOf="@+id/textDetailsMovieDate"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <TextView
-            android:id="@+id/textStars"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:padding="3dp"
-            android:text="Note"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="29dp"
-            android:layout_height="28dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textDetailsMovieGenre"
-            app:layout_constraintStart_toEndOf="@+id/textDetailsMovieGenre"
-            app:layout_constraintTop_toTopOf="@+id/textDetailsMovieGenre"
-            app:srcCompat="@drawable/stars" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <android.support.v7.widget.CardView
             android:id="@+id/cardYoutube"

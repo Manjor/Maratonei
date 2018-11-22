@@ -46,9 +46,6 @@ public class MovieAdapterCategory extends RecyclerView.Adapter<MovieHolderCatego
                     Bundle bundle = new Bundle();
                     intent.putExtra("id",id);
                     v.getContext().startActivity(intent);
-//                BottomSheetDetails bottom = new BottomSheetDetails(v.getContext());
-//                bottom.setTitle("Resumo");
-//                bottom.show();
                 }
             });
 

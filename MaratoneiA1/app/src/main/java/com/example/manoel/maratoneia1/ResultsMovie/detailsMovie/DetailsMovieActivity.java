@@ -54,7 +54,7 @@ public class DetailsMovieActivity extends YouTubeBaseActivity implements YouTube
         textDate = findViewById(R.id.textDetailsMovieDate);
         textOverview = findViewById(R.id.textDetailsMovieOverview);
         genre = findViewById(R.id.textDetailsMovieGenre);
-        star = findViewById(R.id.textStars);
+        //star = findViewById(R.id.textStars);
         youTubePlayer = findViewById(R.id.movieYoutubePlayer);
 
 
