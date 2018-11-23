@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
-import com.example.manoel.maratoneia1.Movies.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +67,6 @@ public class DataBaseOffline extends SQLiteOpenHelper {
         while (cursor.moveToNext()){
             list.add(new MovieIntro(cursor.getString(0),cursor.getString(1)));
         }
-        String lista = list.toString();
         return list;
     }
     public ArrayList<SerieIntro> getItensSerieIntro(){
