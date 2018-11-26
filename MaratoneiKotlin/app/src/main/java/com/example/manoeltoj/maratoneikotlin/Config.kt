@@ -40,5 +40,8 @@ class Config {
         fun getSearch(search: String, language: String): String {
             return "${URL_API}search/muilt?api_key=${API_KEY}&${language}"
         }
+        fun getVideo(id:Int,language: String):String{
+            return "${URL_API}movie/${id}/videos?api_key=${API_KEY}&${language}"
+        }
     }
 }

@@ -3,4 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimaryRoxo">#870d4c</color>
+    <color name="colorPrimaryDarkRoxo">#550024</color>
+    <color name="colorAccentRoxo">#bb4678</color>
+    <color name="white">#FFF</color>
+    <color name="puple">#6100ED</color>
 </resources>
