@@ -35,7 +35,6 @@ public class NewAdapter extends RecyclerView.Adapter<NewHolder>
     @Override
     public void onBindViewHolder(@NonNull NewHolder holder, int position) {
         New news = newList.get(position);
-        //holder.getNewImageProfile().setImageDrawable();
         holder.getNewAutor().setText(news.getNewAutor());
         holder.getNewTitle().setText(news.getNewTitle());
         holder.getNewDate().setText(news.getNewDate());

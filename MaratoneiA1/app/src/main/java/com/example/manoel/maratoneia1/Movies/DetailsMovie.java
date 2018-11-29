@@ -78,7 +78,7 @@
 //        int movieId = this.getIntent().getIntExtra("id", 0);
 //
 //        urlDetails = Configuracao.getDetailsMovie(movieId, getResources().getString(R.string.language).toString());
-//        urlVideo = Configuracao.urlApi + "movie/" + movieId + "/videos" + "?api_key=" + Configuracao.apiKey + "&" + getResources().getString(R.string.language);
+//        urlVideo = Configuracao.URL_API + "movie/" + movieId + "/videos" + "?api_key=" + Configuracao.API_KEY + "&" + getResources().getString(R.string.language);
 //
 //        task1.execute(urlVideo);
 //        task.execute(urlDetails);
@@ -176,8 +176,8 @@
 //                    movieDate.setText(date);
 //                    movieOverview.setText(overview);
 //                    movieHomePage.setText("Homepage: " + homepage);
-//                    Picasso.get().load(Configuracao.urlImageApi500 + urlPoster).into(moviePoster);
-//                    Picasso.get().load(Configuracao.urlImageApi500 + urlBackdrop).into(movieBackdrop);
+//                    Picasso.get().load(Configuracao.URL_IMAGE_500 + urlPoster).into(moviePoster);
+//                    Picasso.get().load(Configuracao.URL_IMAGE_500 + urlBackdrop).into(movieBackdrop);
 //                }
 //            } catch (Exception e) {
 //                Log.i("INFO", "Erro no processamento de componentes" + e);

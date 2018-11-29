@@ -46,20 +46,15 @@ public class DataBaseOffline extends SQLiteOpenHelper {
 
     public void insertMovieIntro(ContentValues movieintro){
         SQLiteDatabase database = this.getWritableDatabase();
+        database.execSQL("DROP TABLE IF EXISTS movieintro");
+        database.execSQL("create table movieintro(_id integer primary key autoincrement, title text not null, backdrop text)");
         database.insert("movieintro",null,movieintro);
-        Toast.makeText(this.context, "Insert Movie Success", Toast.LENGTH_SHORT).show();
     }
     public void insertSerieIntro(ContentValues serieinto){
         SQLiteDatabase database = this.getWritableDatabase();
         database.insert("serieintro",null,serieinto);
-        Toast.makeText(this.context, "Insert Serie Success", Toast.LENGTH_SHORT).show();
     }
-    public int updateMovieIntro(ArrayList<MovieIntro> movies){
-        this.movies = movies;
-        SQLiteDatabase database = this.getWritableDatabase();
-        //database.update("movie",new ContentValues(),,null);
-        return movies.size();
-    }
+
     public ArrayList<MovieIntro> getItensMovieIntro(){
         ArrayList<MovieIntro> list = new ArrayList<>();
         SQLiteDatabase database = this.getReadableDatabase();
@@ -73,14 +68,11 @@ public class DataBaseOffline extends SQLiteOpenHelper {
         ArrayList<SerieIntro> list = new ArrayList<>();
         SQLiteDatabase database = this.getReadableDatabase();
         Cursor cursor = database.query("movieintro",new String[]{"name","poster"},null,null,null,null,null);
-
         while (cursor.moveToNext()){
             list.add(new SerieIntro(cursor.getString(0),cursor.getString(1)));
         }
         return list;
     }
-
-
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

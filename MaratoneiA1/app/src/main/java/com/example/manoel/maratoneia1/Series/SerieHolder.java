@@ -14,7 +14,6 @@ public class SerieHolder extends RecyclerView.ViewHolder {
 
     public SerieHolder(View itemView) {
         super(itemView);
-        //serieName = itemView.findViewById(R.id.textNameSerie);
         seriePosterPath = itemView.findViewById(R.id.imageSerie);
     }
 

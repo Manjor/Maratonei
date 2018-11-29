@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         verificaConexao();
-//        if (verificaConexao()) {
+
             //Instance of with set ids
             toolbar = findViewById(R.id.toolbar);
             tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -49,27 +49,10 @@ public class MainActivity extends AppCompatActivity {
             viewPagerAdapter.addFragment(new MovieFragment(), getResources().getString(R.string.movies));
             viewPagerAdapter.addFragment(new SerieFragment(), getResources().getString(R.string.series));
             viewPagerAdapter.addFragment(new NewFragment(), getResources().getString(R.string.news));
-            //viewPagerAdapter.addFragment(new MapFragment(), "Cinemas");
 
             viewPager.setAdapter(viewPagerAdapter);
-            //tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
             tabLayout.setupWithViewPager(viewPager);
-//        } else {
-//
-//            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-//
-//            dialog.setTitle(getResources().getString(R.string.errorconnection));
-//            dialog.setMessage(getResources().getString(R.string.messageerrorconnection));
-//
-//            dialog.setPositiveButton(getResources().getString(R.string.confirm), new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialog, int which) {
-//                    System.exit(1);
-//                }
-//            });
-//
-//            dialog.show();
-//        }
+
     }
     public static boolean Connection = false;
     public boolean verificaConexao() {

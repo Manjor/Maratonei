@@ -21,7 +21,6 @@ public class SerieTask extends AsyncTask<String,Void,DataSerie> {
     private Gson gson = new Gson();
     private Response response = null;
     private Request request = null;
-    private SerieAdapter serieAdapter;
     private ArrayList<DataSerie> dataSeries = null;
     private DataSerie resultRequest = null;
     SerieFragment serieFragment = null;

@@ -9,11 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dataMovie.manoel.maratoneia1.R;
-import com.example.manoel.maratoneia1.Configuracao;
-import com.example.manoel.maratoneia1.ResultsMovie.detailsMovie.DetailsMovieActivity;
+import com.example.manoel.maratoneia1.Config;
 import com.example.manoel.maratoneia1.ResultsSerie.ResultSerie;
 import com.example.manoel.maratoneia1.ResultsSerie.detailsSerie.DetailsSerieActivity;
-import com.example.manoel.maratoneia1.WelcomeActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -41,7 +39,7 @@ public class SerieAdapter extends RecyclerView.Adapter<SerieHolder>{
         final ResultSerie serie = serieList.get(position);
         final int id = serie.getId();
         try{
-            Picasso.get().load(Configuracao.urlImageApi500 + serie.getPosterPath()).into(holder.getSeriePosterPath());
+            Picasso.get().load(Config.URL_IMAGE_500 + serie.getPosterPath()).into(holder.getSeriePosterPath());
         }catch (Exception e){
 
         }
@@ -55,9 +53,6 @@ public class SerieAdapter extends RecyclerView.Adapter<SerieHolder>{
 
                 v.getContext().startActivity(intent);
 
-//                BottomSheetDetails bottom = new BottomSheetDetails(v.getContext());
-//                bottom.setTitle("Resumo");
-//                bottom.show();
             }
         });
     }

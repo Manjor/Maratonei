@@ -9,9 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dataMovie.manoel.maratoneia1.R;
-import com.example.manoel.maratoneia1.Configuracao;
+import com.example.manoel.maratoneia1.Config;
 import com.example.manoel.maratoneia1.ResultsMovie.detailsMovie.DetailsMovieActivity;
-import com.example.manoel.maratoneia1.ResultsSerie.detailsSeason.Episode;
 import com.example.manoel.maratoneia1.ResultsSerie.detailsSerie.DetailsSerieActivity;
 import com.example.manoel.maratoneia1.Search.searchResult.ResultSearch;
 import com.squareup.picasso.Picasso;
@@ -37,7 +36,7 @@ public class AdapterSearch extends RecyclerView.Adapter<SearchHolder> {
     @Override
     public void onBindViewHolder(@NonNull SearchHolder searchHolder, int i) {
         ResultSearch resultSearch = this.resultSearchArrayList.get(i);
-        Picasso.get().load(Configuracao.urlImageApi300 + resultSearch.getPosterPath()).into(searchHolder.getPosterPath());
+        Picasso.get().load(Config.URL_IMAGE_300 + resultSearch.getPosterPath()).into(searchHolder.getPosterPath());
         final int id  = resultSearch.getId();
         final String type = resultSearch.getMediaType().toString();
         searchHolder.itemView.setOnClickListener(new View.OnClickListener() {

@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dataMovie.manoel.maratoneia1.R;
-import com.example.manoel.maratoneia1.Configuracao;
+import com.example.manoel.maratoneia1.Config;
 import com.example.manoel.maratoneia1.ResultsMovie.people.Cast;
 import com.squareup.picasso.Picasso;
 
@@ -33,7 +33,7 @@ public class AdapterPeople extends RecyclerView.Adapter<HolderPeople> {
         Cast cast = this.casts.get(i);
         holderPeople.getMovieName().setText(cast.getCharacter());
         holderPeople.getRealName().setText(cast.getName());
-        Picasso.get().load(Configuracao.urlImageApi300 + cast.getProfilePath()).into(holderPeople.getImageProfile());
+        Picasso.get().load(Config.URL_IMAGE_300 + cast.getProfilePath()).into(holderPeople.getImageProfile());
     }
 
     @Override

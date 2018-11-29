@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dataMovie.manoel.maratoneia1.R;
-import com.example.manoel.maratoneia1.Configuracao;
+import com.example.manoel.maratoneia1.Config;
 import com.example.manoel.maratoneia1.ResultsMovie.detailsMovie.DetailsMovieActivity;
 import com.example.manoel.maratoneia1.ResultsMovie.ResultMovie;
 import com.squareup.picasso.Picasso;
@@ -38,7 +38,7 @@ public class MovieAdapterCategory extends RecyclerView.Adapter<MovieHolderCatego
         holder.getMovieTitleCategory().setText(movieObject.getTitle());
         final int id = movieObject.getId();
         try{
-            Picasso.get().load(Configuracao.urlImageApi500 + movieObject.getBackdropPath()).into(holder.getMovieBackdrop());
+            Picasso.get().load(Config.URL_IMAGE_500 + movieObject.getBackdropPath()).into(holder.getMovieBackdrop());
             holder.getMovieBackdrop().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

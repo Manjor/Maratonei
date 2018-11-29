@@ -9,7 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dataMovie.manoel.maratoneia1.R;
-import com.example.manoel.maratoneia1.Configuracao;
+import com.example.manoel.maratoneia1.Config;
 import com.example.manoel.maratoneia1.ResultsMovie.people.Cast;
 import com.example.manoel.maratoneia1.ResultsMovie.people.PeopleTask;
 import com.example.manoel.maratoneia1.ResultsMovie.video.Trailer;
@@ -47,7 +47,7 @@ public class DetailsMovieActivity extends YouTubeBaseActivity implements YouTube
 
 
         this.id = this.getIntent().getIntExtra("id",0);
-        urlMovieDetails = Configuracao.getDetailsMovie(id,getResources().getString(R.string.language));
+        urlMovieDetails = Config.getDetailsMovie(id,getResources().getString(R.string.language));
         imageBackdrop = findViewById(R.id.backdropDetailsMovie);
         imagePoster = findViewById(R.id.posterDetailsMovie);
         textTitle = findViewById(R.id.textDetailsMovieTitle);
@@ -67,18 +67,18 @@ public class DetailsMovieActivity extends YouTubeBaseActivity implements YouTube
         detailsMovieTask.execute(urlMovieDetails);
 
         PeopleTask peopleTask = new PeopleTask(this);
-        peopleTask.execute(Configuracao.getPeopleMovie(this.id,getResources().getString(R.string.language)));
+        peopleTask.execute(Config.getPeopleMovie(this.id,getResources().getString(R.string.language)));
 
         TrailerTask trailerTask = new TrailerTask(this);
-        trailerTask.execute(Configuracao.getVideo(this.id,getResources().getString(R.string.language)));
+        trailerTask.execute(Config.getVideo(this.id,getResources().getString(R.string.language)));
     }
 
     public void setData(MovieDetail movieDetail){
         try{
             try{
                 //Set images
-                Picasso.get().load(Configuracao.urlImageApi500 + movieDetail.getBackdropPath()).into(imageBackdrop);
-                Picasso.get().load(Configuracao.urlImageApi500 + movieDetail.getPosterPath()).into(imagePoster);
+                Picasso.get().load(Config.URL_IMAGE_500 + movieDetail.getBackdropPath()).into(imageBackdrop);
+                Picasso.get().load(Config.URL_IMAGE_500 + movieDetail.getPosterPath()).into(imagePoster);
             }catch (Exception e ){
 
             }
@@ -114,7 +114,7 @@ public class DetailsMovieActivity extends YouTubeBaseActivity implements YouTube
     public void setThrailer(Trailer trailer){
         try{
             this.trailer = trailer;
-            youTubePlayer.initialize(Configuracao.GOOGLE_API_KEY,this);
+            youTubePlayer.initialize(Config.GOOGLE_API_KEY,this);
         }
         catch (Exception e){
             youTubePlayer.setVisibility(View.INVISIBLE);
@@ -141,7 +141,7 @@ public class DetailsMovieActivity extends YouTubeBaseActivity implements YouTube
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
         try{
-            String url = Configuracao.urlYoutube + this.trailer.getResults().get(0).getKey();
+            String url = Config.URL_YOUTUBE + this.trailer.getResults().get(0).getKey();
             youTubePlayer.cueVideo(this.trailer.getResults().get(0).getKey());
         }catch (Exception e){
             this.youTubePlayer.setVisibility(View.INVISIBLE);

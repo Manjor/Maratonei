@@ -1,34 +1,26 @@
 package com.example.manoel.maratoneia1.ResultsSerie.detailsSerie;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dataMovie.manoel.maratoneia1.R;
-import com.example.manoel.maratoneia1.Configuracao;
-import com.example.manoel.maratoneia1.MainActivity;
+import com.example.manoel.maratoneia1.Config;
 import com.example.manoel.maratoneia1.ResultsSerie.AdapterEpisode;
 import com.example.manoel.maratoneia1.ResultsSerie.detailsSeason.Episode;
-import com.example.manoel.maratoneia1.ResultsSerie.detailsSeason.SeasonDetail;
 import com.example.manoel.maratoneia1.ResultsSerie.detailsSeason.SeasonDetailsTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class DetailsSerieActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -64,7 +56,7 @@ public class DetailsSerieActivity extends AppCompatActivity implements AdapterVi
         recyclerEpisode.setLayoutManager(layoutManager);
 
         DetailsSerieTask detailsSerieTask = new DetailsSerieTask(this);
-        detailsSerieTask.execute(Configuracao.getDetailsSerie(id, getResources().getString(R.string.language)));
+        detailsSerieTask.execute(Config.getDetailsSerie(id, getResources().getString(R.string.language)));
 
 
     }
@@ -77,13 +69,13 @@ public class DetailsSerieActivity extends AppCompatActivity implements AdapterVi
                 if(serieDetail.getBackdropPath().equals("") || serieDetail.getBackdropPath() == null){
 
                 }else{
-                    Picasso.get().load(Configuracao.urlImageApi500 + serieDetail.getBackdropPath()).into(imageBackdrop);
+                    Picasso.get().load(Config.URL_IMAGE_500 + serieDetail.getBackdropPath()).into(imageBackdrop);
                 }
                 //Set images
                 if(serieDetail.getPosterPath().equals("") || serieDetail.getPosterPath() == null){
 
                 }else{
-                    Picasso.get().load(Configuracao.urlImageApi500 + serieDetail.getPosterPath()).into(imagePoster);
+                    Picasso.get().load(Config.URL_IMAGE_500 + serieDetail.getPosterPath()).into(imagePoster);
                 }
 
             }catch (Exception e){
@@ -146,7 +138,7 @@ public class DetailsSerieActivity extends AppCompatActivity implements AdapterVi
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         SeasonDetailsTask seasonDetailsTask  = new SeasonDetailsTask(this);
-        seasonDetailsTask.execute(Configuracao.getSeason(this.id,this.numSeason.get(spinnerSeasons.getSelectedItemPosition()),getResources().getString(R.string.language)));
+        seasonDetailsTask.execute(Config.getSeason(this.id,this.numSeason.get(spinnerSeasons.getSelectedItemPosition()),getResources().getString(R.string.language)));
     }
     @Override
     public void onNothingSelected(AdapterView<?> parent) {

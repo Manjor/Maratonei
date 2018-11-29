@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.dataMovie.manoel.maratoneia1.R;
-import com.example.manoel.maratoneia1.Configuracao;
+import com.example.manoel.maratoneia1.Config;
 import com.example.manoel.maratoneia1.ResultsSerie.ResultSerie;
 import com.example.manoel.maratoneia1.ResultsSerie.SerieTask;
 
@@ -40,7 +40,7 @@ public class SerieFragment extends Fragment {
 
         //recyclerView.setLayoutManager(layoutManager);
         SerieTask serieTask = new SerieTask(this,lottieLoad);
-        serieTask.execute(Configuracao.getSeriePopular(getResources().getString(R.string.language)));
+        serieTask.execute(Config.getSeriePopular(getResources().getString(R.string.language)));
 
         return view;
 

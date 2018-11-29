@@ -12,14 +12,14 @@ import com.dataMovie.manoel.maratoneia1.R;
 
 public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button btnEnter;
-    private static final String ARQUIVO_PREFERENCIA = "ArquivoPreferencia";
+    private Button btnEnter;
+    private static final String ARQUIVO_PREFERENCIA = "FileReference";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences preferences = getSharedPreferences(ARQUIVO_PREFERENCIA,MODE_PRIVATE);
-        if(preferences.contains("intro")){
+        if(preferences.contains("enter")){
             Intent intent = new Intent(this,MainActivity.class);
             startActivity(intent);
             this.finish();
@@ -35,7 +35,7 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         SharedPreferences preferences = getSharedPreferences(ARQUIVO_PREFERENCIA,MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("intro", true);
+        editor.putBoolean("enter", true);
         editor.commit();
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
