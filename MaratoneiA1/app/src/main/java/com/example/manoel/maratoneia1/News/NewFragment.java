@@ -6,12 +6,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.dataMovie.manoel.maratoneia1.R;
+import com.example.manoel.maratoneia1.MainActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,9 +38,12 @@ public class NewFragment extends Fragment implements ValueEventListener  {
         recyclerView = view.findViewById(R.id.recyclerNew);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
+        if (MainActivity.CONNECTION == false) {
 
-        DatabaseReference news = reference.child("new");
-        news.addListenerForSingleValueEvent(this);
+        }else{
+            DatabaseReference news = reference.child("new");
+            news.addListenerForSingleValueEvent(this);
+        }
         return view;
 
     }

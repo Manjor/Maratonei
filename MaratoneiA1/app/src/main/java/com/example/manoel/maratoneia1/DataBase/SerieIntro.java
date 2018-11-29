@@ -4,9 +4,11 @@ public class SerieIntro {
 
     private String name;
     private String poster;
-    public SerieIntro(String name,String poster){
+    private int id;
+    public SerieIntro(String name,String poster,int id){
         this.name = name;
         this.poster = poster;
+        this.id = id;
     }
 
     public String getName() {
@@ -23,5 +25,13 @@ public class SerieIntro {
 
     public void setPoster(String poster) {
         this.poster = poster;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

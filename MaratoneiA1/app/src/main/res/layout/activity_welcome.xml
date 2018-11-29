@@ -14,7 +14,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="355dp"
         android:fontFamily="@font/fredokaoneregular"
-        android:text="Bem Vindo ao Maratonei"
+        android:text="@string/wellcome"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDarkRoxo"
         android:textSize="24sp"
@@ -23,7 +23,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lottiePlay"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.3" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottiePlay"
@@ -49,7 +49,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/poiretoneregular"
-        android:text="Fique por dentro de tudo o que está em alta nos cinemas e na TV."
+        android:text="@string/wellcomeintro"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDarkRoxo"
         android:textSize="18sp"
@@ -60,46 +60,13 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Ainda não é cadastrado?"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.04"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14"
-        app:layout_constraintVertical_bias="0.933" />
-
-    <Button
-        android:id="@+id/button5"
-        style="@style/Widget.MaterialComponents.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="60dp"
-        android:background="@android:color/transparent"
-        android:padding="5dp"
-        android:text="Cadastre-se"
-        android:textColor="@color/colorPrimaryDarkRoxo"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView13"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView13"
-        app:layout_constraintTop_toTopOf="@+id/textView13" />
-
-    <TextView
         android:id="@+id/textView14"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:text="Tenha Acesso as informações de centenas de filmes e séries em um só lugar. Além de informações sobre os filmes em cartaz e localização de cinemas perto de você."
+        android:text="@string/wellover"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="@+id/textView2"
         app:layout_constraintStart_toStartOf="@+id/textView2"
@@ -114,7 +81,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@color/colorPrimaryDarkRoxo"
-        android:text="Conhecer"
+        android:text="@string/know"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

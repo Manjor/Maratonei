@@ -24,7 +24,7 @@ public class AdapterPeople extends RecyclerView.Adapter<HolderPeople> {
     @NonNull
     @Override
     public HolderPeople onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View itemList = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.peaple_card, (ViewGroup) viewGroup.getParent(), false);
+        View itemList = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.people_card, (ViewGroup) viewGroup.getParent(), false);
         return new HolderPeople(itemList);
     }
 

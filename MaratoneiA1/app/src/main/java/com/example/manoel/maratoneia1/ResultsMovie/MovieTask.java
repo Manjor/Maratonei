@@ -54,6 +54,7 @@ public class MovieTask extends AsyncTask<String,Void,DataMovie> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        lottieAnimationView.setVisibility(View.INVISIBLE);
         lottieAnimationView.playAnimation();
     }
 

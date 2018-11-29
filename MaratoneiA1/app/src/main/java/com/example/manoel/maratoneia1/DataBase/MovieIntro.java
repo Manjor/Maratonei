@@ -4,9 +4,11 @@ public class MovieIntro
 {
     private String title;
     private String backdrop;
-    public MovieIntro(String title,String backdrop){
+    private int id;
+    public MovieIntro(String title,String backdrop,int id){
         this.title = title;
         this.backdrop = backdrop;
+        this.id = id;
     }
 
     public String getTitle() {
@@ -23,5 +25,13 @@ public class MovieIntro
 
     public void setBackdrop(String backdrop) {
         this.backdrop = backdrop;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

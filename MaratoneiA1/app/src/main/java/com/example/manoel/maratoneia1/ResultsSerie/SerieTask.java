@@ -34,6 +34,7 @@ public class SerieTask extends AsyncTask<String,Void,DataSerie> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        lottieAnimationView.setVisibility(View.VISIBLE);
         lottieAnimationView.playAnimation();
     }
 

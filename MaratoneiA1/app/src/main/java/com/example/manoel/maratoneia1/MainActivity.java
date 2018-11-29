@@ -2,6 +2,7 @@ package com.example.manoel.maratoneia1;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -12,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.dataMovie.manoel.maratoneia1.R;
 import com.example.manoel.maratoneia1.Movies.MovieFragment;
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             tabLayout.setupWithViewPager(viewPager);
 
     }
-    public static boolean Connection = false;
+    public static boolean CONNECTION = false;
     public boolean verificaConexao() {
         boolean conectado;
         ConnectivityManager conectivtyManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             conectado = false;
         }
-        this.Connection = conectado;
+        this.CONNECTION = conectado;
         return conectado;
     }
 
@@ -80,8 +82,14 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if(item.getItemId() == R.id.menuSearch){
-            Intent it = new Intent(this,SeachActivity.class);
-            startActivity(it);
+            if(CONNECTION == false){
+                Toast toast = Toast.makeText(this,"Não foi possível conectar a internet, por favor, verifique sua conexão e tente novamente mais tarde.",Toast.LENGTH_LONG);
+                toast.show();
+            }else{
+                Intent it = new Intent(this,SeachActivity.class);
+                startActivity(it);
+            }
+
         }
         return super.onOptionsItemSelected(item);
     }

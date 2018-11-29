@@ -7,6 +7,11 @@
     <string name="series">Series</string>
     <string name="movies">Filmes</string>
     <string name="news">Notícias</string>
+    <string name="genre">Genero</string>
+    <string name="cast">Elenco</string>
+    <string name="wellcome">Bem Vindo Ao Maratonei</string>
+    <string name="wellcomeintro">Fique por dentro de tudo o que está em alta nos cinemas e na TV.</string>
+    <string name="releasedate">Estréia</string>
     <string name="language">language=pt-BR</string>
     <string name="newTite">Titulo da Notícia</string>
     <string name="dateNotice">Data da Notícia</string>
@@ -25,4 +30,8 @@
     <string name="search">Pesquisar</string>
     <string name="exit">Sair</string>
     <string name="cine">Cinema</string>
+    <string name="know">Conhecer</string>
+    <string name="wellover">Tenha Acesso as informações de centenas de filmes e séries em um só lugar. Além de informações sobre os filmes em cartaz e localização de cinemas perto de você.</string>
+    <string name="episodename">Nome do Episodio</string>
+    <string name="overviewepisode">Resumo do Episodio</string>
 </resources>

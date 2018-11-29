@@ -3,6 +3,11 @@
     <string name="series">Series</string>
     <string name="movies">Movies</string>
     <string name="news">News</string>
+    <string name="genre">Genre</string>
+    <string name="cast">Cast</string>
+    <string name="releasedate">Release Date</string>
+    <string name="wellcome">Wellcome to Maratonei</string>
+    <string name="wellcomeintro">Stay on top of everything in theaters and on TV.</string>
     <string name="language">language=en-US</string>
     <string name="overview">Overview</string>
     <string name="serieName">Serie Name</string>
@@ -24,5 +29,8 @@
     <string name="exit">Exit</string>
     <string name="title_activity_home">Maratonei</string>
     <string name="cine">Cine</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="know">To Know</string>
+    <string name="wellover">Get access to hundreds of movies and series information in one place. In addition to information about the movies in motion and location of cinemas near you.</string>
+    <string name="episodename">Episode Name</string>
+    <string name="overviewepisode">Episode Overview</string>
 </resources>

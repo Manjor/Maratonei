@@ -16,8 +16,8 @@ public class DataBaseOffline extends SQLiteOpenHelper {
     Context context = null;
 
     String[] createBD = {
-            "create table movieintro(_id integer primary key autoincrement, title text not null, backdrop text)",
-            "create table serieintro(_id integer primary key autoincrement, name text not null, poster text)",
+            "create table movieintro(_id integer primary key autoincrement, title text not null, backdrop text, idmovie integer)",
+            "create table serieintro(_id integer primary key autoincrement, name text not null, poster text, idserie integer)",
     };
 
     private final String scriptDropMovie = "DROP TABLE IF EXISTS movieintro";
@@ -43,11 +43,18 @@ public class DataBaseOffline extends SQLiteOpenHelper {
             db.execSQL(createBD[iIndex]);
         }
     }
-
+    public void clearMovies(){
+        SQLiteDatabase database = this.getWritableDatabase();
+        database.execSQL(this.scriptDropMovie);
+        database.execSQL(createBD[0]);
+    }
+    public void clearSeries(){
+        SQLiteDatabase database = this.getWritableDatabase();
+        database.execSQL(this.scriptDropSerie);
+        database.execSQL(createBD[1]);
+    }
     public void insertMovieIntro(ContentValues movieintro){
         SQLiteDatabase database = this.getWritableDatabase();
-        database.execSQL("DROP TABLE IF EXISTS movieintro");
-        database.execSQL("create table movieintro(_id integer primary key autoincrement, title text not null, backdrop text)");
         database.insert("movieintro",null,movieintro);
     }
     public void insertSerieIntro(ContentValues serieinto){
@@ -58,18 +65,18 @@ public class DataBaseOffline extends SQLiteOpenHelper {
     public ArrayList<MovieIntro> getItensMovieIntro(){
         ArrayList<MovieIntro> list = new ArrayList<>();
         SQLiteDatabase database = this.getReadableDatabase();
-        Cursor cursor = database.query("movieintro",new String[]{"title","backdrop"},null,null,null,null,null);
+        Cursor cursor = database.query("movieintro",new String[]{"title","backdrop","idmovie"},null,null,null,null,null);
         while (cursor.moveToNext()){
-            list.add(new MovieIntro(cursor.getString(0),cursor.getString(1)));
+            list.add(new MovieIntro(cursor.getString(0),cursor.getString(1),cursor.getInt(2)));
         }
         return list;
     }
     public ArrayList<SerieIntro> getItensSerieIntro(){
         ArrayList<SerieIntro> list = new ArrayList<>();
         SQLiteDatabase database = this.getReadableDatabase();
-        Cursor cursor = database.query("movieintro",new String[]{"name","poster"},null,null,null,null,null);
+        Cursor cursor = database.query("serieintro",new String[]{"name","poster","idserie"},null,null,null,null,null);
         while (cursor.moveToNext()){
-            list.add(new SerieIntro(cursor.getString(0),cursor.getString(1)));
+            list.add(new SerieIntro(cursor.getString(0),cursor.getString(1),cursor.getInt(2)));
         }
         return list;
     }
