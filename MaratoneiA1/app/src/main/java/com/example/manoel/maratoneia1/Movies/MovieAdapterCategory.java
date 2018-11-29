@@ -3,6 +3,7 @@ package com.example.manoel.maratoneia1.Movies;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,8 +54,7 @@ public class MovieAdapterCategory extends RecyclerView.Adapter<MovieHolderCatego
                 @Override
                 public void onClick(View v) {
                     if(MainActivity.CONNECTION == false){
-                        Toast toast = Toast.makeText(v.getContext(),"Não foi possível conectar a internet, por favor, verifique sua conexão e tente novamente mais tarde.",Toast.LENGTH_SHORT);
-                        toast.show();
+                        Snackbar.make(v,v.getResources().getString(R.string.messageerrorconnection),Snackbar.LENGTH_SHORT).show();
                     }else{
                         Intent intent = new Intent(v.getContext(), DetailsMovieActivity.class);
                         Bundle bundle = new Bundle();

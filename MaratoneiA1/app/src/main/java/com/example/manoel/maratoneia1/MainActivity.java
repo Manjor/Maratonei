@@ -2,8 +2,8 @@ package com.example.manoel.maratoneia1;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
+
 
 import com.dataMovie.manoel.maratoneia1.R;
 import com.example.manoel.maratoneia1.Movies.MovieFragment;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private Toolbar toolbar;
     private NestedScrollView nestedScrollView;
+    private Snackbar snackbar = null;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -83,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(item.getItemId() == R.id.menuSearch){
             if(CONNECTION == false){
-                Toast toast = Toast.makeText(this,"Não foi possível conectar a internet, por favor, verifique sua conexão e tente novamente mais tarde.",Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(this,getResources().getString(R.string.messageerrorconnection),Toast.LENGTH_LONG);
                 toast.show();
             }else{
                 Intent it = new Intent(this,SeachActivity.class);

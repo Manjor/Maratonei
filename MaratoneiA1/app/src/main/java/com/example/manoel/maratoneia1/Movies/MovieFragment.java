@@ -57,14 +57,12 @@ public class MovieFragment extends Fragment {
             dataBaseOffline = new DataBaseOffline(getContext(), "movie", 1);
 
             resultMovies = this.dataBaseOffline.getItensMovieIntro();
-//            for (int i = 0; i < dataBaseOffline.getItensMovieIntro().size(); i++) {
-//                resultMovies.add(new ResultMovie(dataBaseOffline.getItensMovieIntro().get(i).getTitle(), dataBaseOffline.getItensMovieIntro().get(i).getBackdrop()));
-//            }
+
             MovieAdapterCategory movieAdapter = new MovieAdapterCategory(resultMovies);
             recyclerNowPlaying.setAdapter(movieAdapter);
         } else {
             movieTask = new MovieTask(this, lottieLoader);
-            movieTask.execute(urlCategory);
+            movieTask.execute(urlAirPlaying);
         }
         return view;
     }

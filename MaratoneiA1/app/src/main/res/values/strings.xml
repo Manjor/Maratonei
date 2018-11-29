@@ -19,7 +19,7 @@
     <string name="moviedate">Movie Date</string>
     <string name="movieoverview">Overview</string>
     <string name="errorconnection">Connection Error.</string>
-    <string name="messageerrorconnection">You device need internet access for continue application.\n" +
+    <string name="messageerrorconnection">You device need internet for access the content.
                     "Please, verify you connection.</string>
     <string name="confirm">Confirm</string>
     <string name="search">Search</string>

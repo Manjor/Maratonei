@@ -27,7 +27,7 @@ import com.example.manoel.maratoneia1.ResultsSerie.SerieTask;
 
 import java.util.ArrayList;
 
-public class SerieFragment extends Fragment implements SensorEventListener {
+public class SerieFragment extends Fragment{
 
     View view;
 
@@ -37,22 +37,20 @@ public class SerieFragment extends Fragment implements SensorEventListener {
     private ArrayList<SerieIntro> serieIntros = null;
     private ArrayList<SerieIntro> resultSeries = null;
 
-    private SensorManager sensorManager;
-    private Sensor orientation;
+    private RecyclerView.LayoutManager layoutManager = null;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_series, container, false);
+
         recyclerView = view.findViewById(R.id.reclyclerSerie);
         lottieLoad = view.findViewById(R.id.lottieLoaderSerie);
         lottieLoad.setVisibility(View.INVISIBLE);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
+        layoutManager = new GridLayoutManager(getContext(), 3);
         recyclerView.setLayoutManager(layoutManager);
 
-        sensorManager = (SensorManager) getContext().getSystemService(Context.SENSOR_SERVICE);
-        orientation = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
         if (MainActivity.CONNECTION == false) {
             resultSeries = new ArrayList<>();
             dataBaseOffline = new DataBaseOffline(getContext(), "movie", 1);
@@ -91,13 +89,4 @@ public class SerieFragment extends Fragment implements SensorEventListener {
 
     }
 
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
-    }
 }

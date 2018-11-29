@@ -20,8 +20,8 @@
     <string name="moviedate">Data</string>
     <string name="movieoverview">Resumo</string>
     <string name="errorconnection">Erro de Conexão.</string>
-    <string name="messageerrorconnection">Seu dispositivo precisa de acesso a internet para continuar a aplicação.\n" +
-                    "Por Favor, verifique sua conexão.</string>
+    <string name="messageerrorconnection">Seu dispositivo precisa de acesso a internet acessar o conteudo.
+                    Por Favor, verifique sua conexão.</string>
     <string name="confirm">Confirmar</string>
     <string name="title_activity_home">Inicio</string>
     <string name="title_home">Inicio</string>
